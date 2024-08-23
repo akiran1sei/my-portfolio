@@ -1,0 +1,56 @@
+├── public/                  
+│   ├── images/              
+│   ├── favicon.ico          
+│   └── ...                  
+│
+├── src/
+│   ├── app/                 
+│   │   ├── layout.js        
+│   │   ├── page.js          
+│   │   ├── about/           
+│   │   │   ├── page.js 
+│   │   ├── works/           
+│   │   │   ├── page.js 
+│   │   ├── blog/           
+│   │   │   ├── page.js 
+│   │   ├── [id]/           
+│   │   │   ├── page.js     
+│   │   ├── projects/        
+│   │   │   ├── [id]/        
+│   │   │   │   ├── page.js  
+│   │   └── contact/         
+│   │   │   ├── page.js      
+│   │   ├── dashboard/       // 作成者専用ページのディレクトリ
+│   │   │   ├── layout.js    // ダッシュボード用のレイアウト
+│   │   │   ├── page.js      // ダッシュボードのメインページ
+│   │   │   └── settings/    // 設定ページなどのサブディレクトリ
+│   │   │       ├── page.js  // 設定ページのコンポーネント
+│   │   ├── login/           // ログインページ
+│   │   │   ├── page.js      // ログインページのコンポーネント
+│   │   └── admin/           // 管理者専用ページ（必要に応じて）
+│   │       ├── layout.js    // 管理者専用レイアウト
+│   │       └── page.js      // 管理者用ページのメインコンポーネント
+│   │
+│   ├── components/          
+│   │   ├── Header.js        
+│   │   ├── Footer.js        
+│   │   ├── ProjectCard.js   
+│   │   ├── AuthGuard.js     // 認証ガードコンポーネント
+│   │   └── ...              
+│   │
+│   ├── styles/              
+│   │   ├── globals.css      
+│   │   └── ...              
+│   │
+│   ├── utils/               
+│   │   ├── api.js           
+│   │   ├── auth.js          // 認証ロジックやトークン管理
+│   │   └── ...              
+│   │
+│   └── middleware/          // ミドルウェアを配置（認証用）
+│       └── auth.js          // 認証ミドルウェア
+│
+├── .gitignore               
+├── next.config.js           
+├── package.json             
+└── README.md                
