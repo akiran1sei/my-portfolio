@@ -53,4 +53,26 @@
 ├── .gitignore               
 ├── next.config.js           
 ├── package.json             
-└── README.md                
+└── README.md       
+
+
+
+//クラス名
+.main
+.main_wrapper
+.page_title
+.socialmedia_box
+.back_button
+.sitename
+.username
+
+
+.header
+.header_wrapper
+.header_menu
+.header_menu_list
+.header_menu_item
+.header_menu_link
+
+.(top)_contents → .top_contentsや.about_contentsなど
+    ※about/works/blog/login/projects/dashboardが入る。
