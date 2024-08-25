@@ -74,5 +74,5 @@
 .header_menu_item
 .header_menu_link
 
-.(top)_contents → .top_contentsや.about_contentsなど
+.(home)_contents → .top_contentsや.about_contentsなど
     ※about/works/blog/login/projects/dashboardが入る。
