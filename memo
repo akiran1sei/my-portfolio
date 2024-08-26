@@ -70,13 +70,35 @@
 
 .header
 .header_wrapper
-.header_menu
-.header_menu_list
-.header_menu_item
-.header_menu_link
+.header_nav
+.header_nav_list
+.header_nav_item
+.header_nav_link
 
-.(home)_contents → .top_contentsや.about_contentsなど
-    ※about/works/blog/login/projects/dashboardが入る。
+.(home)_contents
+ ※()内は、"works","blog","item","contact","login","projects","dashboard"も入る
 .home_notebook
 .home_notebook_spine※背表紙
 .home_notebook_cover※表紙
+
+.(about)_card ※()内は、"works","blog","item","contact"も入る
+.(about)_image
+.(about)_text
+.about_intro_text
+.about_skill_text
+.about_career_text
+
+.works_app_title
+.works_app_summary
+.works_app_deescription
+.works_app_development
+.works_app_process
+
+.(blog)_title ※ ※()内は、"item"も入る
+.blog_read_button
+
+.contact_name
+.contact_email
+.contact_title
+.contact_message
+
