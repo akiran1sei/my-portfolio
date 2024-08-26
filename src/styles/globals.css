@@ -50,10 +50,25 @@ html {
 }
 
 body {
-  font-size: var(--size-base);
+  font-size: var(--font-base);
 }
 @media screen and (min-width: 576px) {
   body {
     font-size: var(--font-small);
   }
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  vertical-align: bottom;
 }
