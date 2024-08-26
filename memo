@@ -63,8 +63,9 @@
 .page_title
 .socialmedia_box
 .back_button
-.sitename
-.username
+.submit_button
+.protfolio_name
+.my_name
 
 
 .header
