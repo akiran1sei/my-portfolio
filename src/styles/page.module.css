@@ -1,0 +1,55 @@
+/* 共有 */
+.container {
+  width: 100%;
+  min-width: 320px;
+  max-width: 575px;
+}
+.main {
+}
+.main_wrapper {
+}
+.page_title {
+  font-size: 27px;
+}
+.portfolio_name {
+  font-size: 48px;
+}
+.my_name {
+  font-size: 18px;
+}
+.socialmedia_box {
+}
+.back_button {
+}
+.submit_button {
+}
+.start_button {
+}
+@media screen and (min-width: 576px) {
+  .container {
+    min-width: 576px;
+    max-width: 1023px;
+  }
+  .my_name {
+    font-size: 36px;
+  }
+  .portfolio_name {
+    font-size: 64px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .container {
+    width: 100%;
+    min-width: 1024px;
+    max-width: 1440px;
+  }
+  .my_name {
+    font-size: 64px;
+  }
+  .portfolio_name {
+    font-size: 128px;
+  }
+}
+/* home */
+.home_contents {
+}
