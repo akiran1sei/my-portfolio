@@ -23,8 +23,9 @@
 }
 .submit_button {
 }
-.start_button {
+.nav_button {
 }
+
 @media screen and (min-width: 576px) {
   .container {
     min-width: 576px;
