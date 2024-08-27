@@ -1,6 +1,8 @@
 import Link from "next/link";
+import React from "react";
 import styles from "../styles/page.module.css";
-const Header = () => {
+
+export function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.header_wrapper}>
@@ -61,5 +63,4 @@ const Header = () => {
       </div>
     </header>
   );
-};
-export default Header;
+}
