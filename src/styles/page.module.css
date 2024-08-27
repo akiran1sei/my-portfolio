@@ -3,10 +3,20 @@
   width: 100%;
   min-width: 320px;
   max-width: 575px;
+  height: calc(100vh - 50px);
 }
 .main {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-image: url("/images/bg-sp.png");
+  background-size: cover;
 }
 .main_wrapper {
+  width: auto;
+  height: 100%;
+  position: relative;
+  margin: 0 2rem;
 }
 .page_title {
   font-size: 27px;
@@ -17,11 +27,85 @@
 .my_name {
   font-size: 18px;
 }
-.socialmedia_box {
+.upButton,
+.blogButton {
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  border: 1px solid var(--accents-color);
+  background: var(--base-color);
+  border-radius: 5px 0px 0px 5px;
 }
-.back_button {
+.blogButton {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
 }
-.submit_button {
+.blogButton_bar {
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: var(--sub-color);
+}
+.blogButton_bar:nth-child(2) {
+  margin: 3px 0;
+}
+.socialMediaBox {
+  width: 25px;
+  height: auto;
+}
+.socialMediaButton {
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  border: 1px solid var(--base-color);
+  border-radius: 0px 5px 5px 0px;
+  background: var(--white-color);
+}
+.backButton {
+  width: 50px;
+  height: 25px;
+  background: var(--base-color);
+  border: 1px solid var(--accents-color);
+
+  border-radius: 5px;
+  color: var(--sub-color);
+}
+.submitButton {
+  width: 50px;
+  height: 25px;
+  background: var(--accents-color);
+  border: 1px solid var(--base-color);
+  border-radius: 5px;
+  color: var(--sub-color);
+}
+.startButton {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  border-style: unset;
+  background: none;
+}
+.startArrow {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.startCircle {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: var(--sub-color);
+  border: 1px solid var(--base-color);
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 .nav_button {
 }
