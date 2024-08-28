@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import styles from "../styles/page.module.css";
+import styles from "@/styles/page.module.css";
 
 export function Header() {
   return (
