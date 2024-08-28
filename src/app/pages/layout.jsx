@@ -8,11 +8,11 @@ import styles from "@/styles/page.module.css";
 import "normalize.css";
 export default function PagesLayout({ children }) {
   return (
-    <>
+    <div className={styles.container}>
       <Header />
       <main className={styles.main}>
         <div className={styles.main_wrapper}>{children}</div>
       </main>
-    </>
+    </div>
   );
 }
