@@ -1,4 +1,4 @@
-import styles from "../../styles/page.module.css";
+import styles from "@/styles/page.module.css";
 export function BlogButton() {
   return (
     <button className={styles.blogButton} type="button">
