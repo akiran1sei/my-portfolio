@@ -240,7 +240,35 @@
   bottom: 1rem;
   right: 1rem;
 }
-.action .home_notebook_index {
+.home_index {
   width: 100%;
   height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: var(--z-index-menu);
+  background: var(--white-color);
+}
+.home_imageBox {
+  width: 100%;
+  height: 100%;
+}
+.home_index_nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.home_index_list {
+  width: 100%;
+  height: 50%;
+  transform: translateY(calc(50vh - 50%));
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.home_index_list_item {
 }
