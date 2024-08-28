@@ -5,7 +5,7 @@ import { SubmitButton } from "@/components/Buttons/SubmitButton";
 
 const About = () => {
   return (
-    <div>
+    <div className={styles.page_contents}>
       <SocialButton />
       <SubmitButton />
       <BackButton />
