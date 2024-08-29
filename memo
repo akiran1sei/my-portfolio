@@ -61,6 +61,7 @@
 .main
 .main_wrapper
 .page_title
+.contents
 .socialmedia_box
 .back_button
 .submit_button
@@ -76,12 +77,12 @@
 .header_nav_link
 
 .(home)_contents
- ※()内は、"works","blog","item","contact","login","projects","dashboard"も入る
+ ※()内は、,"login","projects","dashboard"も入る
 .home_notebook
 .home_notebook_spine※背表紙
 .home_notebook_cover※表紙
 
-.(about)_card ※()内は、"works","blog","item","contact"も入る
+.(about)_section ※()内は、"works","blog","item","contact"も入る
 .(about)_image
 .(about)_text
 .about_intro_text
