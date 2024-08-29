@@ -1,21 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Noto+Sans+JP&display=swap");
 :root {
   /* カラー */
-  --sub-color: #82774d;
-  --base-color: #ffc800;
-  --accents-color: #e0c14f;
+  --sub-color: #fcc800;
+  --base-color: #fcd53f;
+  --accents-color: #fde37e;
   --white-color: #fffffe;
   --black-color: #333333;
   /* サブカラーの透明度 */
-  --sub-color-90: #82774de6;
-  --sub-color-80: #82774dcc;
-  --sub-color-70: #82774db3;
-  --sub-color-60: #82774d99;
-  --sub-color-50: #82774d80;
-  --sub-color-40: #82774d66;
-  --sub-color-30: #82774d4d;
-  --sub-color-20: #82774d33;
-  --sub-color-10: #82774d1a;
+  --sub-color-90: #fcc800e6;
+  --sub-color-80: #fcc800cc;
+  --sub-color-70: #fcc800b3;
+  --sub-color-60: #fcc80099;
+  --sub-color-50: #fcc80080;
+  --sub-color-40: #fcc80066;
+  --sub-color-30: #fcc8004d;
+  --sub-color-20: #fcc80033;
+  --sub-color-10: #fcc8001a;
 
   /* size */
   --font-large: 27px;
@@ -46,14 +46,12 @@ html {
   font-size: 62.5%;
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
     "Hiragino Sans", Meiryo, sans-serif;
-  line-height: 2.5rem;
 }
 
 body {
   width: 100%;
   height: 100%;
   font-size: var(--font-base);
-  margin: 0;
 }
 @media screen and (min-width: 576px) {
   body {
@@ -61,8 +59,6 @@ body {
   }
 }
 ul {
-  margin: 0;
-  padding: 0;
   list-style-type: none;
 }
 a {
@@ -75,6 +71,31 @@ img {
   height: 100%;
   vertical-align: bottom;
 }
-p {
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
   margin: 0;
+  padding: 0;
 }

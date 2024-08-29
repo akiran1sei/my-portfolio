@@ -5,10 +5,10 @@ import Link from "next/link";
 import { useState } from "react";
 
 const Home = () => {
-  const [Action, setAction] = useState(false);
-  const handleClickAction = () => {
-    setAction(!Action);
-  };
+  // const [Action, setAction] = useState(false);
+  // const handleClickAction = () => {
+  //   setAction(!Action);
+  // };
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -17,21 +17,19 @@ const Home = () => {
             <div className={styles.home_notebook}>
               <div className={styles.home_notebook_spine}></div>
               <div className={styles.home_notebook_cover}>
-                <p className={styles.portfolio_name}>
-                  Portfolio
-                  <span
-                    className={`${styles.border_bottom} ${styles.home}`}
-                  ></span>
-                </p>
+                <h1 className={styles.portfolio_name}>
+                  <span className={`${styles.border_bottom} ${styles.home}`}>
+                    Portfolio
+                  </span>
+                </h1>
                 <p className={styles.my_name}>
-                  Akira Nakamori
-                  <span
-                    className={`${styles.border_bottom} ${styles.home}`}
-                  ></span>
+                  <span className={`${styles.border_bottom} ${styles.home}`}>
+                    Akira Nakamori
+                  </span>
                 </p>
                 <div className={styles.home_button}>
                   <button
-                    onClick={handleClickAction}
+                    // onClick={handleClickAction}
                     className={styles.startButton}
                     type="button"
                   >
@@ -44,23 +42,21 @@ const Home = () => {
                         priority
                       />
                     </span>
-                    <span className={styles.startCircle}></span>
+                    <Link
+                      href={"http://localhost:3000/pages/about"}
+                      scroll={false}
+                      passHref
+                    >
+                      <span className={styles.startCircle}></span>
+                    </Link>
                   </button>
                 </div>
               </div>
             </div>
-            {Action && (
+
+            {/* {Action && (
               <div className={styles.home_index}>
-                <div className={styles.home_imageBox}>
-                  <Image
-                    src="/images/bg-sp.png"
-                    alt="Xの画像"
-                    width={576}
-                    height={1024}
-                    className={styles.bg_img}
-                    priority
-                  />
-                </div>
+                <h2 className={styles.home_index_title}>目次</h2>
                 <nav className={styles.home_index_nav}>
                   <ul className={styles.home_index_list}>
                     <li className={styles.home_index_item}>
@@ -102,7 +98,7 @@ const Home = () => {
                   </ul>
                 </nav>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </main>
