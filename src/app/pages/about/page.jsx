@@ -22,7 +22,7 @@ const About = () => {
           <p className={styles.about_intro_text}>
             35歳からプログラミングやアプリ開発、アフィリエイト、ブログに挑戦しています。うつ病や不安障害と闘いながら、同じ悩みを持つ方々に少しでも勇気を与えたいと思っています。日々の出来事や精神疾患に関する悩みなどをブログで発信中です。ぜひご覧ください。
           </p>
-          <p className={styles.about_skill_text}>
+          <div className={styles.about_skill_text}>
             <h3 className={styles.about_skill_title}>
               スキルリスト（習熟度順）
             </h3>
@@ -61,7 +61,7 @@ const About = () => {
                 </ul>
               </li>
             </ul>
-          </p>
+          </div>
           <div className={styles.about_career_text}>
             <h3 className={styles.about_career_title}>経歴</h3>
             <ul className={styles.about_career_list}>
