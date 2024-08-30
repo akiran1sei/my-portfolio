@@ -25,12 +25,11 @@
 }
 .contents {
   width: calc(100% - 40px);
-  height: 100%;
-  background-image: url("/images/bg-sp.png");
-  background-repeat: repeat;
-  background-size: cover;
+  height: auto;
+  background-image: url(/images/bg.png);
+  /* background-image: url(/images/bg-sp.png); */
+  background-repeat: repeat-y;
   margin: 0 auto;
-  overflow-y: auto;
 }
 
 .page_title {
@@ -195,13 +194,18 @@
   .portfolio_name {
     font-size: 64px;
   }
+  /* .contents {
+    background-image: url(/images/bg.png);
+  } */
 }
 @media screen and (min-width: 1024px) {
   .container {
     width: 100%;
     min-width: 1024px;
     max-width: 1440px;
+    margin: 0 auto;
   }
+
   .my_name {
     font-size: 64px;
   }
@@ -306,7 +310,17 @@
 .home_index_title {
   color: var(--accents-color);
 }
-
+@media screen and (min-width: 576px) {
+  .home_notebook_bg_text {
+    font-size: 4em;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .home_notebook_bg_text {
+    font-size: 4em;
+  }
+}
+/* about */
 .about_section {
   width: 100%;
   height: 100%;
@@ -355,7 +369,11 @@
 }
 .about_career_item {
 }
-
+@media screen and (min-width: 576px) {
+}
+@media screen and (min-width: 1024px) {
+}
+/* works */
 .works_scroll {
   overflow-x: auto;
   white-space: nowrap;
@@ -445,4 +463,8 @@
 }
 .works_devProcess_item_list_item {
   /* 開発プロセスのスタイル */
+}
+@media screen and (min-width: 576px) {
+}
+@media screen and (min-width: 1024px) {
 }
