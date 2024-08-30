@@ -1,12 +1,13 @@
 import styles from "@/styles/page.module.css";
-import { BackButton } from "@/components/Buttons/BackButton";
 import { SocialButton } from "@/components/Buttons/SocialButton";
-import { SubmitButton } from "@/components/Buttons/SubmitButton";
 import Image from "next/image";
+import { UpButton } from "@/components/Buttons/UpButton";
 
 const About = () => {
   return (
     <div className={styles.contents}>
+      <SocialButton />
+      <UpButton />
       <section className={styles.about_section}>
         <h2 className={styles.page_title}>About</h2>
         <div className={styles.about_image}>
@@ -29,35 +30,49 @@ const About = () => {
             <ul className={styles.about_skill_list}>
               <li className={styles.about_skill_item}>
                 フロントエンド開発
-                <ul>
-                  <li>HTML/CSS/JavaScript（最も長い学習期間）</li>
-                  <li>Next.js (AppRouter含む)</li>
+                <ul className={styles.about_skill_item_list}>
+                  <li className={styles.about_skill_item_list_item}>
+                    HTML/CSS/JavaScript（最も長い学習期間）
+                  </li>
+                  <li className={styles.about_skill_item_list_item}>
+                    Next.js (AppRouter含む)
+                  </li>
                 </ul>
               </li>
               <li className={styles.about_skill_item}>
                 バックエンド/データベース
-                <ul>
-                  <li>MongoDB Atlas</li>
+                <ul className={styles.about_skill_item_list}>
+                  <li className={styles.about_skill_item_list_item}>
+                    MongoDB Atlas
+                  </li>
                 </ul>
               </li>
               <li className={styles.about_skill_item}>
                 バージョン管理
-                <ul>
-                  <li>GitHub</li>
+                <ul className={styles.about_skill_item_list}>
+                  <li className={styles.about_skill_item_list_item}>GitHub</li>
                 </ul>
               </li>
               <li className={styles.about_skill_item}>
                 デザインツール
-                <ul>
-                  <li>Figma（基本的なデザイン作成）</li>
-                  <li>Adobe XD（基本操作）</li>
+                <ul className={styles.about_skill_item_list}>
+                  <li className={styles.about_skill_item_list_item}>
+                    Figma（基本的なデザイン作成）
+                  </li>
+                  <li className={styles.about_skill_item_list_item}>
+                    Adobe XD（基本操作）
+                  </li>
                 </ul>
               </li>
               <li className={styles.about_skill_item}>
                 その他の技術（基礎レベル）
-                <ul>
-                  <li>Ruby/Ruby on Rails（サンプルアプリ作成経験）</li>
-                  <li>PHP（WordPress使用経験）</li>
+                <ul className={styles.about_skill_item_list}>
+                  <li className={styles.about_skill_item_list_item}>
+                    Ruby/Ruby on Rails（サンプルアプリ作成経験）
+                  </li>
+                  <li className={styles.about_skill_item_list_item}>
+                    PHP（WordPress使用経験）
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -83,7 +98,9 @@ const About = () => {
               </li>
               <li className={styles.about_career_item}>
                 その後: 3か月間精神病棟に入院し、価値観に変化を感じる
-                <br /> 退院後:諦めていたプログラマーを目指すべく一念発起。
+              </li>
+              <li className={styles.about_career_item}>
+                退院後:諦めていたプログラマーを目指すべく一念発起。
                 <br />
                 WEB制作会社などの仕事や障がい者就労継続支援A型・B型就労移行支援サービスを行う会社に就職
               </li>
@@ -94,9 +111,6 @@ const About = () => {
           </div>
         </div>
       </section>
-      {/* <SocialButton />
-      <SubmitButton />
-      <BackButton /> */}
     </div>
   );
 };
