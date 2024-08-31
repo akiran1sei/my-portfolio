@@ -428,6 +428,7 @@
   scroll-snap-align: start;
   min-width: 240px;
   border-radius: 5px;
+  background-repeat: no-repeat;
 }
 .works_img_1 {
   background-image: url(/images/works-img-sp-1.png);
@@ -527,7 +528,7 @@
 @media screen and (min-width: 1024px) {
   .works_scroll_image {
     width: 600px;
-    height: 280px;
+    height: 330px;
   }
   .works_section {
     max-width: 600px;

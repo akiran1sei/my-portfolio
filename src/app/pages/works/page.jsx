@@ -1,8 +1,8 @@
 "use client";
 import styles from "@/styles/page.module.css";
-import Image from "next/image";
+
 import { UpButton } from "@/components/Buttons/UpButton";
-import { useState, useEffect } from "react";
+
 const Works = () => {
   return (
     <div className={styles.contents}>
