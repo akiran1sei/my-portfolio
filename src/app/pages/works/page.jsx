@@ -1,62 +1,121 @@
+"use client";
 import styles from "@/styles/page.module.css";
 import { SocialButton } from "@/components/Buttons/SocialButton";
 import Image from "next/image";
 import { UpButton } from "@/components/Buttons/UpButton";
-const works = () => {
+import { useState, useEffect } from "react";
+const Works = () => {
+  const [Change, setChange] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    // ウィンドウのサイズが変更されたときに、状態を更新
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    if (window.innerWidth <= 576) {
+      setChange(false);
+    } else {
+      setChange(true);
+    }
+
+    // クリーンアップ
+    return () => window.removeEventListener("resize", handleResize);
+  }, [windowWidth]);
+
   return (
     <div className={styles.contents}>
       <SocialButton />
       <UpButton />
       <section className={styles.works_section}>
-        <h2 className={styles.page_title}>Works</h2>
+        <h2 className={styles.page_title}>
+          Works <br />
+          『Tasting Note』
+        </h2>
 
-        <div className={styles.works_scroll}>
-          <div className={styles.works_scroll_image}>
-            <Image
-              src="/images/sp-img.png"
-              alt="開発したアプリの写真"
-              width={240}
-              height={447}
-              priority
-            />
+        {Change && (
+          <div className={styles.works_scroll}>
+            <div className={styles.works_scroll_image}>
+              <Image
+                src="/images/works-img-pc-1.png"
+                alt="開発したアプリの写真"
+                width={600}
+                height={280}
+                priority
+              />
+            </div>
+            <div className={styles.works_scroll_image}>
+              <Image
+                src="/images/works-img-pc-2.png"
+                alt="開発したアプリの写真"
+                width={600}
+                height={280}
+                priority
+              />
+            </div>
+            <div className={styles.works_scroll_image}>
+              <Image
+                src="/images/works-img-pc-3.png"
+                alt="開発したアプリの写真"
+                width={600}
+                height={280}
+                priority
+              />
+            </div>
+            <div className={styles.works_scroll_image}>
+              <Image
+                src="/images/works-img-pc-4.png"
+                alt="開発したアプリの写真"
+                width={600}
+                height={280}
+                priority
+              />
+            </div>
           </div>
-          <div className={styles.works_scroll_image}>
-            <Image
-              src="/images/sp-img.png"
-              alt="開発したアプリの写真"
-              width={240}
-              height={447}
-              priority
-            />
+        )}
+        {!Change && (
+          <div className={styles.works_scroll}>
+            <div className={styles.works_scroll_image}>
+              <Image
+                src="/images/works-img-sp-1.png"
+                alt="開発したアプリの写真"
+                width={240}
+                height={447}
+                priority
+              />
+            </div>
+            <div className={styles.works_scroll_image}>
+              <Image
+                src="/images/works-img-sp-2.png"
+                alt="開発したアプリの写真"
+                width={240}
+                height={447}
+                priority
+              />
+            </div>
+            <div className={styles.works_scroll_image}>
+              <Image
+                src="/images/works-img-sp-3.png"
+                alt="開発したアプリの写真"
+                width={240}
+                height={447}
+                priority
+              />
+            </div>
+            <div className={styles.works_scroll_image}>
+              <Image
+                src="/images/works-img-sp-4.png"
+                alt="開発したアプリの写真"
+                width={240}
+                height={447}
+                priority
+              />
+            </div>
           </div>
-          <div className={styles.works_scroll_image}>
-            <Image
-              src="/images/sp-img.png"
-              alt="開発したアプリの写真"
-              width={240}
-              height={447}
-              priority
-            />
-          </div>
-          <div className={styles.works_scroll_image}>
-            <Image
-              src="/images/sp-img.png"
-              alt="開発したアプリの写真"
-              width={240}
-              height={447}
-              priority
-            />
-          </div>
-          <div className={styles.works_scroll_image}>
-            <Image
-              src="/images/sp-img.png"
-              alt="開発したアプリの写真"
-              width={240}
-              height={447}
-              priority
-            />
-          </div>
-        </div>
+        )}
         <div className={styles.works_text}>
           <h3 className={styles.works_app_title}>
             コーヒーテイスティングアプリ『Tasting Note』
@@ -100,7 +159,7 @@ const works = () => {
             <h4 className={styles.works_devProcess_title}>開発プロセス</h4>
             <ul className={styles.works_devProcess_list}>
               <li className={styles.works_devProcess_item}>
-                企画・設計
+                <span className={styles.itemTitle}>企画・設計</span>
                 <ul className={styles.works_devProcess_item_list}>
                   <li className={styles.works_devProcess_item_list_item}>
                     初めてのアプリ開発としてコーヒー関連のテーマを選択
@@ -108,7 +167,7 @@ const works = () => {
                 </ul>
               </li>
               <li className={styles.works_devProcess_item}>
-                開発スタート
+                <span className={styles.itemTitle}>開発スタート</span>
                 <ul className={styles.works_devProcess_item_list}>
                   <li className={styles.works_devProcess_item_list_item}>
                     当初はHTML/CSS/JavaScriptのみで開発開始
@@ -119,7 +178,7 @@ const works = () => {
                 </ul>
               </li>
               <li className={styles.works_devProcess_item}>
-                React導入
+                <span className={styles.itemTitle}>React導入</span>
                 <ul className={styles.works_devProcess_item_list}>
                   <li className={styles.works_devProcess_item_list_item}>
                     JavaScript習熟度向上に伴い、Reactライブラリの導入を決定
@@ -127,7 +186,7 @@ const works = () => {
                 </ul>
               </li>
               <li className={styles.works_devProcess_item}>
-                Next.jsへの移行
+                <span className={styles.itemTitle}>Next.jsへの移行</span>
                 <ul className={styles.works_devProcess_item_list}>
                   <li className={styles.works_devProcess_item_list_item}>
                     ReactベースのフレームワークであるNext.jsの採用
@@ -138,7 +197,7 @@ const works = () => {
                 </ul>
               </li>
               <li className={styles.works_devProcess_item}>
-                App Routerへの切り替え
+                <span className={styles.itemTitle}>App Routerへの切り替え</span>
                 <ul className={styles.works_devProcess_item_list}>
                   <li className={styles.works_devProcess_item_list_item}>
                     調査の結果、App Router機能の習得が有益と判断
@@ -149,7 +208,9 @@ const works = () => {
                 </ul>
               </li>
               <li className={styles.works_devProcess_item}>
-                データベース不具合の修正
+                <span className={styles.itemTitle}>
+                  データベース不具合の修正
+                </span>
                 <ul className={styles.works_devProcess_item_list}>
                   <li className={styles.works_devProcess_item_list_item}>
                     更新機能の不具合を発見し修正
@@ -157,7 +218,9 @@ const works = () => {
                 </ul>
               </li>
               <li className={styles.works_devProcess_item}>
-                『Tasting Note』アプリの完成
+                <span className={styles.itemTitle}>
+                  『Tasting Note』アプリの完成
+                </span>
                 <ul className={styles.works_devProcess_item_list}>
                   <li className={styles.works_devProcess_item_list_item}>
                     App Router機能を活用し、最終版のアプリを開発
@@ -171,4 +234,4 @@ const works = () => {
     </div>
   );
 };
-export default works;
+export default Works;

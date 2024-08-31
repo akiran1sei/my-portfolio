@@ -145,8 +145,7 @@
   bottom: 0;
   right: 0;
 }
-.nav_button {
-}
+
 .header {
   width: 100%;
   height: 50px;
@@ -181,7 +180,8 @@
 .header_nav_item:last-child {
   letter-spacing: -2px;
 }
-.header_nav_link {
+.itemTitle {
+  font-weight: bold;
 }
 @media screen and (min-width: 576px) {
   .container {
@@ -194,15 +194,14 @@
   .portfolio_name {
     font-size: 64px;
   }
-  /* .contents {
-    background-image: url(/images/bg.png);
-  } */
+  .header_nav_item {
+    letter-spacing: 0;
+  }
 }
 @media screen and (min-width: 1024px) {
   .container {
     width: 100%;
-    min-width: 1024px;
-    max-width: 1440px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 
@@ -312,12 +311,12 @@
 }
 @media screen and (min-width: 576px) {
   .home_notebook_bg_text {
-    font-size: 4em;
+    font-size: 2em;
   }
 }
 @media screen and (min-width: 1024px) {
   .home_notebook_bg_text {
-    font-size: 4em;
+    font-size: 2em;
   }
 }
 /* about */
@@ -349,7 +348,8 @@
   margin-left: 2rem;
   list-style-type: decimal;
 }
-.about_skill_item {
+.about_skill_item::marker {
+  font-weight: bold;
 }
 .about_skill_item_list {
   margin-left: 2rem;
@@ -370,8 +370,20 @@
 .about_career_item {
 }
 @media screen and (min-width: 576px) {
+  .about_section {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .about_image {
+    width: 300px;
+    height: 300px;
+  }
 }
 @media screen and (min-width: 1024px) {
+  .about_section {
+    max-width: 600px;
+  }
 }
 /* works */
 .works_scroll {
@@ -398,6 +410,7 @@
 .works_text {
   line-height: 1.5;
   padding-bottom: 10rem;
+  margin-top: 2rem;
 }
 .works_overview {
   padding-top: 2rem;
@@ -453,8 +466,9 @@
   margin-left: 2rem;
   list-style-type: decimal;
 }
-.works_devProcess_item {
+.works_devProcess_item::marker {
   /* 開発プロセスのスタイル */
+  font-weight: bold;
 }
 .works_devProcess_item_list {
   /* 開発プロセスのスタイル */
@@ -465,6 +479,22 @@
   /* 開発プロセスのスタイル */
 }
 @media screen and (min-width: 576px) {
+  .works_section {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .works_scroll_image {
+    max-width: 700px;
+    min-width: 500px;
+  }
 }
 @media screen and (min-width: 1024px) {
+  .works_section {
+    max-width: 600px;
+  }
+  .works_scroll_image {
+    max-width: 600px;
+    min-width: 600px;
+  }
 }

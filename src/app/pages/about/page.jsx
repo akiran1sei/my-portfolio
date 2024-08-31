@@ -1,24 +1,54 @@
+"use client";
 import styles from "@/styles/page.module.css";
 import { SocialButton } from "@/components/Buttons/SocialButton";
 import Image from "next/image";
 import { UpButton } from "@/components/Buttons/UpButton";
-
+import { useState, useEffect } from "react";
 const About = () => {
+  const [Change, setChange] = useState("sp");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    // ウィンドウのサイズが変更されたときに、状態を更新
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    if (window.innerWidth <= 576) {
+      setChange(
+        <Image
+          src={`/images/mt-huji-sp.svg`}
+          alt="富士登頂した時の写真"
+          width={150}
+          height={150}
+          priority
+        />
+      );
+    } else {
+      setChange(
+        <Image
+          src={`/images/mt-huji-pc.svg`}
+          alt="富士登頂した時の写真"
+          width={300}
+          height={300}
+          priority
+        />
+      );
+    }
+
+    // クリーンアップ
+    return () => window.removeEventListener("resize", handleResize);
+  }, [windowWidth]);
+
   return (
     <div className={styles.contents}>
       <SocialButton />
       <UpButton />
       <section className={styles.about_section}>
         <h2 className={styles.page_title}>About</h2>
-        <div className={styles.about_image}>
-          <Image
-            src="/images/mt-huji.svg"
-            alt="富士登頂した時の写真"
-            width={150}
-            height={150}
-            priority
-          />
-        </div>
+        <div className={styles.about_image}>{Change}</div>
         <div className={styles.about_text}>
           <p className={styles.about_intro_text}>
             35歳からプログラミングやアプリ開発、アフィリエイト、ブログに挑戦しています。うつ病や不安障害と闘いながら、同じ悩みを持つ方々に少しでも勇気を与えたいと思っています。日々の出来事や精神疾患に関する悩みなどをブログで発信中です。ぜひご覧ください。
@@ -29,7 +59,7 @@ const About = () => {
             </h3>
             <ul className={styles.about_skill_list}>
               <li className={styles.about_skill_item}>
-                フロントエンド開発
+                <span className={styles.itemTitle}>フロントエンド開発</span>
                 <ul className={styles.about_skill_item_list}>
                   <li className={styles.about_skill_item_list_item}>
                     HTML/CSS/JavaScript（最も長い学習期間）
@@ -40,7 +70,9 @@ const About = () => {
                 </ul>
               </li>
               <li className={styles.about_skill_item}>
-                バックエンド/データベース
+                <span className={styles.itemTitle}>
+                  バックエンド/データベース
+                </span>
                 <ul className={styles.about_skill_item_list}>
                   <li className={styles.about_skill_item_list_item}>
                     MongoDB Atlas
@@ -48,13 +80,13 @@ const About = () => {
                 </ul>
               </li>
               <li className={styles.about_skill_item}>
-                バージョン管理
+                <span className={styles.itemTitle}>バージョン管理</span>
                 <ul className={styles.about_skill_item_list}>
                   <li className={styles.about_skill_item_list_item}>GitHub</li>
                 </ul>
               </li>
               <li className={styles.about_skill_item}>
-                デザインツール
+                <span className={styles.itemTitle}>デザインツール</span>
                 <ul className={styles.about_skill_item_list}>
                   <li className={styles.about_skill_item_list_item}>
                     Figma（基本的なデザイン作成）
@@ -65,7 +97,9 @@ const About = () => {
                 </ul>
               </li>
               <li className={styles.about_skill_item}>
-                その他の技術（基礎レベル）
+                <span className={styles.itemTitle}>
+                  その他の技術（基礎レベル）
+                </span>
                 <ul className={styles.about_skill_item_list}>
                   <li className={styles.about_skill_item_list_item}>
                     Ruby/Ruby on Rails（サンプルアプリ作成経験）
