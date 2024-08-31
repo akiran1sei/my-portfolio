@@ -221,7 +221,7 @@
     font-size: 64px;
   }
   .portfolio_name {
-    font-size: 128px;
+    font-size: 96px;
   }
 }
 /* home */
@@ -271,10 +271,12 @@
   flex-wrap: nowrap;
   justify-content: space-around;
   align-items: center;
+  border-radius: 0px 5px 5px 0px;
 }
 .home_notebook_spine {
   width: 25px;
   height: 100%;
+  border-radius: 5px 0px 0px 5px;
   background: var(--accents-color);
 }
 
@@ -346,6 +348,7 @@
   width: 150px;
   height: 150px;
   margin: 0 auto;
+  border-radius: 10px;
 }
 .about_text {
   line-height: 1.5;
@@ -520,12 +523,12 @@
     max-width: 500px;
     margin: 0 auto;
   }
-  /* .works_scroll_image {
-    max-width: 700px;
-    min-width: 500px;
-  } */
 }
 @media screen and (min-width: 1024px) {
+  .works_scroll_image {
+    width: 600px;
+    height: 280px;
+  }
   .works_section {
     max-width: 600px;
   }
