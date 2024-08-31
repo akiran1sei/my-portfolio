@@ -1,5 +1,5 @@
 import styles from "@/styles/page.module.css";
 const blog = () => {
-  return <div className={styles.page_contents}></div>;
+  return <div className={styles.contents}></div>;
 };
 export default blog;
