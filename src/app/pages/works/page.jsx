@@ -1,34 +1,11 @@
 "use client";
 import styles from "@/styles/page.module.css";
-import { SocialButton } from "@/components/Buttons/SocialButton";
 import Image from "next/image";
 import { UpButton } from "@/components/Buttons/UpButton";
 import { useState, useEffect } from "react";
 const Works = () => {
-  const [Change, setChange] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    // ウィンドウのサイズが変更されたときに、状態を更新
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    if (window.innerWidth <= 576) {
-      setChange(false);
-    } else {
-      setChange(true);
-    }
-
-    // クリーンアップ
-    return () => window.removeEventListener("resize", handleResize);
-  }, [windowWidth]);
-
   return (
     <div className={styles.contents}>
-      <SocialButton />
       <UpButton />
       <section className={styles.works_section}>
         <h2 className={styles.page_title}>
@@ -36,86 +13,18 @@ const Works = () => {
           『Tasting Note』
         </h2>
 
-        {Change && (
-          <div className={styles.works_scroll}>
-            <div className={styles.works_scroll_image}>
-              <Image
-                src="/images/works-img-pc-1.png"
-                alt="開発したアプリの写真"
-                width={600}
-                height={280}
-                priority
-              />
-            </div>
-            <div className={styles.works_scroll_image}>
-              <Image
-                src="/images/works-img-pc-2.png"
-                alt="開発したアプリの写真"
-                width={600}
-                height={280}
-                priority
-              />
-            </div>
-            <div className={styles.works_scroll_image}>
-              <Image
-                src="/images/works-img-pc-3.png"
-                alt="開発したアプリの写真"
-                width={600}
-                height={280}
-                priority
-              />
-            </div>
-            <div className={styles.works_scroll_image}>
-              <Image
-                src="/images/works-img-pc-4.png"
-                alt="開発したアプリの写真"
-                width={600}
-                height={280}
-                priority
-              />
-            </div>
-          </div>
-        )}
-        {!Change && (
-          <div className={styles.works_scroll}>
-            <div className={styles.works_scroll_image}>
-              <Image
-                src="/images/works-img-sp-1.png"
-                alt="開発したアプリの写真"
-                width={240}
-                height={447}
-                priority
-              />
-            </div>
-            <div className={styles.works_scroll_image}>
-              <Image
-                src="/images/works-img-sp-2.png"
-                alt="開発したアプリの写真"
-                width={240}
-                height={447}
-                priority
-              />
-            </div>
-            <div className={styles.works_scroll_image}>
-              <Image
-                src="/images/works-img-sp-3.png"
-                alt="開発したアプリの写真"
-                width={240}
-                height={447}
-                priority
-              />
-            </div>
-            <div className={styles.works_scroll_image}>
-              <Image
-                src="/images/works-img-sp-4.png"
-                alt="開発したアプリの写真"
-                width={240}
-                height={447}
-                priority
-              />
-            </div>
-          </div>
-        )}
+        <div className={styles.works_scroll}>
+          <div
+            className={`${styles.works_scroll_image} ${styles.works_img_1}`}
+          ></div>
+          <div
+            className={`${styles.works_scroll_image} ${styles.works_img_2}`}
+          ></div>
+          <div
+            className={`${styles.works_scroll_image} ${styles.works_img_3}`}
+          ></div>
+        </div>
+
         <div className={styles.works_text}>
           <h3 className={styles.works_app_title}>
             コーヒーテイスティングアプリ『Tasting Note』

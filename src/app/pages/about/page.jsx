@@ -1,54 +1,45 @@
 "use client";
 import styles from "@/styles/page.module.css";
-import { SocialButton } from "@/components/Buttons/SocialButton";
-import Image from "next/image";
 import { UpButton } from "@/components/Buttons/UpButton";
-import { useState, useEffect } from "react";
+import Image from "next/image";
+
 const About = () => {
-  const [Change, setChange] = useState("sp");
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    // ウィンドウのサイズが変更されたときに、状態を更新
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    if (window.innerWidth <= 576) {
-      setChange(
-        <Image
-          src={`/images/mt-huji-sp.svg`}
-          alt="富士登頂した時の写真"
-          width={150}
-          height={150}
-          priority
-        />
-      );
-    } else {
-      setChange(
-        <Image
-          src={`/images/mt-huji-pc.svg`}
-          alt="富士登頂した時の写真"
-          width={300}
-          height={300}
-          priority
-        />
-      );
-    }
-
-    // クリーンアップ
-    return () => window.removeEventListener("resize", handleResize);
-  }, [windowWidth]);
-
   return (
     <div className={styles.contents}>
-      <SocialButton />
       <UpButton />
       <section className={styles.about_section}>
         <h2 className={styles.page_title}>About</h2>
-        <div className={styles.about_image}>{Change}</div>
+        <div className={styles.about_image}></div>
+        <div className={styles.socialMediaBox}>
+          <button className={styles.socialMediaButton} type="button">
+            <Image
+              src="/images/X_logo-black.png"
+              alt="Xの画像"
+              width={25}
+              height={25}
+              priority
+            />
+          </button>
+          <button className={styles.socialMediaButton} type="button">
+            <Image
+              src="/images/Instagram_Glyph_Gradient.png"
+              alt="インスタグラムの画像"
+              width={25}
+              height={25}
+              priority
+            />
+          </button>
+          <button className={styles.socialMediaButton} type="button">
+            <Image
+              src="/images/Facebook_Logo_Primary.png"
+              alt="フェイスブックの画像"
+              width={25}
+              height={25}
+              priority
+            />
+          </button>
+          {/* <button className={styles.socialBox_} type="button"></button> */}
+        </div>
         <div className={styles.about_text}>
           <p className={styles.about_intro_text}>
             35歳からプログラミングやアプリ開発、アフィリエイト、ブログに挑戦しています。うつ病や不安障害と闘いながら、同じ悩みを持つ方々に少しでも勇気を与えたいと思っています。日々の出来事や精神疾患に関する悩みなどをブログで発信中です。ぜひご覧ください。
