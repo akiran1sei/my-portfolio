@@ -53,10 +53,13 @@ const Works = () => {
             <h4 className={styles.works_techUsed_title}>使用技術</h4>
             <ul className={styles.works_techUsed_list}>
               <li className={styles.works_techUsed_item}>
-                フロントエンド: HTML, CSS, JavaScript, React
+                フロントエンド: HTML, CSS, JavaScript
               </li>
               <li className={styles.works_techUsed_item}>
-                バックエンド: Next.js (App Router使用)
+                バックエンド: Node.js
+              </li>
+              <li className={styles.works_techUsed_item}>
+                フレームワーク: Next.js (App Router使用)
               </li>
               <li className={styles.works_techUsed_item}>
                 データベース: MongoDB Atlas
