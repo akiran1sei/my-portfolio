@@ -45,11 +45,7 @@ const Home = () => {
                         priority
                       />
                     </span>
-                    <Link
-                      href={"http://localhost:3000/pages/about"}
-                      scroll={false}
-                      passHref
-                    >
+                    <Link href={"http://localhost:3000/pages/about"} passHref>
                       <span className={styles.startCircle}></span>
                     </Link>
                   </button>
@@ -65,7 +61,7 @@ const Home = () => {
                     <li className={styles.home_index_item}>
                       <Link
                         href={"http://localhost:3000/pages/about"}
-                        scroll={false}
+                        
                         passHref
                       >
                         About
@@ -74,7 +70,7 @@ const Home = () => {
                     <li className={styles.home_index_item}>
                       <Link
                         href={"http://localhost:3000/pages/works"}
-                        scroll={false}
+                        
                         passHref
                       >
                         Works
@@ -83,7 +79,7 @@ const Home = () => {
                     <li className={styles.home_index_item}>
                       <Link
                         href={"http://localhost:3000/pages/blog"}
-                        scroll={false}
+                        
                         passHref
                       >
                         Blog
@@ -92,7 +88,7 @@ const Home = () => {
                     <li className={styles.home_index_item}>
                       <Link
                         href={"http://localhost:3000/pages/contact"}
-                        scroll={false}
+                        
                         passHref
                       >
                         Contact
