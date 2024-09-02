@@ -4,7 +4,7 @@ import styles from "@/styles/page.module.css";
 
 export function Header() {
   return (
-    <header className={styles.header}>
+    <header className={styles.header} id="header">
       <div className={styles.header_wrapper}>
         <nav className={styles.header_nav}>
           <ul className={styles.header_nav_list}>
@@ -12,7 +12,6 @@ export function Header() {
               <Link
                 className={styles.header_nav_link}
                 href={"http://localhost:3000/pages/about"}
-                scroll={false}
                 passHref
               >
                 About
@@ -22,7 +21,6 @@ export function Header() {
               <Link
                 className={styles.header_nav_link}
                 href={"http://localhost:3000/pages/works"}
-                scroll={false}
                 passHref
               >
                 Works
@@ -32,7 +30,6 @@ export function Header() {
               <Link
                 className={styles.header_nav_link}
                 href={"http://localhost:3000/pages/blog"}
-                scroll={false}
                 passHref
               >
                 Blog
@@ -42,7 +39,6 @@ export function Header() {
               <Link
                 className={styles.header_nav_link}
                 href={"http://localhost:3000/pages/contact"}
-                scroll={false}
                 passHref
               >
                 Contact
@@ -52,7 +48,7 @@ export function Header() {
               <Link
                 className={styles.header_nav_link}
                 href={"http://localhost:3000/pages/preview"}
-                scroll={false}
+                
                 passHref
               >
                 Preview

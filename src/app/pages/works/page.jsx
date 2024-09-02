@@ -2,17 +2,26 @@
 import styles from "@/styles/page.module.css";
 
 import { UpButton } from "@/components/Buttons/UpButton";
+import { useState, useEffect } from "react";
 
 const Works = () => {
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    // ページ読み込み時に実行される処理
+    setIsActive(true);
+  }, []); // 空の配列を渡すことで、マウント時に一度だけ実行される
   return (
     <div className={styles.contents}>
       <UpButton />
-      <section className={styles.works_section}>
+
+      <section
+        className={`${styles.works_section} ${isActive ? styles.active : " "}`}
+      >
         <h2 className={styles.page_title}>
           Works <br />
           『Tasting Note』
         </h2>
-
         <div className={styles.works_scroll}>
           <div
             className={`${styles.works_scroll_image} ${styles.works_img_1}`}

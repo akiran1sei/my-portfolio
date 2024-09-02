@@ -2,12 +2,21 @@
 import styles from "@/styles/page.module.css";
 import { UpButton } from "@/components/Buttons/UpButton";
 import Image from "next/image";
-
+import { useState, useEffect } from "react";
 const About = () => {
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    // ページ読み込み時に実行される処理
+    setIsActive(true);
+  }, []); // 空の配列を渡すことで、マウント時に一度だけ実行される
   return (
     <div className={styles.contents}>
       <UpButton />
-      <section className={styles.about_section}>
+
+      <section
+        className={`${styles.about_section} ${isActive ? styles.active : " "}`}
+      >
         <h2 className={styles.page_title}>About</h2>
         <div className={styles.about_image}></div>
         <div className={styles.socialMediaBox}>

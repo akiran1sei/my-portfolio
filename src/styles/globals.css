@@ -77,6 +77,10 @@ img {
   height: 100%;
   vertical-align: bottom;
 }
+button {
+  background: transparent;
+  border: none;
+}
 body,
 div,
 dl,
