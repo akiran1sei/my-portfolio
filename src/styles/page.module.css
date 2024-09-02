@@ -45,7 +45,7 @@
   width: 100%;
 }
 .portfolio_name {
-  font-size: 48px;
+  font-size: 36px;
   color: var(--white-color);
   font-family: "Merienda", "cursive";
   text-shadow: 2px 2px 0px var(--accents-color);
@@ -129,6 +129,7 @@
   position: relative;
   border-style: unset;
   background: none;
+  animation: blink 1s infinite;
 }
 .startArrow {
   display: inline-block;
@@ -136,7 +137,7 @@
   height: 35px;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 40px;
 }
 .startCircle {
   display: inline-block;
@@ -147,7 +148,19 @@
   border-radius: 50%;
   position: absolute;
   bottom: 0;
-  right: 0;
+  right: 25px;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .show {
   opacity: 1; /* 不透明度を1にする */
@@ -270,9 +283,10 @@
   transform-origin: left;
   transform: rotate(90deg);
   color: var(--sub-color);
+  letter-spacing: 4rem;
 }
 .home_notebook_cover {
-  width: 100%;
+  width: calc(100% - 50px);
   height: 100%;
   background: var(--base-color);
   display: flex;
@@ -351,7 +365,16 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  opacity: 0;
+  transition: 1s;
+  transform: translateY(2rem);
+  transition: all 1s ease-in-out;
 }
+.about_section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .about_image {
   background-image: url(/images/mt-huji-sp.svg);
   width: 150px;
@@ -416,6 +439,16 @@
   }
 }
 /* works */
+.works_section {
+  opacity: 0;
+  transition: 1s;
+  transform: translateY(2rem);
+  transition: all 1s ease-in-out;
+}
+.works_section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
 .works_scroll {
   overflow-x: auto;
   white-space: nowrap;
@@ -435,6 +468,7 @@
   height: 450px;
   margin-right: 10px;
   scroll-snap-align: start;
+
   min-width: 240px;
   border-radius: 5px;
   background-repeat: no-repeat;
