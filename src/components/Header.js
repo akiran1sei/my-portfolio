@@ -11,7 +11,7 @@ export function Header() {
             <li className={styles.header_nav_item}>
               <Link
                 className={styles.header_nav_link}
-                href={"http://localhost:3000/pages/about"}
+                href={"/pages/about"}
                 passHref
               >
                 About
@@ -20,7 +20,7 @@ export function Header() {
             <li className={styles.header_nav_item}>
               <Link
                 className={styles.header_nav_link}
-                href={"http://localhost:3000/pages/works"}
+                href={"/pages/works"}
                 passHref
               >
                 Works
@@ -29,7 +29,7 @@ export function Header() {
             <li className={styles.header_nav_item}>
               <Link
                 className={styles.header_nav_link}
-                href={"http://localhost:3000/pages/blog"}
+                href={"/pages/blog"}
                 passHref
               >
                 Blog
@@ -38,7 +38,7 @@ export function Header() {
             <li className={styles.header_nav_item}>
               <Link
                 className={styles.header_nav_link}
-                href={"http://localhost:3000/pages/contact"}
+                href={"/pages/contact"}
                 passHref
               >
                 Contact
@@ -47,7 +47,7 @@ export function Header() {
             {/* <li className={styles.header_nav_item}>
               <Link
                 className={styles.header_nav_link}
-                href={"http://localhost:3000/pages/preview"}
+                href={"/pages/preview"}
                 
                 passHref
               >

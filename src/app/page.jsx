@@ -43,7 +43,7 @@ const Home = () => {
                         priority
                       />
                     </span>
-                    <Link href={"http://localhost:3000/pages/about"} passHref>
+                    <Link href={"/pages/about"} passHref>
                       <span className={styles.startCircle}></span>
                     </Link>
                   </button>
