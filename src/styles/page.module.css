@@ -130,6 +130,7 @@
   border-style: unset;
   background: none;
   animation: blink 1s infinite;
+  padding: 0;
 }
 .startArrow {
   display: inline-block;
@@ -137,18 +138,17 @@
   height: 35px;
   position: absolute;
   top: 0;
-  right: 40px;
+  right: 20px;
 }
 .startCircle {
   display: inline-block;
   width: 20px;
   height: 20px;
   background: var(--white-color);
-  /* border: 1px solid var(--base-color); */
   border-radius: 50%;
   position: absolute;
   bottom: 0;
-  right: 25px;
+  right: 0;
 }
 
 @keyframes blink {
@@ -267,20 +267,17 @@
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: stretch;
+  /* overflow: hidden; */
 }
 .home_notebook_bg {
-  width: 100%;
+  width: 2em;
   height: 100%;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 25px;
 }
 .home_notebook_bg_text {
   font-size: 2em;
-  position: absolute;
-  top: 0;
-  left: 1em;
-  transform-origin: left;
   transform: rotate(90deg);
   color: var(--sub-color);
   letter-spacing: 4rem;
@@ -294,58 +291,68 @@
   flex-wrap: nowrap;
   justify-content: space-around;
   align-items: center;
-  border-radius: 0px 5px 5px 0px;
 }
+
 .home_notebook_spine {
   width: 25px;
   height: 100%;
-  border-radius: 5px 0px 0px 5px;
+  border-right: 0.5px solid var(--sub-color);
+  border-radius: 5px 0px 0px 1px;
   background: var(--accents-color);
+}
+.home_notebook_spine_under {
+  width: 25px;
+  height: 10px;
+  background: var(--accents-color);
+  position: absolute;
+  bottom: -10px;
+  transform: translateX(15px) skewX(70deg);
+  border-right: 1px solid var(--sub-color);
+  z-index: var(--z-index-header);
+}
+.home_notebook_bundle {
+  width: 25px;
+  height: 100%;
+  background: var(--base-color);
+  transform: skewY(20deg);
+  transform-origin: top left;
+}
+.home_notebook_bundle_under {
+  position: absolute;
+  bottom: -10px;
+  width: calc(100% - 50px);
+  height: 10px;
+  background: var(--sub-color-10);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  transform: translateX(37px) skewX(70deg);
+}
+.home_notebook_page_under {
+  display: inline-block;
+  width: 100%;
+  height: 0.5px;
+  background: var(--white-color);
+  border: 0.5px solid #33333333;
+  transform-origin: right;
+  margin-bottom: 0.5px;
+}
+.home_notebook_page {
+  display: inline-block;
+  width: 1px;
+  height: 100%;
+  border: 0.5px solid #33333333;
+
+  background: var(--white-color);
 }
 
 .home_button {
   position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-}
-.home_index {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: var(--z-index-menu);
-  background: url(/images/bg-sp.png);
+  bottom: 0;
+  right: 30px;
 }
 
-.home_index_nav {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  color: var(--sub-color);
-}
-.home_index_list {
-  width: 100%;
-  height: 50%;
-  transform: translateY(calc(50vh - 50%));
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-}
-.home_index_item {
-  width: 100px;
-  padding: 1rem;
-  text-align: center;
-  background: var(--accents-color);
-  border: 2px solid var(--base-color);
-  border-radius: 5px;
-}
-.home_index_title {
-  color: var(--accents-color);
-}
 @media screen and (min-width: 576px) {
   .home_notebook_bg_text {
     font-size: 2em;
@@ -366,7 +373,7 @@
   justify-content: flex-start;
   align-items: center;
   opacity: 0;
-  transition: 1s;
+
   transform: translateY(2rem);
   transition: all 1s ease-in-out;
 }
@@ -441,7 +448,7 @@
 /* works */
 .works_section {
   opacity: 0;
-  transition: 1s;
+
   transform: translateY(2rem);
   transition: all 1s ease-in-out;
 }
@@ -487,6 +494,23 @@
   line-height: 1.5;
   padding-bottom: 10rem;
   margin-top: 2rem;
+}
+.works_app_link {
+  border-bottom: 2px solid var(--base-color);
+
+  animation: color 1s infinite;
+}
+@keyframes color {
+  0% {
+    color: var(--sub-color);
+  }
+  50% {
+    color: var(--accents-color);
+  }
+
+  100% {
+    color: var(--sub-color);
+  }
 }
 .works_overview {
   padding-top: 2rem;

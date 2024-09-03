@@ -15,10 +15,8 @@ const Home = () => {
         <div className={styles.main_wrapper}>
           <div className={styles.home_contents}>
             <div className={styles.home_notebook}>
-              <div className={styles.home_notebook_bg}>
-                <p className={styles.home_notebook_bg_text}>notebook</p>
-              </div>
               <div className={styles.home_notebook_spine}></div>
+              <div className={styles.home_notebook_spine_under}></div>
               <div className={styles.home_notebook_cover}>
                 <h1 className={styles.portfolio_name}>
                   <span className={`${styles.border_bottom} ${styles.home}`}>
@@ -50,54 +48,32 @@ const Home = () => {
                     </Link>
                   </button>
                 </div>
+                <div className={styles.home_notebook_bg}>
+                  <p className={styles.home_notebook_bg_text}>notebook</p>
+                </div>
+              </div>
+              <div className={styles.home_notebook_bundle}>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+              </div>
+              <div className={styles.home_notebook_bundle_under}>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
               </div>
             </div>
-
-            {/* {Action && (
-              <div className={styles.home_index}>
-                <h2 className={styles.home_index_title}>目次</h2>
-                <nav className={styles.home_index_nav}>
-                  <ul className={styles.home_index_list}>
-                    <li className={styles.home_index_item}>
-                      <Link
-                        href={"http://localhost:3000/pages/about"}
-                        
-                        passHref
-                      >
-                        About
-                      </Link>
-                    </li>
-                    <li className={styles.home_index_item}>
-                      <Link
-                        href={"http://localhost:3000/pages/works"}
-                        
-                        passHref
-                      >
-                        Works
-                      </Link>
-                    </li>
-                    <li className={styles.home_index_item}>
-                      <Link
-                        href={"http://localhost:3000/pages/blog"}
-                        
-                        passHref
-                      >
-                        Blog
-                      </Link>
-                    </li>
-                    <li className={styles.home_index_item}>
-                      <Link
-                        href={"http://localhost:3000/pages/contact"}
-                        
-                        passHref
-                      >
-                        Contact
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            )} */}
           </div>
         </div>
       </main>
