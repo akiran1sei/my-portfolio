@@ -63,52 +63,6 @@ const Home = () => {
                 <span className={styles.home_notebook_page}></span>
               </div>
             </div>
-
-            {/* {Action && (
-              <div className={styles.home_index}>
-                <h2 className={styles.home_index_title}>目次</h2>
-                <nav className={styles.home_index_nav}>
-                  <ul className={styles.home_index_list}>
-                    <li className={styles.home_index_item}>
-                      <Link
-                        href={"http://localhost:3000/pages/about"}
-                        
-                        passHref
-                      >
-                        About
-                      </Link>
-                    </li>
-                    <li className={styles.home_index_item}>
-                      <Link
-                        href={"http://localhost:3000/pages/works"}
-                        
-                        passHref
-                      >
-                        Works
-                      </Link>
-                    </li>
-                    <li className={styles.home_index_item}>
-                      <Link
-                        href={"http://localhost:3000/pages/blog"}
-                        
-                        passHref
-                      >
-                        Blog
-                      </Link>
-                    </li>
-                    <li className={styles.home_index_item}>
-                      <Link
-                        href={"http://localhost:3000/pages/contact"}
-                        
-                        passHref
-                      >
-                        Contact
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            )} */}
           </div>
         </div>
       </main>

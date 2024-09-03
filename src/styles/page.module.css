@@ -320,44 +320,7 @@
   bottom: 0;
   right: 30px;
 }
-.home_index {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: var(--z-index-menu);
-  background: url(/images/bg-sp.png);
-}
 
-.home_index_nav {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  color: var(--sub-color);
-}
-.home_index_list {
-  width: 100%;
-  height: 50%;
-  transform: translateY(calc(50vh - 50%));
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-}
-.home_index_item {
-  width: 100px;
-  padding: 1rem;
-  text-align: center;
-  background: var(--accents-color);
-  border: 2px solid var(--base-color);
-  border-radius: 5px;
-}
-.home_index_title {
-  color: var(--accents-color);
-}
 @media screen and (min-width: 576px) {
   .home_notebook_bg_text {
     font-size: 2em;
