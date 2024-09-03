@@ -16,7 +16,7 @@ const Home = () => {
           <div className={styles.home_contents}>
             <div className={styles.home_notebook}>
               <div className={styles.home_notebook_spine}></div>
-
+              <div className={styles.home_notebook_spine_under}></div>
               <div className={styles.home_notebook_cover}>
                 <h1 className={styles.portfolio_name}>
                   <span className={`${styles.border_bottom} ${styles.home}`}>
@@ -61,6 +61,17 @@ const Home = () => {
                 <span className={styles.home_notebook_page}></span>
                 <span className={styles.home_notebook_page}></span>
                 <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+              </div>
+              <div className={styles.home_notebook_bundle_under}>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
               </div>
             </div>
           </div>
