@@ -500,6 +500,9 @@
 
   animation: color 1s infinite;
 }
+.works_app_link_Text {
+  text-align: center;
+}
 @keyframes color {
   0% {
     color: var(--sub-color);
