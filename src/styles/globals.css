@@ -68,6 +68,7 @@ a {
 }
 h3 {
   background: var(--accents-color);
+  text-align: center;
 }
 h4 {
   border-bottom: 2px solid var(--accents-color);
