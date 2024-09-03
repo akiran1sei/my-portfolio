@@ -3,6 +3,7 @@ import styles from "@/styles/page.module.css";
 
 import { UpButton } from "@/components/Buttons/UpButton";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 const Works = () => {
   const [isActive, setIsActive] = useState(false);
@@ -20,7 +21,9 @@ const Works = () => {
       >
         <h2 className={styles.page_title}>
           Works <br />
-          『Tasting Note』
+          <Link href={`https://tastingnote.vercel.app/`} passHref>
+            『Tasting Note』
+          </Link>
         </h2>
         <div className={styles.works_scroll}>
           <div
@@ -38,6 +41,15 @@ const Works = () => {
           <h3 className={styles.works_app_title}>
             コーヒーテイスティングアプリ『Tasting Note』
           </h3>
+          <p className={styles.works_app_link_Text}>
+            <Link
+              className={styles.works_app_link}
+              href={`https://tastingnote.vercel.app/`}
+              passHref
+            >
+              『Tasting Note』は、こちらからどうぞ！
+            </Link>
+          </p>
           <div className={styles.works_overview}>
             <h4 className={styles.works_overview_title}>概要</h4>
             <p className={styles.works_overview_text}>

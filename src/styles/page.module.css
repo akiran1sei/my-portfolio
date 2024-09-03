@@ -500,6 +500,23 @@
   padding-bottom: 10rem;
   margin-top: 2rem;
 }
+.works_app_link {
+  border-bottom: 2px solid var(--base-color);
+
+  animation: color 1s infinite;
+}
+@keyframes color {
+  0% {
+    color: var(--sub-color);
+  }
+  50% {
+    color: var(--accents-color);
+  }
+
+  100% {
+    color: var(--sub-color);
+  }
+}
 .works_overview {
   padding-top: 2rem;
 }
