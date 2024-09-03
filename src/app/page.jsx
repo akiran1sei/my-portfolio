@@ -15,10 +15,8 @@ const Home = () => {
         <div className={styles.main_wrapper}>
           <div className={styles.home_contents}>
             <div className={styles.home_notebook}>
-              <div className={styles.home_notebook_bg}>
-                <p className={styles.home_notebook_bg_text}>notebook</p>
-              </div>
               <div className={styles.home_notebook_spine}></div>
+
               <div className={styles.home_notebook_cover}>
                 <h1 className={styles.portfolio_name}>
                   <span className={`${styles.border_bottom} ${styles.home}`}>
@@ -50,6 +48,19 @@ const Home = () => {
                     </Link>
                   </button>
                 </div>
+                <div className={styles.home_notebook_bg}>
+                  <p className={styles.home_notebook_bg_text}>notebook</p>
+                </div>
+              </div>
+              <div className={styles.home_notebook_bundle}>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
               </div>
             </div>
 
