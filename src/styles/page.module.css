@@ -298,6 +298,7 @@
   width: 25px;
   height: 100%;
   border-right: 0.5px solid var(--sub-color);
+  border-left: 0.5px solid var(--sub-color);
   border-radius: 5px 0px 0px 1px;
   background: var(--accents-color);
 }
@@ -308,7 +309,8 @@
   position: absolute;
   bottom: -10px;
   transform: translateX(15px) skewX(70deg);
-  border-right: 1px solid var(--sub-color);
+  border-right: 0.5px solid var(--sub-color);
+
   z-index: var(--z-index-header);
 }
 .home_notebook_bundle {
