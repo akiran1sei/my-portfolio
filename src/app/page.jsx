@@ -2,13 +2,8 @@
 import styles from "@/styles/page.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 const Home = () => {
-  // const [Action, setAction] = useState(false);
-  // const handleClickAction = () => {
-  //   setAction(!Action);
-  // };
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -29,11 +24,7 @@ const Home = () => {
                   </span>
                 </p>
                 <div className={styles.home_button}>
-                  <button
-                    // onClick={handleClickAction}
-                    className={styles.startButton}
-                    type="button"
-                  >
+                  <button className={styles.startButton} type="button">
                     <span className={styles.startArrow}>
                       <Image
                         src="/images/south_east_arrow.svg"
@@ -61,8 +52,21 @@ const Home = () => {
                 <span className={styles.home_notebook_page}></span>
                 <span className={styles.home_notebook_page}></span>
                 <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
               </div>
               <div className={styles.home_notebook_bundle_under}>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
                 <span className={styles.home_notebook_page_under}></span>
                 <span className={styles.home_notebook_page_under}></span>
                 <span className={styles.home_notebook_page_under}></span>

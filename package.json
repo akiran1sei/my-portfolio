@@ -10,13 +10,16 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "crypto": "^1.0.1",
     "dotenv": "^16.4.5",
+    "gridfs-stream": "^1.1.1",
     "jose": "^5.7.0",
     "jwt-decode": "^4.0.0",
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.4",
     "next": "14.2.6",
     "normalize.css": "^8.0.1",
+    "path": "^0.12.7",
     "react": "^18",
     "react-dom": "^18",
     "swr": "^2.2.5"

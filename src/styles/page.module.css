@@ -25,7 +25,7 @@
 }
 .contents {
   width: calc(100% - 40px);
-  height: 100%;
+  height: auto;
   background-image: url(/images/bg.png);
   /* background-image: url(/images/bg-sp.png); */
   background-repeat: repeat-y;
@@ -337,7 +337,7 @@
   width: 100%;
   height: 0.5px;
   background: var(--white-color);
-  border: 0.5px solid #33333333;
+  border-bottom: 0.5px solid #33333333;
   transform-origin: right;
   margin-bottom: 0.5px;
 }
@@ -345,7 +345,7 @@
   display: inline-block;
   width: 1px;
   height: 100%;
-  border: 0.5px solid #33333333;
+  border-left: 0.5px solid #33333333;
 
   background: var(--white-color);
 }
@@ -385,10 +385,19 @@
   transform: translateY(0);
 }
 
+.about_image_box {
+  width: 100%;
+  height: 100%;
+}
 .about_image {
+  width: 100%;
+  height: 100%;
+  max-width: 150px;
+  min-width: 150px;
+  max-height: 150px;
+  min-height: 150px;
   background-image: url(/images/mt-huji-sp.svg);
-  width: 150px;
-  height: 150px;
+  background-repeat: no-repeat;
   margin: 0 auto;
   border-radius: 10px;
 }
@@ -438,9 +447,13 @@
     margin: 0 auto;
   }
   .about_image {
-    background-image: url(/images/mt-huji-pc.svg);
-    width: 300px;
-    height: 300px;
+    background-image: url(http://localhost:3000/images/mt-huji-pc.svg);
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    min-width: 300px;
+    max-height: 300px;
+    min-height: 300px;
   }
 }
 @media screen and (min-width: 1024px) {
