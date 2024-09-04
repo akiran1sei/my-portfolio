@@ -101,6 +101,7 @@ pre,
 code,
 form,
 fieldset,
+figure,
 legend,
 input,
 textarea,
@@ -110,4 +111,7 @@ th,
 td {
   margin: 0;
   padding: 0;
+}
+figcaption {
+  font-size: var(--font-x-small);
 }
