@@ -25,7 +25,7 @@
 }
 .contents {
   width: calc(100% - 40px);
-  height: 100%;
+  height: auto;
   background-image: url(/images/bg.png);
   /* background-image: url(/images/bg-sp.png); */
   background-repeat: repeat-y;
@@ -337,7 +337,7 @@
   width: 100%;
   height: 0.5px;
   background: var(--white-color);
-  border: 0.5px solid #33333333;
+  border-bottom: 0.5px solid #33333333;
   transform-origin: right;
   margin-bottom: 0.5px;
 }
@@ -345,7 +345,7 @@
   display: inline-block;
   width: 1px;
   height: 100%;
-  border: 0.5px solid #33333333;
+  border-left: 0.5px solid #33333333;
 
   background: var(--white-color);
 }

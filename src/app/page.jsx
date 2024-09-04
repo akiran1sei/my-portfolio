@@ -52,8 +52,21 @@ const Home = () => {
                 <span className={styles.home_notebook_page}></span>
                 <span className={styles.home_notebook_page}></span>
                 <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
+                <span className={styles.home_notebook_page}></span>
               </div>
               <div className={styles.home_notebook_bundle_under}>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
+                <span className={styles.home_notebook_page_under}></span>
                 <span className={styles.home_notebook_page_under}></span>
                 <span className={styles.home_notebook_page_under}></span>
                 <span className={styles.home_notebook_page_under}></span>
