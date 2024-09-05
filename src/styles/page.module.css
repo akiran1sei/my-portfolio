@@ -319,6 +319,7 @@
   background: var(--base-color);
   transform: skewY(20deg);
   transform-origin: top left;
+  overflow: hidden;
 }
 .home_notebook_bundle_under {
   position: absolute;
@@ -331,6 +332,7 @@
   flex-wrap: nowrap;
   justify-content: center;
   transform: translateX(37px) skewX(70deg);
+  overflow: hidden;
 }
 .home_notebook_page_under {
   display: inline-block;
