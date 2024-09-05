@@ -6,4 +6,4 @@ const BlogSchema = new Schema({
   postDate: String,
 });
 export const BlogModel =
-  mongoose.model.Blog || mongoose.model("Blog", BlogSchema);
+  mongoose.models.Blog || mongoose.model("Blog", BlogSchema);
