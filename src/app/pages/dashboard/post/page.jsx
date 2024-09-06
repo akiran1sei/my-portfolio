@@ -12,7 +12,6 @@ const BlogPost = () => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [contents, setContents] = useState("");
-
   const [error, setError] = useState("");
   const router = useRouter();
   useEffect(() => {
@@ -47,11 +46,12 @@ const BlogPost = () => {
 
       const jsonData = await response.json();
       alert(jsonData.message);
-      return router.refresh();
+      return router.push("/pages/dashboard/post");
     } catch (error) {
       return alert("投稿エラー");
     }
   };
+
   return (
     <div className={styles.contents}>
       <section
