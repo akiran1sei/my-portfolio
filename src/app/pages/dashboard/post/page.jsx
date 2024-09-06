@@ -83,7 +83,9 @@ const BlogPost = () => {
                 id="contents"
                 value={contents}
                 onChange={(e) => setContents(e.target.value)}
-                cols="25"
+                rows="10"
+                cols="30"
+                placeholder="ここにテキストを入力してください"
                 required
               ></textarea>
             </div>
