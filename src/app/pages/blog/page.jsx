@@ -8,11 +8,11 @@ import Link from "next/link";
 
 const Blog = () => {
   const [isActive, setIsActive] = useState(false);
-  function truncateText(text, maxLength) {
-    return text.length > maxLength
-      ? text.substring(0, maxLength) + "..."
-      : text;
-  }
+  // function truncateText(text, maxLength) {
+  //   return text.length > maxLength
+  //     ? text.substring(0, maxLength) + "..."
+  //     : text;
+  // }
   useEffect(() => {
     // ページ読み込み時に実行される処理
     setIsActive(true);
@@ -52,7 +52,8 @@ const Blog = () => {
               </time>
 
               <p className={styles.blog_post_text}>
-                {truncateText(item.postMessage, 100)}
+                {item.postMessage}
+                {/* {truncateText(item.postMessage, 100)} */}
               </p>
               <div className={styles.blog_post_next}>
                 <Link href={`/pages/blog/${item._id}`} passHref={false}>
