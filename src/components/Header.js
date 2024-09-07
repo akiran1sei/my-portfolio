@@ -26,7 +26,7 @@ export function Header() {
                 Works
               </Link>
             </li>
-            {/* <li className={styles.header_nav_item}>
+            <li className={styles.header_nav_item}>
               <Link
                 className={styles.header_nav_link}
                 href={"/pages/blog"}
@@ -35,7 +35,7 @@ export function Header() {
                 Blog
               </Link>
             </li>
-             <li className={styles.header_nav_item}>
+            <li className={styles.header_nav_item}>
               <Link
                 className={styles.header_nav_link}
                 href={"/pages/contact"}
@@ -43,7 +43,7 @@ export function Header() {
               >
                 Contact
               </Link>
-            </li> */}
+            </li>
             {/* <li className={styles.header_nav_item}>
               <Link
                 className={styles.header_nav_link}
