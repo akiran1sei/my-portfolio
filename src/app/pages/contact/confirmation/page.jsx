@@ -24,11 +24,23 @@ const Confirmation = () => {
     setIsActive(true);
   }, []); // 空の配列を渡すことで、マウント時に一度だけ実行される
   const handleSubmit = async (e) => {
-    //   e.preventDefault();
-    //   try {
-    //     setError(null);
-    //   } catch (error) {
-    //   }
+    e.preventDefault();
+    try {
+      setError(null);
+      // 送信処理 (API呼び出しなど)
+      // const response = await fetch("/api/submit", {
+      //   method: "POST",
+      //   // ...
+      // });
+      // if (!response.ok) {
+      //   throw new Error("送信に失敗しました");
+      // }
+      alert("送信が完了しました。");
+      return router.push("/pages/contact/confirmation");
+    } catch (error) {
+      console.error(error);
+      setError(error.message || "予期せぬエラーが発生しました。");
+    }
   };
 
   return (
