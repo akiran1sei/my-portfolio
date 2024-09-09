@@ -51,10 +51,12 @@ const Blog = () => {
                 {item.postDate}
               </time>
 
-              <p className={styles.blog_post_text}>
-                {item.postMessage}
+              <div className={styles.blog_post_text}>
+                {/* <span dangerouslySetInnerHTML={{ __html:truncateText(item.postMessage, 100)}} /> */}
+                <div dangerouslySetInnerHTML={{ __html: item.postMessage }} />
+
                 {/* {truncateText(item.postMessage, 100)} */}
-              </p>
+              </div>
               <div className={styles.blog_post_next}>
                 <Link href={`/pages/blog/${item._id}`} passHref={false}>
                   <span>&gt;</span>
