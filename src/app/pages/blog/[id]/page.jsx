@@ -4,10 +4,9 @@ import useSWR from "swr";
 import { UpButton } from "@/components/Buttons/UpButton";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { BackButton } from "@/components/Buttons/BackButton";
-import { BlogButton } from "@/components/Buttons/BlogButton";
 
+import { BackButton } from "@/components/Buttons/BackButton";
+import DOMPurify from "dompurify";
 const Article = (request) => {
   const [isActive, setIsActive] = useState(false);
 
@@ -15,6 +14,7 @@ const Article = (request) => {
     // ページ読み込み時に実行される処理
     setIsActive(true);
   }, []); // 空の配列を渡すことで、マウント時に一度だけ実行される
+
   const { data, error } = useSWR(
     `/pages/api/blog/${request.params.id}`,
     fetcher,
@@ -28,6 +28,34 @@ const Article = (request) => {
   if (error) return <div>エラーが発生しました。</div>;
   if (!data) return <div>データを取得中</div>;
   const blogItem = data.value;
+
+  const dirtyHtml = blogItem.postMessage; // dirtyHtmlを定義
+  const sanitizedHtml = DOMPurify.sanitize(dirtyHtml, {
+    ALLOWED_TAGS: [
+      "p",
+      "b",
+      "i",
+      "a",
+      "img",
+      "ul",
+      "ol",
+      "li",
+      "blockquote",
+      "code",
+      "pre",
+    ],
+    ALLOWED_ATTR: {
+      "*": ["class", "style"],
+      a: ["href", "target"],
+      img: ["src", "alt", "width", "height"],
+      code: ["class"],
+      pre: ["class"],
+    },
+    ALLOWED_URI_REGEXP:
+      /^https?:\/\/(www\.)?[-a-z0-9]+(\.[a-z]{2,}){1,3}(\/.*)?$/i,
+    FORBID_ATTR: ["onclick", "onload"],
+    ALLOW_DATA_ATTRS: false,
+  });
   return (
     <div className={styles.contents}>
       <UpButton />
@@ -53,8 +81,12 @@ const Article = (request) => {
             <time dateTime="2024-04-01" className={styles.article_post_date}>
               {blogItem.postDate}
             </time>
-
-            <p className={styles.article_post_text}>{blogItem.postMessage} </p>
+            <div className={styles.article_post_text}>
+              <div
+                dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
+                className={styles.article_htmlEditor}
+              />
+            </div>
           </article>
           <div className={styles.article_button}>
             <BackButton />

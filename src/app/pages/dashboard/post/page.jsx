@@ -4,12 +4,13 @@ import styles from "@/styles/page.module.css";
 import dotenv from "dotenv";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
 
 const BlogPost = () => {
   dotenv.config();
-  const [currentContent, setCurrentContent] = useState("");
+  const [currentContent, setCurrentContent] = useState(
+    "<p>これは初期表示されるHTMLコードです。</p>"
+  );
+
   const [isActive, setIsActive] = useState(false);
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
@@ -54,8 +55,9 @@ const BlogPost = () => {
         setCurrentContent("");
         setTitle("");
         setDate("");
+        router.push("/pages/dashboard/post");
       }
-      return router.replace("/pages/dashboard/post");
+      return;
     } catch (error) {
       return alert("投稿エラー");
     }
@@ -85,7 +87,7 @@ const BlogPost = () => {
             <div className={styles.post_form_contents}>
               <p>投稿内容</p>
               <br />
-              {/* <div dangerouslySetInnerHTML={{ __html: currentContent }} /> */}
+
               <HtmlEditor
                 initialValue={currentContent}
                 onChange={setCurrentContent}
