@@ -7,6 +7,7 @@ import Image from "next/image";
 
 import { BackButton } from "@/components/Buttons/BackButton";
 import DOMPurify from "dompurify";
+
 const Article = (request) => {
   const [isActive, setIsActive] = useState(false);
 
@@ -25,6 +26,7 @@ const Article = (request) => {
       revalidateOnReconnect: true, // 再接続時に再検証
     }
   );
+
   if (error) return <div>エラーが発生しました。</div>;
   if (!data) return <div>データを取得中</div>;
   const blogItem = data.value;
@@ -55,6 +57,9 @@ const Article = (request) => {
       /^https?:\/\/(www\.)?[-a-z0-9]+(\.[a-z]{2,}){1,3}(\/.*)?$/i,
     FORBID_ATTR: ["onclick", "onload"],
     ALLOW_DATA_ATTRS: false,
+    USE_PROFILES: { html: true },
+    // FORBID_TAGS: ["style"],
+    // FORBID_ATTR: ["style"],
   });
   return (
     <div className={styles.contents}>

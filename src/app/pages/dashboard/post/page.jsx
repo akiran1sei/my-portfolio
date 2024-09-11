@@ -1,5 +1,6 @@
 "use client";
-import HtmlEditor from "@/components/HtmlEditor";
+// import HtmlEditor from "@/components/HtmlEditor";
+import Tiptap from "@/components/Tiptap";
 import styles from "@/styles/page.module.css";
 import dotenv from "dotenv";
 import { useState, useEffect } from "react";
@@ -7,9 +8,7 @@ import { useRouter } from "next/navigation";
 
 const BlogPost = () => {
   dotenv.config();
-  const [currentContent, setCurrentContent] = useState(
-    "<p>これは初期表示されるHTMLコードです。</p>"
-  );
+  const [currentContent, setCurrentContent] = useState("");
 
   const [isActive, setIsActive] = useState(false);
   const [title, setTitle] = useState("");
@@ -88,10 +87,12 @@ const BlogPost = () => {
               <p>投稿内容</p>
               <br />
 
-              <HtmlEditor
+              {/* <HtmlEditor
                 initialValue={currentContent}
                 onChange={setCurrentContent}
-              />
+              /> */}
+              <Tiptap />
+              {/* <Tiptap content={currentContent} onChange={setCurrentContent} /> */}
             </div>
 
             <div className={styles.post_form_button}>
