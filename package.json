@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@codemirror/lang-html": "^6.4.9",
-    "@codemirror/lang-javascript": "^6.2.2",
-    "@uiw/react-codemirror": "^4.23.1",
+    "@tiptap/extension-document": "^2.6.6",
+    "@tiptap/extension-image": "^2.6.6",
+    "@tiptap/extension-paragraph": "^2.6.6",
+    "@tiptap/extension-text": "^2.6.6",
+    "@tiptap/pm": "^2.6.6",
+    "@tiptap/react": "^2.6.6",
+    "@tiptap/starter-kit": "^2.6.6",
     "bcryptjs": "^2.4.3",
-    "codemirror": "^6.0.1",
     "crypto": "^1.0.1",
     "dompurify": "^3.1.6",
     "dotenv": "^16.4.5",
