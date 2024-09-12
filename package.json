@@ -12,6 +12,7 @@
     "@tiptap/extension-document": "^2.6.6",
     "@tiptap/extension-image": "^2.6.6",
     "@tiptap/extension-paragraph": "^2.6.6",
+    "@tiptap/extension-placeholder": "^2.6.6",
     "@tiptap/extension-text": "^2.6.6",
     "@tiptap/pm": "^2.6.6",
     "@tiptap/react": "^2.6.6",
