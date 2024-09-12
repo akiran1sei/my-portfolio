@@ -1,17 +1,26 @@
+//src/components/Tiptap.js
 "use client";
-
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import ImageExtension from "@tiptap/extension-image";
-import Document from "@tiptap/extension-document";
-import Paragraph from "@tiptap/extension-paragraph";
-import Text from "@tiptap/extension-text";
-import "../styles/editor.css";
-const Tiptap = () => {
+import Placeholder from "@tiptap/extension-placeholder";
+
+import "@/styles/editor.css";
+const Tiptap = ({ onUpdate, placeholder, editable, content }) => {
   const editor = useEditor({
-    extensions: [StarterKit],
-    // ...その他のオプション
-    content: "<p>Hello World! 🌎️</p>",
+    extensions: [
+      StarterKit,
+      Placeholder.configure({
+        placeholder: placeholder || "ここに入力してください...",
+      }),
+    ],
+    content: content,
+    editable: editable,
+    autofocus: true,
+    enableInputRules: true,
+    enablePasteRules: true,
+    onUpdate: ({ editor }) => {
+      onUpdate(editor.getHTML());
+    },
   });
 
   return <EditorContent editor={editor} />;
