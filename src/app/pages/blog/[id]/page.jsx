@@ -43,6 +43,8 @@ const Article = (request) => {
       "ol",
       "li",
       "blockquote",
+      "figure",
+      "figcaption",
       "code",
       "pre",
     ],

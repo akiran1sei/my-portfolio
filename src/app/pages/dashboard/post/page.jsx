@@ -93,7 +93,6 @@ const BlogPost = () => {
                 content={currentContent}
               />
             </div>
-
             <div className={styles.post_form_button}>
               <button type="submit" className={styles.post_form_button_submit}>
                 投稿
