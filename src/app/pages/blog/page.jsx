@@ -5,14 +5,20 @@ import { UpButton } from "@/components/Buttons/UpButton";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
+import DOMPurify from "dompurify";
 const Blog = () => {
   const [isActive, setIsActive] = useState(false);
-  // function truncateText(text, maxLength) {
-  //   return text.length > maxLength
-  //     ? text.substring(0, maxLength) + "..."
-  //     : text;
-  // }
+  const truncateText = (text, maxLength) => {
+    return text.length > maxLength
+      ? text.substring(0, maxLength) + "..."
+      : text;
+  };
+
+  const sanitizedAndTruncatedText = (text, maxLength) => {
+    const sanitizedText = DOMPurify.sanitize(text);
+    return truncateText(sanitizedText, maxLength);
+  };
+
   useEffect(() => {
     // ページ読み込み時に実行される処理
     setIsActive(true);
@@ -51,10 +57,13 @@ const Blog = () => {
                 {item.postDate}
               </time>
 
-              <p className={styles.blog_post_text}>
-                {item.postMessage}
-                {/* {truncateText(item.postMessage, 100)} */}
-              </p>
+              <div className={styles.blog_post_text}>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizedAndTruncatedText(item.postMessage, 100),
+                  }}
+                />
+              </div>
               <div className={styles.blog_post_next}>
                 <Link href={`/pages/blog/${item._id}`} passHref={false}>
                   <span>&gt;</span>
