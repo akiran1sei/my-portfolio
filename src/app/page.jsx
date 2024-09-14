@@ -9,7 +9,8 @@ const Home = () => {
       <main className={styles.main}>
         <div className={styles.main_wrapper}>
           <div className={styles.home_contents}>
-            <div className={styles.home_notebook}>
+            {/* バージョン1 */}
+            {/* <div className={styles.home_notebook}>
               <div className={styles.home_notebook_spine}></div>
               <div className={styles.home_notebook_spine_under}></div>
               <div className={styles.home_notebook_cover}>
@@ -73,7 +74,9 @@ const Home = () => {
                 <span className={styles.home_notebook_page_under}></span>
                 <span className={styles.home_notebook_page_under}></span>
               </div>
-            </div>
+            </div> */}
+            {/* バージョン2 */}
+            <div className={styles.home_gradation}></div>
           </div>
         </div>
       </main>
