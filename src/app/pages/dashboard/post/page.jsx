@@ -53,9 +53,8 @@ const BlogPost = () => {
         setCurrentContent("");
         setTitle("");
         setDate("");
-        router.push("/pages/dashboard/post");
       }
-      return;
+      return location.reload();
     } catch (error) {
       return alert("投稿エラー");
     }
