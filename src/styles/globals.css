@@ -48,10 +48,15 @@ html {
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
     "Hiragino Sans", Meiryo, sans-serif;
 }
-
 body {
   width: 100%;
-  height: auto;
+  height: 100%;
+  background: radial-gradient(circle at center, #f2d769, #333);
+  background-size: cover;
+}
+body {
+  width: 100%;
+  /* height: auto; */
   font-size: var(--font-base);
 }
 @media screen and (min-width: 576px) {

@@ -57,19 +57,19 @@ const Tiptap = ({ onUpdate, placeholder, editable, content }) => {
   });
 
   // 副作用で画像を設定
-  useEffect(() => {
-    if (editor) {
-      editor.commands.setImage({
-        src: "http://localhost:3000/images/post/rico.png",
-      });
+  // useEffect(() => {
+  //   if (editor) {
+  //     editor.commands.setImage({
+  //       src: "http://localhost:3000/images/post/rico.png",
+  //     });
 
-      editor.commands.setImage({
-        src: "http://localhost:3000/images/post/rico.png",
-        alt: "リコちゃん",
-        title: "姪っ子",
-      });
-    }
-  }, [editor]); // editor が定義されたときに画像を設定
+  //     editor.commands.setImage({
+  //       src: "http://localhost:3000/images/post/rico.png",
+  //       alt: "リコちゃん",
+  //       title: "姪っ子",
+  //     });
+  //   }
+  // }, [editor]); // editor が定義されたときに画像を設定
 
   return <EditorContent editor={editor} />;
 };
