@@ -76,6 +76,7 @@ const Contact = () => {
                 type="text"
                 name="contents"
                 id="contents"
+                className={styles.contact_form_textarea}
                 value={contents}
                 onChange={(e) => setContents(e.target.value)}
                 rows="10"
