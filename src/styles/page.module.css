@@ -290,7 +290,7 @@
 }
 .home_text_gradation {
   text-shadow: 5px 5px 0px var(--sub-color);
-  animation: gradation 5s infinite;
+  animation: gradation 5s infinite ease-in-out;
 }
 @keyframes gradation {
   0% {
