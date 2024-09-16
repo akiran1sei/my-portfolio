@@ -3,6 +3,7 @@ import styles from "@/styles/page.module.css";
 import { UpButton } from "@/components/Buttons/UpButton";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 const About = () => {
   const [isActive, setIsActive] = useState(false);
 
@@ -21,31 +22,40 @@ const About = () => {
         <div className={styles.about_image}></div>
         <div className={styles.socialMediaBox}>
           <button className={styles.socialMediaButton} type="button">
-            <Image
-              src="/images/X_logo-black.png"
-              alt="Xの画像"
-              width={25}
-              height={25}
-              priority
-            />
+            <Link href={"https://x.com/akiran1sei"} passHref={false}>
+              <Image
+                src="/images/X_logo-black.png"
+                alt="Xの画像"
+                width={25}
+                height={25}
+                priority
+              />
+            </Link>
           </button>
           <button className={styles.socialMediaButton} type="button">
-            <Image
-              src="/images/Instagram_Glyph_Gradient.png"
-              alt="インスタグラムの画像"
-              width={25}
-              height={25}
-              priority
-            />
+            <Link
+              href={"https://www.instagram.com/aquila1sei"}
+              passHref={false}
+            >
+              <Image
+                src="/images/Instagram_Glyph_Gradient.png"
+                alt="インスタグラムの画像"
+                width={25}
+                height={25}
+                priority
+              />
+            </Link>
           </button>
           <button className={styles.socialMediaButton} type="button">
-            <Image
-              src="/images/Facebook_Logo_Primary.png"
-              alt="フェイスブックの画像"
-              width={25}
-              height={25}
-              priority
-            />
+            <Link href={"https://www.facebook.com/aquila1sei"} passHref={false}>
+              <Image
+                src="/images/Facebook_Logo_Primary.png"
+                alt="フェイスブックの画像"
+                width={25}
+                height={25}
+                priority
+              />
+            </Link>
           </button>
           {/* <button className={styles.socialBox_} type="button"></button> */}
         </div>
