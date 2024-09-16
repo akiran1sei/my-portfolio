@@ -52,10 +52,18 @@ html {
 body {
   width: 100%;
   height: auto;
-  background: radial-gradient(circle at center, #f2d769, #fcc800);
+
+  background: radial-gradient(
+    circle at center,
+    var(--accents-color) 0%,
+    var(--base-color) 50%,
+    var(--sub-color) 100%
+  );
+  box-shadow: 0 0 10px var(--sub-color);
   background-size: cover;
   font-size: var(--font-base);
 }
+
 @media screen and (min-width: 576px) {
   body {
     font-size: var(--font-small);

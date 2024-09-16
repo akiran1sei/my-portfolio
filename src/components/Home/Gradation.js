@@ -22,7 +22,7 @@ export function Gradation() {
       <h1 className={styles.home_gradation_title}>
         <button type="button">
           <Link href={"/pages/about"} passHref={false}>
-            Portfolio
+            <span className={styles.home_text_gradation}>Portfolio</span>
           </Link>
         </button>
       </h1>
