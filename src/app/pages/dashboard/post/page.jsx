@@ -1,27 +1,23 @@
-//src/app/pages/dashboard/post/page.jsx
 "use client";
 import Tiptap from "@/components/Tiptap";
 import styles from "@/styles/page.module.css";
-import dotenv from "dotenv";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 const BlogPost = () => {
-  dotenv.config();
   const [currentContent, setCurrentContent] = useState("");
-
   const [isActive, setIsActive] = useState(false);
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [error, setError] = useState("");
-  const router = useRouter();
+
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+
   useEffect(() => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0"); // 月は0から始まるので+1して、桁数が1桁の場合は頭に0を追加
+    const month = String(today.getMonth() + 1).padStart(2, "0");
     const day = String(today.getDate()).padStart(2, "0");
     setDate(`${year}/${month}/${day}`);
-    // ページ読み込み時に実行される処理
     setIsActive(true);
   }, []);
 
@@ -29,43 +25,44 @@ const BlogPost = () => {
     e.preventDefault();
     try {
       setError(null);
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/pages/api/post`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            postTitle: title,
-            postMessage: currentContent,
-            postDate: date,
-          }),
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            "Cache-Control": "no-store",
-          },
-        }
-      );
+      const response = await fetch("/pages/api/post", {
+        method: "POST",
+        body: JSON.stringify({
+          postTitle: title,
+          postMessage: currentContent,
+          postDate: date,
+          imageUrl: uploadedImageUrl,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       const jsonData = await response.json();
 
-      alert(jsonData.message);
-      if (jsonData.ok) {
+      if (jsonData.success) {
+        alert(jsonData.message);
         setCurrentContent("");
         setTitle("");
         setDate("");
+        setUploadedImageUrl("");
+        return location.reload();
+        // router.push("/dashboard"); // 投稿後にダッシュボードにリダイレクト
+      } else {
+        setError(jsonData.message || "投稿に失敗しました。");
       }
-      return location.reload();
     } catch (error) {
-      return alert("投稿エラー");
+      setError("エラーが発生しました。もう一度お試しください。");
     }
   };
 
   return (
     <div className={styles.contents}>
       <section
-        className={`${styles.post_section} ${isActive ? styles.active : " "}`}
+        className={`${styles.post_section} ${isActive ? styles.active : ""}`}
       >
         <h2 className={styles.page_title}>POST</h2>
+
         <div className={styles.post_form_box}>
           <form onSubmit={handlePostSubmit} className={styles.post_form}>
             <div className={styles.post_form_title}>
@@ -84,10 +81,9 @@ const BlogPost = () => {
             <div className={styles.post_form_contents}>
               <p>投稿内容</p>
               <br />
-
               <Tiptap
                 onUpdate={(content) => setCurrentContent(content)}
-                placeholder="ここに記事を入力してください..."
+                placeholder="記事を入力してください..."
                 editable={true}
                 content={currentContent}
               />
@@ -99,6 +95,7 @@ const BlogPost = () => {
             </div>
           </form>
         </div>
+        {error && <p className={styles.error_message}>{error}</p>}
       </section>
     </div>
   );
