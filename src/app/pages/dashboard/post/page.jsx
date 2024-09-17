@@ -41,16 +41,15 @@ const BlogPost = () => {
       const jsonData = await response.json();
 
       if (jsonData.success) {
-        alert(jsonData.message);
         setCurrentContent("");
         setTitle("");
         setDate("");
         setUploadedImageUrl("");
-        return location.reload();
-        // router.push("/dashboard"); // 投稿後にダッシュボードにリダイレクト
       } else {
         setError(jsonData.message || "投稿に失敗しました。");
       }
+      alert(jsonData.message);
+      return location.reload();
     } catch (error) {
       setError("エラーが発生しました。もう一度お試しください。");
     }
