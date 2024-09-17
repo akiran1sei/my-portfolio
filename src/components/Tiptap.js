@@ -11,19 +11,7 @@ import "@/styles/editor.css";
 
 const Tiptap = ({ onUpdate, placeholder, editable, content }) => {
   const [image, setImage] = useState(null);
-  const handleImageUpload = (blob) => {
-    // FormDataを作成して、APIに送信
-    const formData = new FormData();
-    formData.append("image", blob);
-    fetch("/api/upload", {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setImage(data.url);
-      });
-  };
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -34,15 +22,11 @@ const Tiptap = ({ onUpdate, placeholder, editable, content }) => {
       Paragraph,
       Text,
       ImageExtension.configure({
-        inline: false, // 画像をインラインで表示
+        inline: true, // インラインで表示
         resizable: true, // サイズ変更可能
         allowBase64: true, // 画像を base64 文字列として解析
         HTMLAttributes: {
-          class: "my-img", // 画像に適用されるクラス
-        },
-        upload: {
-          url: "/pages/api/upload",
-          handler: handleImageUpload,
+          class: "my-image", // カスタムクラス
         },
       }),
     ],
