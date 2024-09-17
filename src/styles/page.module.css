@@ -175,6 +175,9 @@
   opacity: 0; /* 不透明度を0にする */
   transform: translateY(20px); /* 上方向に20px移動させる */
 }
+.error_message {
+  text-align: center;
+}
 .header {
   width: 100%;
   height: 50px;
@@ -278,17 +281,17 @@
   margin: 0 auto;
 }
 .home_gradation_title {
+  margin: 0;
+  transform: rotate(-15deg);
+  transform-origin: center;
+}
+.home_text_gradation {
   font-family: "Rock Salt", cursive;
   font-weight: 400;
   font-style: normal;
   font-size: 27px;
   color: var(--base-color);
   text-shadow: 3px 3px 3px var(--black-color);
-  margin: 0;
-  transform: rotate(-15deg);
-  transform-origin: center;
-}
-.home_text_gradation {
   text-shadow: 5px 5px 0px var(--sub-color);
   animation: gradation 5s infinite ease-in-out;
 }
@@ -772,7 +775,8 @@
 /* contact , confirmation , post */
 .contact_section,
 .confirmation_section,
-.post_section {
+.post_section,
+.upload_section {
   width: calc(100% - 20px);
   margin: 0 auto;
   height: calc(100vh - 50px);
@@ -839,7 +843,8 @@
 }
 .contact_form_button_submit,
 .confirmation_form_button_submit,
-.post_form_button_submit {
+.post_form_button_submit,
+.upload_form_button_submit {
   background: var(--accents-color);
   padding: 1rem;
   border-radius: 10px;
@@ -852,6 +857,23 @@
   box-shadow: inset 2px 2px 2px var(--black-color);
   transform: translate(2px, 2px);
 }
+.upload_images_upload {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  text-align: center;
+  margin: 5rem auto;
+  border: 1px solid var(--black-color);
+  border-radius: 5px;
+  padding: 0.5rem 0;
+}
+.upload_images_upload input[type="file"] {
+  margin: 2rem 0 1rem;
+}
+.upload_images_upload label {
+  border-bottom: 5px solid var(--base-color);
+}
+
 .contact_form_textarea {
   width: 100%;
 }

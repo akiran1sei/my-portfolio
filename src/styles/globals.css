@@ -125,3 +125,6 @@ td {
 figcaption {
   font-size: var(--font-x-small);
 }
+input[type="file"] {
+  width: 100%;
+}
