@@ -12,12 +12,6 @@ export function Gradation() {
           height={350}
           alt="珈琲豆のイラスト"
         />
-        {/* <Image
-          src="/images/beans-sp.png"
-          width={300}
-          height={300}
-          alt="珈琲豆のイラスト"
-        /> */}
       </div>
       <h1 className={styles.home_gradation_title}>
         <button type="button">
