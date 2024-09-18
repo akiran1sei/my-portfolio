@@ -1,5 +1,5 @@
 "use client";
-import Tiptap from "@/components/Tiptap";
+import CodeEditor from "@/components/CodeEditor";
 import styles from "@/styles/page.module.css";
 import { useState, useEffect } from "react";
 
@@ -21,10 +21,14 @@ const BlogPost = () => {
     setIsActive(true);
   }, []);
 
+  const handleCodeChange = (newCode) => {
+    setCurrentContent(newCode);
+  };
   const handlePostSubmit = async (e) => {
     e.preventDefault();
     try {
       setError(null);
+      console.log(currentContent);
       const response = await fetch("/pages/api/post", {
         method: "POST",
         body: JSON.stringify({
@@ -48,8 +52,8 @@ const BlogPost = () => {
       } else {
         setError(jsonData.message || "投稿に失敗しました。");
       }
-      alert(jsonData.message);
-      return location.reload();
+      // alert(jsonData.message); // 不要なアラートを削除
+      return location.reload(); // 成功時にもリロードするのは好ましくない（確認が必要です）
     } catch (error) {
       setError("エラーが発生しました。もう一度お試しください。");
     }
@@ -80,12 +84,7 @@ const BlogPost = () => {
             <div className={styles.post_form_contents}>
               <p>投稿内容</p>
               <br />
-              <Tiptap
-                onUpdate={(content) => setCurrentContent(content)}
-                placeholder="記事を入力してください..."
-                editable={true}
-                content={currentContent}
-              />
+              <CodeEditor value={currentContent} onChange={handleCodeChange} />
             </div>
             <div className={styles.post_form_button}>
               <button type="submit" className={styles.post_form_button_submit}>

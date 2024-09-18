@@ -4,7 +4,6 @@ import useSWR from "swr";
 import { UpButton } from "@/components/Buttons/UpButton";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-
 import { BackButton } from "@/components/Buttons/BackButton";
 import DOMPurify from "dompurify";
 
@@ -12,18 +11,17 @@ const Article = (request) => {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    // ページ読み込み時に実行される処理
     setIsActive(true);
-  }, []); // 空の配列を渡すことで、マウント時に一度だけ実行される
+  }, []);
 
   const { data, error } = useSWR(
     `/pages/api/blog/${request.params.id}`,
     fetcher,
     {
-      initial: true, // 初回レンダリング時に必ず更新
-      onBackgroundUpdate: true, // バックグラウンドで再読み込み
-      revalidateOnMount: true, // マウント時に再検証
-      revalidateOnReconnect: true, // 再接続時に再検証
+      initial: true,
+      onBackgroundUpdate: true,
+      revalidateOnMount: true,
+      revalidateOnReconnect: true,
     }
   );
 
@@ -31,7 +29,7 @@ const Article = (request) => {
   if (!data) return <div>データを取得中</div>;
   const blogItem = data.value;
 
-  const dirtyHtml = blogItem.postMessage; // dirtyHtmlを定義
+  const dirtyHtml = blogItem.postMessage;
   const sanitizedHtml = DOMPurify.sanitize(dirtyHtml, {
     ALLOWED_TAGS: [
       "p",
@@ -56,21 +54,17 @@ const Article = (request) => {
       pre: ["class"],
     },
     ALLOWED_URI_REGEXP:
-      /^https?:\/\/(www\.)?[-a-z0-9]+(\.[a-z]{2,}){1,3}(\/.*)?$/i,
+      /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|cid|xmpp|xxx):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
     FORBID_ATTR: ["onclick", "onload"],
     ALLOW_DATA_ATTRS: false,
     USE_PROFILES: { html: true },
-    // FORBID_TAGS: ["style"],
-    // FORBID_ATTR: ["style"],
   });
+
   return (
     <div className={styles.contents}>
       <UpButton />
-
       <section
-        className={`${styles.article_section} ${
-          isActive ? styles.active : " "
-        }`}
+        className={`${styles.article_section} ${isActive ? styles.active : ""}`}
       >
         <h2 className={styles.page_title}>Article</h2>
         <div className={styles.article_contents}>
@@ -103,8 +97,10 @@ const Article = (request) => {
     </div>
   );
 };
+
 const fetcher = async (url) => {
   const response = await fetch(url);
   return response.json();
 };
+
 export default Article;
