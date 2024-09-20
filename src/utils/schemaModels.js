@@ -4,6 +4,7 @@ const BlogSchema = new Schema({
   postTitle: String,
   postMessage: String,
   postDate: String,
+  postImage: String,
   createdAt: Date, // 作成日時
   updatedAt: Date, // 更新日時
 });

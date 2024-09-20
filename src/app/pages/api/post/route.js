@@ -8,6 +8,7 @@ export async function POST(request) {
     postTitle: body.postTitle,
     postMessage: body.postMessage,
     postDate: body.postDate,
+    postImage: body.postImage,
   };
   try {
     await connectDB();
