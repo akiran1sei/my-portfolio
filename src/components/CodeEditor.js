@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, forwardRef } from "react";
 import dynamic from "next/dynamic";
-import "@/styles/editor.css";
 import useSWR from "swr";
 import { useState } from "react";
+import editor from "@/styles/editor.module.css";
 
+// ダイナミックインポートでAceEditorを遅延読み込み
 const AceEditor = dynamic(
   async () => {
     const ace = await import("react-ace");
@@ -16,7 +17,7 @@ const AceEditor = dynamic(
 
 const CodeEditor = forwardRef(({ value, onChange }, ref) => {
   const editorRef = useRef(null);
-  const [setImage, useImage] = useState("");
+
   useEffect(() => {
     if (editorRef.current) {
       const editor = editorRef.current.editor;
@@ -25,36 +26,9 @@ const CodeEditor = forwardRef(({ value, onChange }, ref) => {
       editor.session.setWrapLimitRange(null, null);
     }
   }, []);
-  const { data, error } = useSWR(`/pages/api/blog/img`, fetcher, {
-    initial: true,
-    onBackgroundUpdate: true,
-    revalidateOnMount: true,
-    revalidateOnReconnect: true,
-  });
 
-  if (error) return <div>エラーが発生しました。</div>;
-  if (!data) return <div>データを取得中</div>;
-  const options = [];
-  data.value.forEach((img) => {
-    options.push(
-      <option key={img._id} value={img.url}>
-        {img.url}
-      </option>
-    );
-  });
   return (
     <>
-      <div class="thumbnail">
-        <label htmlFor="thumbnail">サムネイル</label>
-        <select
-          name="thumbnail"
-          id="thumbnail"
-          value={useImage}
-          onChange={(e) => setImage(e.target.value)}
-        >
-          {options}
-        </select>
-      </div>
       <AceEditor
         ref={ref} // refをAceEditorコンポーネントに渡す
         mode="html"
@@ -70,7 +44,7 @@ const CodeEditor = forwardRef(({ value, onChange }, ref) => {
           showLineNumbers: true,
           tabSize: 2,
         }}
-        className="my-editor"
+        className={editor.my_editor}
         style={{ width: "100%", height: "400px" }}
       />
     </>
@@ -79,13 +53,19 @@ const CodeEditor = forwardRef(({ value, onChange }, ref) => {
 
 CodeEditor.displayName = "CodeEditor";
 
-// ここで、AceEditorコンポーネントにrefを直接渡す
+// AceEditorコンポーネントにrefを直接渡す
 const EnhancedCodeEditor = forwardRef((props, ref) => (
   <CodeEditor {...props} ref={ref} />
 ));
 EnhancedCodeEditor.displayName = "EnhancedCodeEditor";
+
+// fetcher関数の定義
 const fetcher = async (url) => {
   const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("データの取得に失敗しました");
+  }
   return response.json();
 };
+
 export default EnhancedCodeEditor;
