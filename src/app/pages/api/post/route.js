@@ -9,6 +9,7 @@ export async function POST(request) {
     postMessage: body.postMessage,
     postDate: body.postDate,
     postImage: body.postImage,
+    postImageAlt: body.postImageAlt,
   };
   try {
     await connectDB();

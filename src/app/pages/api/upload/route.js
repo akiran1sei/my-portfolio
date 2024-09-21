@@ -22,6 +22,7 @@ export async function POST(request) {
 
     // Save the file
     // const filename = Date.now() + "_" + file.name;
+    console.log(file);
     const filename = file.name;
     const filepath = path.join(
       process.cwd(),
