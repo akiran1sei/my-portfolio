@@ -4,7 +4,6 @@ import Image from "next/image";
 import useSWR from "swr";
 import CodeEditor from "@/components/CodeEditor";
 import styles from "@/styles/page.module.css";
-// import editor from "@/styles/editor.module.css"; // エディタースタイルのインポートを追加
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
