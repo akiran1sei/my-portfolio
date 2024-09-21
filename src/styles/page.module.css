@@ -790,7 +790,6 @@
 .post_form_box {
   width: 100%;
   height: auto;
-  /* height: 100%; */
   max-width: 500px;
   margin: 0 auto;
 }
@@ -798,7 +797,6 @@
 .post_form {
   width: 100%;
   height: auto;
-  /* height: 100%; */
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -838,6 +836,10 @@
 .post_form_contents textarea {
   margin-top: 1rem;
 }
+.post_form_title > input {
+  max-width: 300px;
+  width: 100%;
+}
 .contact_form_button,
 .confirmation_form_button,
 .post_form_button {
@@ -860,6 +862,7 @@
   box-shadow: inset 2px 2px 2px var(--black-color);
   transform: translate(2px, 2px);
 }
+
 .upload_images_upload {
   width: 100%;
   max-width: 500px;
