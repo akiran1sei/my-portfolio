@@ -48,10 +48,9 @@ const Blog = () => {
                 <Image
                   width={150}
                   height={150}
-                  src={"/images/mt-huji-sp.svg"}
-                  alt="登山登頂時"
+                  src={item.postImage}
+                  alt={item.postImageAlt}
                 />
-                <figcaption>富士山登頂時</figcaption>
               </figure>
               <time dateTime={item.postDate} className={styles.blog_post_date}>
                 {item.postDate}

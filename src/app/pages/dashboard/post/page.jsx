@@ -4,7 +4,6 @@ import Image from "next/image";
 import useSWR from "swr";
 import CodeEditor from "@/components/CodeEditor";
 import styles from "@/styles/page.module.css";
-import editor from "@/styles/editor.module.css"; // エディタースタイルのインポートを追加
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -15,6 +14,7 @@ const BlogPost = () => {
   const [date, setDate] = useState("");
   const [error, setError] = useState("");
   const [image, setImage] = useState("");
+  const [alt, setAlt] = useState("");
 
   useEffect(() => {
     const today = new Date();
@@ -40,6 +40,7 @@ const BlogPost = () => {
           postMessage: currentContent,
           postDate: date,
           postImage: image,
+          postImageAlt: alt,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +77,7 @@ const BlogPost = () => {
   ));
 
   const handleChange = (e) => setImage(e.target.value);
-
+  console.log(image);
   return (
     <div className={styles.contents}>
       <section
@@ -102,20 +103,20 @@ const BlogPost = () => {
             <div className={styles.post_form_contents}>
               <label>投稿内容</label>
               <br />
-              <div className={editor.thumbnail_box}>
-                <h3 className={editor.thumbnail_title}>サムネイル</h3>
+              <div className={styles.thumbnail_box}>
+                <h3 className={styles.thumbnail_title}>サムネイル</h3>
                 <select
                   name="thumbnail"
                   id="thumbnail"
                   value={image}
                   onChange={handleChange}
-                  className={editor.thumbnail}
+                  className={styles.thumbnail}
                 >
                   <option value="">選択してください</option>
                   {options}
                 </select>
 
-                <div className={editor.thumbnail_images}>
+                <div className={styles.thumbnail_images}>
                   {image ? (
                     <Image
                       src={image}
@@ -133,6 +134,18 @@ const BlogPost = () => {
                       priority
                     />
                   )}
+                </div>
+                <div className={styles.thumbnail_images_alternative}>
+                  <label htmlFor="alt">代換テキスト</label>
+                  <br />
+                  <input
+                    type="text"
+                    name="alt"
+                    id="alt"
+                    value={alt}
+                    onChange={(e) => setAlt(e.target.value)}
+                    // required
+                  />
                 </div>
               </div>
               <CodeEditor value={currentContent} onChange={handleCodeChange} />

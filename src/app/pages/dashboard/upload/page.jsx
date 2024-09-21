@@ -47,6 +47,7 @@ const ImageUploadForm = ({ onImageUpload, isUploading }) => {
           name="upload"
           id="upload"
           onChange={handleFileChange}
+          //multiple
         />
         <br />
         <button

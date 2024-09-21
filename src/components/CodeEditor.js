@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, forwardRef } from "react";
 import dynamic from "next/dynamic";
-import useSWR from "swr";
-import { useState } from "react";
-import editor from "@/styles/editor.module.css";
-
 // ダイナミックインポートでAceEditorを遅延読み込み
 const AceEditor = dynamic(
   async () => {
@@ -44,7 +40,6 @@ const CodeEditor = forwardRef(({ value, onChange }, ref) => {
           showLineNumbers: true,
           tabSize: 2,
         }}
-        className={editor.my_editor}
         style={{ width: "100%", height: "400px" }}
       />
     </>
@@ -58,14 +53,5 @@ const EnhancedCodeEditor = forwardRef((props, ref) => (
   <CodeEditor {...props} ref={ref} />
 ));
 EnhancedCodeEditor.displayName = "EnhancedCodeEditor";
-
-// fetcher関数の定義
-const fetcher = async (url) => {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error("データの取得に失敗しました");
-  }
-  return response.json();
-};
 
 export default EnhancedCodeEditor;
