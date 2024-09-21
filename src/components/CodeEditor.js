@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, forwardRef } from "react";
 import dynamic from "next/dynamic";
-import useSWR from "swr";
-import { useState } from "react";
+
 import editor from "@/styles/editor.module.css";
 
 // ダイナミックインポートでAceEditorを遅延読み込み
