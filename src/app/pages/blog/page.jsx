@@ -72,7 +72,7 @@ const Blog = () => {
                 {item.postDate}
               </time>
               <div className={styles.blog_post_text}>
-                {sanitizeAndTruncateText(item.postMessage, 100)}
+                {sanitizeAndTruncateText(item.postMessage, 80)}
               </div>
               <div className={styles.blog_post_next}>
                 <Link href={`/pages/blog/${item._id}`}>

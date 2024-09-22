@@ -762,7 +762,8 @@
     grid-area: 1 / 3 / 2 / 4;
   }
   .blog_post_img {
-    width: 150px;
+    width: 100%;
+    max-width: 150px;
     grid-area: 1 / 1 / 4 / 2;
     margin: 1rem 1rem 0;
   }
