@@ -70,15 +70,7 @@ const Article = (request) => {
         <div className={styles.article_contents}>
           <article className={styles.article_post}>
             <h2 className={styles.article_post_title}>{blogItem.postTitle}</h2>
-            {/* <figure className={styles.article_post_img}>
-              <Image
-                width={150}
-                height={150}
-                src={"/images/mt-huji-sp.svg"}
-                alt="登山登頂時"
-              />
-              <figcaption>富士山登頂時</figcaption>
-            </figure> */}
+
             <time dateTime="2024-04-01" className={styles.article_post_date}>
               {blogItem.postDate}
             </time>
