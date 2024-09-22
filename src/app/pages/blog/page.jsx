@@ -1,4 +1,5 @@
 "use client";
+
 import styles from "@/styles/page.module.css";
 import useSWR from "swr";
 import { UpButton } from "@/components/Buttons/UpButton";
@@ -6,38 +7,53 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "dompurify";
+
 const Blog = () => {
   const [isActive, setIsActive] = useState(false);
+
   const truncateText = (text, maxLength) => {
+    if (typeof text !== "string") {
+      console.error("truncateText received non-string input:", text);
+      return "";
+    }
     return text.length > maxLength
       ? text.substring(0, maxLength) + "..."
       : text;
   };
-
-  const sanitizedAndTruncatedText = (text, maxLength) => {
-    const sanitizedText = DOMPurify.sanitize(text);
-    return truncateText(sanitizedText, maxLength);
+  const sanitizeAndTruncateText = (text, maxLength) => {
+    const sanitizedText = DOMPurify.sanitize(text, {
+      ALLOWED_TAGS: ["p", "b", "i", "em", "strong", "a"],
+      ALLOWED_ATTR: ["href", "target"],
+    });
+    const strippedText = sanitizedText.replace(/<[^>]*>/g, "");
+    return truncateText(strippedText, maxLength);
   };
 
   useEffect(() => {
-    // ページ読み込み時に実行される処理
     setIsActive(true);
-  }, []); // 空の配列を渡すことで、マウント時に一度だけ実行される
+  }, []);
+
   const { data, error } = useSWR(`/pages/api/blog/readall`, fetcher, {
-    initial: true, // 初回レンダリング時に必ず更新
-    onBackgroundUpdate: true, // バックグラウンドで再読み込み
-    revalidateOnMount: true, // マウント時に再検証
-    revalidateOnReconnect: true, // 再接続時に再検証
+    initial: true,
+    onBackgroundUpdate: true,
+    revalidateOnMount: true,
+    revalidateOnReconnect: true,
   });
+
+  useEffect(() => {
+    if (data) {
+      console.log("Fetched data:", data);
+    }
+  }, [data]);
+
   if (error) return <div>エラーが発生しました。</div>;
   if (!data) return <div>データを取得中...</div>;
 
   return (
     <div className={styles.contents}>
       <UpButton />
-
       <section
-        className={`${styles.blog_section} ${isActive ? styles.active : " "}`}
+        className={`${styles.blog_section} ${isActive ? styles.active : ""}`}
       >
         <h2 className={styles.page_title}>Blog</h2>
         <div className={styles.blog_contents}>
@@ -55,16 +71,11 @@ const Blog = () => {
               <time dateTime={item.postDate} className={styles.blog_post_date}>
                 {item.postDate}
               </time>
-
               <div className={styles.blog_post_text}>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: sanitizedAndTruncatedText(item.postMessage, 100),
-                  }}
-                />
+                {sanitizeAndTruncateText(item.postMessage, 100)}
               </div>
               <div className={styles.blog_post_next}>
-                <Link href={`/pages/blog/${item._id}`} passHref={false}>
+                <Link href={`/pages/blog/${item._id}`}>
                   <span>&gt;</span>
                   <span>続きを読む</span>
                 </Link>
@@ -81,4 +92,5 @@ const fetcher = async (url) => {
   const response = await fetch(url);
   return response.json();
 };
+
 export default Blog;
