@@ -53,26 +53,31 @@ const Confirmation = () => {
         <h2 className={styles.page_title}>Confirmation</h2>
         <div className={styles.confirmation_form_box}>
           <form onSubmit={handleSubmit} className={styles.confirmation_form}>
-            <div className={styles.confirmation_form_title}>
+            <label className={styles.confirmation_form_title}>
               <span className={styles.confirmation_form_email_title}>
                 タイトル名
               </span>
-              <br />
+            </label>
+            <div className={styles.confirmation_form_contents}>
               {"はじめまして"}
             </div>
-            <div className={styles.confirmation_form_subject}>
+
+            <label className={styles.confirmation_form_subject}>
               <span className={styles.confirmation_form_email_subject}>
                 件名
               </span>
-              <br />
+            </label>
+
+            <div className={styles.confirmation_form_contents}>
               {"お問い合わせ"}
             </div>
 
-            <div className={styles.confirmation_form_contents}>
+            <label className={styles.confirmation_form_contents}>
               <span className={styles.confirmation_form_email_contents}>
                 内容
               </span>
-              <br />
+            </label>
+            <div className={styles.confirmation_form_contents}>
               {
                 "アプリ『Tasting Note』について、詳しく教えてほしくご連絡いたしました。下記のご連絡先まで、返答をください。********@sample.con"
               }
