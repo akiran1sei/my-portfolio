@@ -1,44 +1,57 @@
+//pages/contact/page.jsx
 "use client";
 import styles from "@/styles/page.module.css";
-import dotenv from "dotenv";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
 
 const Contact = () => {
-  dotenv.config();
   const [isActive, setIsActive] = useState(false);
-  const [title, setTitle] = useState("");
+  const [formData, setFormData] = useState({
+    title: "",
+    subject: "",
+    email: "",
+    contents: "",
+    // 送信者の名前を追加
+    name: "",
+  });
   const [date, setDate] = useState("");
-  const [contents, setContents] = useState("");
-  const [subject, setSubject] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+
+  const handleChange = async (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/pages/api/contact", {
+        method: "POST",
+        body: { ...formData },
+      });
+      const data = await response.json();
+
+      alert(data.message);
+      router.push("/pages/contact/confirmation");
+    } catch (error) {
+      console.error(error);
+      setError("送信に失敗しました。");
+    }
+  };
+
   useEffect(() => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0"); // 月は0から始まるので+1して、桁数が1桁の場合は頭に0を追加
+    const month = String(today.getMonth() + 1).padStart(2, "0");
     const day = String(today.getDate()).padStart(2, "0");
     setDate(`${year}/${month}/${day}`);
-    // ページ読み込み時に実行される処理
     setIsActive(true);
-  }, []); // 空の配列を渡すことで、マウント時に一度だけ実行される
-  const handleContactSubmit = async (e) => {
-    e.preventDefault();
-    router.push("/pages/contact/confirmation");
-    //   try {
-    //     setError(null);
-    //   } catch (error) {
-    //   }
-  };
+  }, []);
 
   return (
     <div className={styles.contents}>
       <section
-        className={`${styles.contact_section} ${
-          isActive ? styles.active : " "
-        }`}
+        className={`${styles.contact_section} ${isActive ? styles.active : ""}`}
       >
         <h2 className={styles.page_title}>Contact</h2>
         <div className={styles.contact_form_box}>
@@ -50,9 +63,9 @@ const Contact = () => {
                 type="text"
                 name="title"
                 id="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                // required
+                value={formData.title}
+                onChange={handleChange}
+                required
               />
             </div>
             <div className={styles.contact_form_subject}>
@@ -62,27 +75,49 @@ const Contact = () => {
                 type="text"
                 name="subject"
                 id="subject"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-                // required
+                value={formData.subject}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className={styles.contact_form_title}>
+              <label htmlFor="name">お名前</label>
+              <br />
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className={styles.contact_form_email}>
+              <label htmlFor="email">メールアドレス</label>
+              <br />
+              <input
+                type="email"
+                name="email"
+                id="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
               />
             </div>
             <div className={styles.contact_form_date}>{date}</div>
-
             <div className={styles.contact_form_contents}>
               <label htmlFor="contents">内容</label>
               <br />
               <textarea
-                type="text"
                 name="contents"
                 id="contents"
                 className={styles.contact_form_textarea}
-                value={contents}
-                onChange={(e) => setContents(e.target.value)}
+                value={formData.contents}
+                onChange={handleChange}
                 rows="10"
                 cols="30"
                 placeholder="ここにテキストを入力してください"
-                // required
+                required
               ></textarea>
             </div>
             <div className={styles.contact_form_button}>
@@ -90,10 +125,11 @@ const Contact = () => {
                 type="submit"
                 className={styles.contact_form_button_submit}
               >
-                次へ
+                送信
               </button>
             </div>
           </form>
+          {error && <p className={styles.error_message}>{error}</p>}
         </div>
       </section>
     </div>
