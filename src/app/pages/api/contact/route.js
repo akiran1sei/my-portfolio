@@ -1,11 +1,10 @@
 // api/send-email.js
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
-export async function POST(request, response) {
+export async function POST(request) {
   try {
     const body = await request.json();
     console.log(body);
-    // const { name, email, subject, message } = req.body;
 
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -18,16 +17,41 @@ export async function POST(request, response) {
     });
 
     const mailOptions = {
-      from: email,
+      from: `"ポートフォリオサイト" <${process.env.SMTP_USER}>`,
       to: process.env.TO_EMAIL,
-      subject: subject,
+      replyTo: body.email,
+      subject: `新しいお問い合わせ: ${body.subject}`,
       text: `
-        名前: ${body.name}
-        メールアドレス: ${body.email}
-        件名: ${body.subject},
-        お問い合わせ内容:
-        ${body.contents}
-      `,
+ポートフォリオサイトから新しいお問い合わせがありました。
+
+送信者情報:
+名前: ${body.name}
+メールアドレス: ${body.email}
+
+件名: ${body.subject}
+
+お問い合わせ内容:
+${body.contents}
+
+---
+このメールはポートフォリオサイトのお問い合わせフォームから自動送信されています。
+  `,
+      html: `
+<h2>ポートフォリオサイトから新しいお問い合わせがありました。</h2>
+
+<h3>送信者情報:</h3>
+<p><strong>名前:</strong> ${body.name}</p>
+<p><strong>メールアドレス:</strong> ${body.email}</p>
+
+<h3>件名:</h3>
+<p>${body.subject}</p>
+
+<h3>お問い合わせ内容:</h3>
+<p>${body.contents.replace(/\n/g, "<br>")}</p>
+
+<hr>
+<p><small>このメールはポートフォリオサイトのお問い合わせフォームから自動送信されています。</small></p>
+  `,
     };
 
     await transporter.sendMail(mailOptions);
