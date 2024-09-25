@@ -6,28 +6,21 @@ import { useRouter } from "next/navigation";
 
 const Contact = () => {
   const [isActive, setIsActive] = useState(false);
-  const [formData, setFormData] = useState({
-    title: "",
-    subject: "",
-    email: "",
-    contents: "",
-    // 送信者の名前を追加
-    name: "",
-  });
+  const [title, setTitle] = useState("");
+  const [subject, setSubject] = useState("");
+  const [email, setEmail] = useState("");
+  const [contents, setContents] = useState("");
+  const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
-
-  const handleChange = async (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const handleContactSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch("/pages/api/contact", {
         method: "POST",
-        body: { ...formData },
+        body: { title: title, name: name, email: email, contents: contents },
       });
       const data = await response.json();
 
@@ -63,8 +56,8 @@ const Contact = () => {
                 type="text"
                 name="title"
                 id="title"
-                value={formData.title}
-                onChange={handleChange}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 required
               />
             </div>
@@ -75,8 +68,8 @@ const Contact = () => {
                 type="text"
                 name="subject"
                 id="subject"
-                value={formData.subject}
-                onChange={handleChange}
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
                 required
               />
             </div>
@@ -87,8 +80,8 @@ const Contact = () => {
                 type="text"
                 name="name"
                 id="name"
-                value={formData.name}
-                onChange={handleChange}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </div>
@@ -99,8 +92,8 @@ const Contact = () => {
                 type="email"
                 name="email"
                 id="email"
-                value={formData.email}
-                onChange={handleChange}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -112,8 +105,8 @@ const Contact = () => {
                 name="contents"
                 id="contents"
                 className={styles.contact_form_textarea}
-                value={formData.contents}
-                onChange={handleChange}
+                value={contents}
+                onChange={(e) => setContents(e.target.value)}
                 rows="10"
                 cols="30"
                 placeholder="ここにテキストを入力してください"

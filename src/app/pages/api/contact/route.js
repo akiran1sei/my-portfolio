@@ -1,10 +1,12 @@
 // api/send-email.js
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
-export async function POST(req, res) {
+export async function POST(request, response) {
   try {
-    const { name, email, subject, message } = req.body;
-    console.log(req, res);
+    const body = await request.json();
+    console.log(body);
+    // const { name, email, subject, message } = req.body;
+
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
@@ -20,11 +22,11 @@ export async function POST(req, res) {
       to: process.env.TO_EMAIL,
       subject: subject,
       text: `
-        名前: ${name}
-        メールアドレス: ${email}
-        件名: ${subject},
+        名前: ${body.name}
+        メールアドレス: ${body.email}
+        件名: ${body.subject},
         お問い合わせ内容:
-        ${message}
+        ${body.contents}
       `,
     };
 
