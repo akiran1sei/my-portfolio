@@ -89,7 +89,7 @@ const BlogPost = () => {
           <form onSubmit={handlePostSubmit} className={styles.post_form}>
             <div className={styles.post_form_title}>
               <label htmlFor="title">タイトル名</label>
-              <br />
+
               <input
                 type="text"
                 name="title"
@@ -102,9 +102,9 @@ const BlogPost = () => {
             <div className={styles.post_form_date}>{date}</div>
             <div className={styles.post_form_contents}>
               <label>投稿内容</label>
-              <br />
+
               <div className={styles.thumbnail_box}>
-                <h3 className={styles.thumbnail_title}>サムネイル</h3>
+                <label className={styles.thumbnail_title}>サムネイル</label>
                 <select
                   name="thumbnail"
                   id="thumbnail"
@@ -137,7 +137,7 @@ const BlogPost = () => {
                 </div>
                 <div className={styles.thumbnail_images_alternative}>
                   <label htmlFor="alt">代換テキスト</label>
-                  <br />
+
                   <input
                     type="text"
                     name="alt"

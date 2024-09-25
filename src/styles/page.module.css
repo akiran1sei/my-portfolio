@@ -804,43 +804,31 @@
   flex-wrap: nowrap;
   justify-content: flex-start;
 }
-.contact_form_title,
-.contact_form_subject,
-.confirmation_form_title,
-.confirmation_form_subject,
-.confirmation_form_contents,
-.post_form_title {
-  text-align: center;
-  margin-top: 1rem;
-}
-.contact_form_title label,
-.contact_form_subject label,
-.contact_form_contents label,
-.confirmation_form_email_title,
-.confirmation_form_email_subject,
-.confirmation_form_email_contents,
-.post_form_title label,
-.post_form_contents label {
+
+.contact_form_box label,
+.post_form_box label,
+.thumbnail_box label,
+.thumbnail_images_alternative label,
+.confirmation_form_box label,
+.upload_images_box label {
   border-bottom: 5px solid var(--accents-color);
+  margin-bottom: 1rem;
+  display: inline-block;
 }
 
-.contact_form_contents,
-.contact_form_date,
-.post_form_contents,
-.post_form_date {
+.contact_form_box,
+.post_form_box,
+.thumbnail_box,
+.confirmation_form_box {
   text-align: center;
   margin-top: 1rem;
 }
-.contact_form_title input,
-.contact_form_subject input,
-.contact_form_contents textarea,
-.post_form_title input,
-.post_form_contents textarea {
-  margin-top: 1rem;
-}
-.post_form_title > input {
-  max-width: 300px;
-  width: 100%;
+
+.post_form_title {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 .contact_form_button,
 .confirmation_form_button,
@@ -865,7 +853,7 @@
   transform: translate(2px, 2px);
 }
 
-.upload_images_upload {
+.upload_images_box {
   width: 100%;
   max-width: 500px;
   height: auto;
@@ -875,11 +863,8 @@
   border-radius: 5px;
   padding: 0.5rem 0;
 }
-.upload_images_upload input[type="file"] {
-  margin: 2rem 0 1rem;
-}
-.upload_images_upload label {
-  border-bottom: 5px solid var(--base-color);
+.upload_images_box input[type="file"] {
+  margin: 1rem auto;
 }
 
 .contact_form_textarea {
@@ -958,12 +943,7 @@
   border: 2px solid var(--sub-color);
   background: var(--sub-color-10);
 }
-.thumbnail_title {
-  font-size: var(--font-base);
-  font-weight: normal;
-  border-bottom: 1px solid var(--sub-color);
-  background: unset;
-}
+
 .thumbnail {
   width: 100%;
   max-width: 300px;
@@ -992,5 +972,4 @@
 .thumbnail_images_alternative > input {
   width: 100%;
   max-width: 300px;
-  margin-top: 1rem;
 }

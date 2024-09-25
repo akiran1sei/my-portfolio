@@ -38,7 +38,7 @@ const ImageUploadForm = ({ onImageUpload, isUploading }) => {
   };
 
   return (
-    <div className={styles.upload_images_upload}>
+    <div className={styles.upload_images_box}>
       <form onSubmit={handleUploadSubmit}>
         <label>画像アップロード</label>
         <br />
