@@ -20,24 +20,20 @@ const Contact = () => {
     if (confirm("本当にメールを送信しますか？")) {
       // ユーザーが「OK」を選択した場合
       try {
-        const response = await fetch(
-          "http://localhost:3000/pages/api/contact",
-          {
-            method: "POST",
-            body: JSON.stringify({
-              title: title,
-              subject: subject,
-              name: name,
-              email: email,
-              contents: contents,
-            }),
-          }
-        );
+        const response = await fetch("/pages/api/contact", {
+          method: "POST",
+          body: JSON.stringify({
+            title: title,
+            subject: subject,
+            name: name,
+            email: email,
+            contents: contents,
+          }),
+        });
 
         const data = await response.json();
-
-        alert(data.message);
-        router.push("/pages/contact/confirmation");
+        location.reload();
+        return alert(data.message);
       } catch (error) {
         console.error(error);
         setError("送信に失敗しました。");
@@ -45,7 +41,8 @@ const Contact = () => {
       // ここで実際のメール送信処理を行う
     } else {
       // ユーザーが「キャンセル」を選択した場合
-      console.log("メール送信がキャンセルされました。");
+      location.reload();
+      return alert("メール送信がキャンセルされました。");
     }
   };
 
