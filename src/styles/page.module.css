@@ -197,11 +197,9 @@
   width: 60px;
   height: 25px;
   text-align: center;
-
   letter-spacing: -1.5px;
-  border-left: 1px solid var(--sub-color-10);
-  border-right: 1px solid var(--sub-color-10);
-  border-bottom: 1px solid var(--sub-color-10);
+  border: 1px solid var(--sub-color);
+  border-top: none;
   border-radius: 0px 0px 5px 5px;
   background: linear-gradient(
     to top,
