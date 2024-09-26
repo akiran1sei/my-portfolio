@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 const Contact = () => {
   const [isActive, setIsActive] = useState(false);
-  const [title, setTitle] = useState("");
+
   const [subject, setSubject] = useState("");
   const [email, setEmail] = useState("");
   const [contents, setContents] = useState("");
@@ -23,7 +23,6 @@ const Contact = () => {
         const response = await fetch("/pages/api/contact", {
           method: "POST",
           body: JSON.stringify({
-            title: title,
             subject: subject,
             name: name,
             email: email,
@@ -63,18 +62,6 @@ const Contact = () => {
         <h2 className={styles.page_title}>Contact</h2>
         <div className={styles.contact_form_box}>
           <form onSubmit={handleContactSubmit} className={styles.contact_form}>
-            <div className={styles.contact_form_title}>
-              <label htmlFor="title">タイトル名</label>
-              <br />
-              <input
-                type="text"
-                name="title"
-                id="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-              />
-            </div>
             <div className={styles.contact_form_subject}>
               <label htmlFor="subject">件名</label>
               <br />
