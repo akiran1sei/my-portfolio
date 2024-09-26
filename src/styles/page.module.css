@@ -182,8 +182,7 @@
   width: 100%;
   height: 50px;
 }
-.header_wrapper .header_nav {
-}
+
 .header_nav_list {
   width: inherit;
   height: inherit;
@@ -209,6 +208,27 @@
 }
 .header_nav_item:last-child {
   letter-spacing: -2px;
+}
+.dashboard_header_nav_list {
+  width: 100%;
+  height: auto;
+  min-width: 280px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background: var(--base-color);
+  color: var(--white-color);
+  text-shadow: 1px 1px 2px var(--black-color);
+}
+.dashboard_header_nav_item {
+  padding: 0.5rem;
+  border-right: 1px solid;
+  margin: 0.5rem 0;
+}
+.dashboard_header_nav_item:last-child {
+  border-right: none;
 }
 .itemTitle {
   font-weight: bold;
@@ -778,7 +798,7 @@
 .contact_section,
 .confirmation_section,
 .post_section,
-.upload_section {
+.edit_box {
   width: calc(100% - 20px);
   margin: 0 auto;
   height: 100%;
