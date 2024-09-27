@@ -85,11 +85,12 @@ const Upload = () => {
   };
 
   return (
-    <div className={styles.contents}>
+    <div className={styles.edit_box}>
+      <h2 className={styles.page_title}>Edit</h2>
       <section
         className={`${styles.upload_section} ${isActive ? styles.active : ""}`}
       >
-        <h2 className={styles.page_title}>Upload</h2>
+        <h3 className={styles.page_sub_title}>Update</h3>
 
         {error && <p className={styles.error_message}>{error}</p>}
 
@@ -98,6 +99,12 @@ const Upload = () => {
           isUploading={isUploading}
         />
         {uploadedImageUrl && <p>アップロードされた画像: {uploadedImageUrl}</p>}
+      </section>
+      <section>
+        <h3 className={styles.page_sub_title}>Update</h3>
+      </section>
+      <section>
+        <h3 className={styles.page_sub_title}>Delete</h3>
       </section>
     </div>
   );
