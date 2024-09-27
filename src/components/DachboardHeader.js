@@ -26,33 +26,6 @@ export function DashboardHeader() {
                 Edit
               </Link>
             </li>
-            <li className={styles.dashboard_header_nav_item}>
-              <Link
-                className={styles.dashboard_header_nav_link}
-                href={"/pages/dashboard/delete"}
-                passHref
-              >
-                Delete
-              </Link>
-            </li>
-            <li className={styles.dashboard_header_nav_item}>
-              <Link
-                className={styles.dashboard_header_nav_link}
-                href={"/pages/dashboard/update"}
-                passHref
-              >
-                Update
-              </Link>
-            </li>
-            <li className={styles.dashboard_header_nav_item}>
-              <Link
-                className={styles.dashboard_header_nav_link}
-                href={"/pages/dashboard/preview"}
-                passHref
-              >
-                Preview
-              </Link>
-            </li>
           </ul>
         </nav>
       </div>

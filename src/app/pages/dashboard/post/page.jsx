@@ -4,7 +4,7 @@ import Image from "next/image";
 import useSWR from "swr";
 import CodeEditor from "@/components/CodeEditor";
 import styles from "@/styles/page.module.css";
-
+import DOMPurify from "dompurify";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const BlogPost = () => {
@@ -15,6 +15,7 @@ const BlogPost = () => {
   const [error, setError] = useState("");
   const [image, setImage] = useState("");
   const [alt, setAlt] = useState("");
+  const [preview, setPreview] = useState(""); // プレビュー用の state
 
   useEffect(() => {
     const today = new Date();
@@ -27,8 +28,9 @@ const BlogPost = () => {
 
   const handleCodeChange = (newCode) => {
     setCurrentContent(newCode);
+    const cleanContent = DOMPurify.sanitize(newCode); // DOMPurify を使用
+    setPreview(cleanContent); // プレビューを更新
   };
-
   const handlePostSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -148,6 +150,13 @@ const BlogPost = () => {
               </div>
             </div>
             <CodeEditor value={currentContent} onChange={handleCodeChange} />
+          </div>
+          <div className={styles.post_form_preview}>
+            <h3>プレビュー</h3>
+            <div
+              className={styles.post_preview_content}
+              dangerouslySetInnerHTML={{ __html: preview }}
+            />
           </div>
           <div className={styles.post_form_button}>
             <button type="submit" className={styles.post_form_button_submit}>
