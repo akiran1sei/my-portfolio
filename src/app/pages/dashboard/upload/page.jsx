@@ -3,6 +3,7 @@
 import styles from "@/styles/page.module.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { DashboardHeader } from "@/components/DashboardHeader";
 
 const ImageUploadForm = ({ onImageUpload, isUploading }) => {
   const [file, setFile] = useState(null);
@@ -85,12 +86,12 @@ const Upload = () => {
   };
 
   return (
-    <div className={styles.edit_box}>
-      <h2 className={styles.page_title}>Edit</h2>
+    <>
+      <DashboardHeader />
       <section
         className={`${styles.upload_section} ${isActive ? styles.active : ""}`}
       >
-        <h3 className={styles.page_sub_title}>Update</h3>
+        <h2 className={styles.page_title}>Update</h2>
 
         {error && <p className={styles.error_message}>{error}</p>}
 
@@ -100,13 +101,7 @@ const Upload = () => {
         />
         {uploadedImageUrl && <p>アップロードされた画像: {uploadedImageUrl}</p>}
       </section>
-      <section>
-        <h3 className={styles.page_sub_title}>Update</h3>
-      </section>
-      <section>
-        <h3 className={styles.page_sub_title}>Delete</h3>
-      </section>
-    </div>
+    </>
   );
 };
 

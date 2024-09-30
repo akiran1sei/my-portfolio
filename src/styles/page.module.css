@@ -798,13 +798,13 @@
 ----- contact -----
 -----  post   -----
 -----thumbnail-----
------   edit  -----
+
 ----- upload  -----
 ----- signIn  ----- 
 */
 .contact_section,
 .post_section,
-.edit_box,
+.upload_section,
 .signIn_section {
   width: calc(100% - 20px);
   margin: 0 auto;
@@ -998,4 +998,3 @@
     max-height: 300px;
   } */
 }
-/* editor */

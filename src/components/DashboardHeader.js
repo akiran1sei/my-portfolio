@@ -20,10 +20,10 @@ export function DashboardHeader() {
             <li className={styles.dashboard_header_nav_item}>
               <Link
                 className={styles.dashboard_header_nav_link}
-                href={"/pages/dashboard/edit"}
+                href={"/pages/dashboard/upload"}
                 passHref
               >
-                Edit
+                Upload
               </Link>
             </li>
           </ul>
