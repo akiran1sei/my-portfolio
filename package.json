@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^5.6.3",
     "ace-builds": "^1.36.2",
     "bcryptjs": "^2.4.3",
     "crypto": "^1.0.1",

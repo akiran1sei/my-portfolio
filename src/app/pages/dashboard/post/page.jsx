@@ -4,7 +4,9 @@ import Image from "next/image";
 import useSWR from "swr";
 import CodeEditor from "@/components/CodeEditor";
 import styles from "@/styles/page.module.css";
-
+import DOMPurify from "dompurify";
+import { DashboardHeader } from "@/components/DashboardHeader";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const BlogPost = () => {
@@ -15,6 +17,7 @@ const BlogPost = () => {
   const [error, setError] = useState("");
   const [image, setImage] = useState("");
   const [alt, setAlt] = useState("");
+  const [preview, setPreview] = useState(""); // プレビュー用の state
 
   useEffect(() => {
     const today = new Date();
@@ -27,8 +30,9 @@ const BlogPost = () => {
 
   const handleCodeChange = (newCode) => {
     setCurrentContent(newCode);
+    const cleanContent = DOMPurify.sanitize(newCode); // DOMPurify を使用
+    setPreview(cleanContent); // プレビューを更新
   };
-
   const handlePostSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -79,85 +83,103 @@ const BlogPost = () => {
   const handleChange = (e) => setImage(e.target.value);
 
   return (
-    <section
-      className={`${styles.post_section} ${isActive ? styles.active : ""}`}
-    >
-      <h2 className={styles.page_title}>POST</h2>
-
-      <div className={styles.post_form_box}>
-        <form onSubmit={handlePostSubmit} className={styles.post_form}>
-          <div className={styles.post_form_title}>
-            <label htmlFor="title">タイトル名</label>
-
-            <input
-              type="text"
-              name="title"
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </div>
-          <div className={styles.post_form_date}>{date}</div>
-          <div className={styles.post_form_contents}>
-            <label>投稿内容</label>
-
-            <div className={styles.thumbnail_box}>
-              <label className={styles.thumbnail_title}>サムネイル</label>
-              <select
-                name="thumbnail"
-                id="thumbnail"
-                value={image}
-                onChange={handleChange}
-                className={styles.thumbnail}
-              >
-                <option value="">選択してください</option>
-                {options}
-              </select>
-
-              <div className={styles.thumbnail_images}>
-                {image ? (
-                  <Image
-                    src={image}
-                    width={100}
-                    height={100}
-                    alt={image}
-                    priority
-                  />
-                ) : (
-                  <Image
-                    src="/images/no-image.jpg"
-                    width={100}
-                    height={100}
-                    alt="no image"
-                    priority
-                  />
-                )}
-              </div>
-              <div className={styles.thumbnail_images_alternative}>
-                <label htmlFor="alt">代換テキスト</label>
+    <>
+      <DashboardHeader />
+      <section
+        className={`${styles.post_section} ${isActive ? styles.active : ""}`}
+      >
+        <h2 className={styles.page_title}>POST</h2>
+        <SignedIn>
+          <div className={styles.post_form_box}>
+            <form onSubmit={handlePostSubmit} className={styles.post_form}>
+              <div className={styles.post_form_title}>
+                <label htmlFor="title">タイトル名</label>
 
                 <input
                   type="text"
-                  name="alt"
-                  id="alt"
-                  value={alt}
-                  onChange={(e) => setAlt(e.target.value)}
-                  // required
+                  name="title"
+                  id="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
                 />
               </div>
-            </div>
-            <CodeEditor value={currentContent} onChange={handleCodeChange} />
+              <div className={styles.post_form_date}>{date}</div>
+              <div className={styles.post_form_contents}>
+                <label>投稿内容</label>
+
+                <div className={styles.thumbnail_box}>
+                  <label className={styles.thumbnail_title}>サムネイル</label>
+                  <select
+                    name="thumbnail"
+                    id="thumbnail"
+                    value={image}
+                    onChange={handleChange}
+                    className={styles.thumbnail}
+                  >
+                    <option value="">選択してください</option>
+                    {options}
+                  </select>
+
+                  <div className={styles.thumbnail_images}>
+                    {image ? (
+                      <Image
+                        src={image}
+                        width={100}
+                        height={100}
+                        alt={image}
+                        priority
+                      />
+                    ) : (
+                      <Image
+                        src="/images/no-image.jpg"
+                        width={100}
+                        height={100}
+                        alt="no image"
+                        priority
+                      />
+                    )}
+                  </div>
+                  <div className={styles.thumbnail_images_alternative}>
+                    <label htmlFor="alt">代換テキスト</label>
+
+                    <input
+                      type="text"
+                      name="alt"
+                      id="alt"
+                      value={alt}
+                      onChange={(e) => setAlt(e.target.value)}
+                      // required
+                    />
+                  </div>
+                </div>
+                <CodeEditor
+                  value={currentContent}
+                  onChange={handleCodeChange}
+                />
+              </div>
+              <div className={styles.post_form_preview}>
+                <h3>プレビュー</h3>
+                <div
+                  className={styles.post_preview_content}
+                  dangerouslySetInnerHTML={{ __html: preview }}
+                />
+              </div>
+              <div className={styles.post_form_button}>
+                <button
+                  type="submit"
+                  className={styles.post_form_button_submit}
+                >
+                  投稿
+                </button>
+              </div>
+            </form>
           </div>
-          <div className={styles.post_form_button}>
-            <button type="submit" className={styles.post_form_button_submit}>
-              投稿
-            </button>
-          </div>
-        </form>
-      </div>
-      {error && <p className={styles.error_message}>{error}</p>}
-    </section>
+          {error && <p className={styles.error_message}>{error}</p>}
+        </SignedIn>
+        <SignedOut></SignedOut>
+      </section>
+    </>
   );
 };
 

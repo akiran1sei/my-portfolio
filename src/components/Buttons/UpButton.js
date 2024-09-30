@@ -16,14 +16,16 @@ export function UpButton() {
   }, []);
 
   return (
-    <button
-      className={`${styles.upButton} ${showButton ? styles.show : styles.hide}`}
-      type="button"
-      id="upButton"
-    >
-      <Link href="#header" passHref>
+    <Link href="#header" passHref>
+      <button
+        className={`${styles.upButton} ${
+          showButton ? styles.show : styles.hide
+        }`}
+        type="button"
+        id="upButton"
+      >
         ▲
-      </Link>
-    </button>
+      </button>
+    </Link>
   );
 }

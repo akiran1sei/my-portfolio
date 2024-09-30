@@ -1,12 +1,13 @@
-import { DashboardHeader } from "@/components/DachboardHeader";
+// dashboard/layout.js
 
+import { ClerkProvider } from "@clerk/nextjs";
 import styles from "@/styles/page.module.css";
 import "normalize.css";
+
 export default function PagesLayout({ children }) {
   return (
-    <div className={styles.contents}>
-      <DashboardHeader />
-      {children}
-    </div>
+    <ClerkProvider>
+      <div className={styles.contents}>{children}</div>
+    </ClerkProvider>
   );
 }

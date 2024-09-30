@@ -3,7 +3,8 @@
 import styles from "@/styles/page.module.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
+import { DashboardHeader } from "@/components/DashboardHeader";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 const ImageUploadForm = ({ onImageUpload, isUploading }) => {
   const [file, setFile] = useState(null);
 
@@ -85,28 +86,25 @@ const Upload = () => {
   };
 
   return (
-    <div className={styles.edit_box}>
-      <h2 className={styles.page_title}>Edit</h2>
+    <>
+      <DashboardHeader />
       <section
         className={`${styles.upload_section} ${isActive ? styles.active : ""}`}
       >
-        <h3 className={styles.page_sub_title}>Update</h3>
-
-        {error && <p className={styles.error_message}>{error}</p>}
-
-        <ImageUploadForm
-          onImageUpload={handleImageUpload}
-          isUploading={isUploading}
-        />
-        {uploadedImageUrl && <p>アップロードされた画像: {uploadedImageUrl}</p>}
+        <h2 className={styles.page_title}>Update</h2>
+        <SignedIn>
+          {error && <p className={styles.error_message}>{error}</p>}
+          <ImageUploadForm
+            onImageUpload={handleImageUpload}
+            isUploading={isUploading}
+          />
+          {uploadedImageUrl && (
+            <p>アップロードされた画像: {uploadedImageUrl}</p>
+          )}
+        </SignedIn>
+        <SignedOut></SignedOut>
       </section>
-      <section>
-        <h3 className={styles.page_sub_title}>Update</h3>
-      </section>
-      <section>
-        <h3 className={styles.page_sub_title}>Delete</h3>
-      </section>
-    </div>
+    </>
   );
 };
 

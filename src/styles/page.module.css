@@ -211,7 +211,7 @@
 }
 .dashboard_header_nav_list {
   width: 100%;
-  height: auto;
+  height: 50px;
   min-width: 280px;
   display: flex;
   flex-direction: row;
@@ -794,27 +794,42 @@
   }
 }
 
-/* contact , confirmation , post */
+/* 
+----- contact -----
+-----  post   -----
+-----thumbnail-----
+
+----- upload  -----
+----- signIn  ----- 
+*/
 .contact_section,
-.confirmation_section,
 .post_section,
-.edit_box {
+.upload_section,
+.signIn_section {
   width: calc(100% - 20px);
   margin: 0 auto;
   height: 100%;
   min-height: 100vh;
   line-height: 1.5;
 }
+.signIn_section {
+  min-height: calc(100vh - 100px);
+}
 .contact_form_box,
-.confirmation_form_box,
-.post_form_box {
+.post_form_box,
+.thumbnail_box,
+.signIn_form_box {
   width: 100%;
   height: auto;
   max-width: 500px;
   margin: 0 auto;
+  text-align: center;
+  margin-top: 1rem;
 }
+
 .contact_form,
-.post_form {
+.post_form,
+.signIn_form {
   width: 100%;
   height: auto;
   display: flex;
@@ -827,19 +842,11 @@
 .post_form_box label,
 .thumbnail_box label,
 .thumbnail_images_alternative label,
-.confirmation_form_box label,
-.upload_images_box label {
+.upload_images_box label,
+.signIn_form_box label {
   border-bottom: 5px solid var(--accents-color);
   margin-bottom: 1rem;
   display: inline-block;
-}
-
-.contact_form_box,
-.post_form_box,
-.thumbnail_box,
-.confirmation_form_box {
-  text-align: center;
-  margin-top: 1rem;
 }
 
 .post_form_title {
@@ -849,23 +856,23 @@
   align-items: center;
 }
 .contact_form_button,
-.confirmation_form_button,
-.post_form_button {
+.post_form_button,
+.signIn_form_button {
   text-align: center;
   margin: 1rem;
 }
 .contact_form_button_submit,
-.confirmation_form_button_submit,
 .post_form_button_submit,
-.upload_form_button_submit {
+.upload_form_button_submit,
+.signIn_form_button_submit {
   background: var(--accents-color);
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 2px 2px 2px #33333333;
 }
 .contact_form_button_submit:active,
-.confirmation_form_button_submit:active,
-.post_form_button_submit:active {
+.post_form_button_submit:active,
+.signIn_form_button_submit:active {
   background: var(--sub-color);
   box-shadow: inset 2px 2px 2px var(--black-color);
   transform: translate(2px, 2px);
@@ -888,6 +895,51 @@
 .contact_form_textarea {
   width: 100%;
 }
+#html-editor {
+  font-size: 18px !important;
+}
+.thumbnail_box {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem auto;
+  padding: 1rem;
+  border: 2px solid var(--sub-color);
+  background: var(--sub-color-10);
+}
+
+.thumbnail {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem auto;
+}
+
+.thumbnail-img {
+  display: inline-block;
+  width: 150px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.thumbnail_images {
+  width: 100%;
+  max-width: 150px;
+  margin: 0 auto;
+}
+.thumbnail_images_alternative,
+.thumbnail_images_alternative > input {
+  width: 100%;
+  max-width: 300px;
+}
+
 @media screen and (min-width: 576px) {
 }
 @media screen and (min-width: 1024px) {
@@ -945,49 +997,4 @@
     max-width: 300px;
     max-height: 300px;
   } */
-}
-/* editor */
-#html-editor {
-  font-size: 18px !important;
-}
-.thumbnail_box {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem auto;
-  padding: 1rem;
-  border: 2px solid var(--sub-color);
-  background: var(--sub-color-10);
-}
-
-.thumbnail {
-  width: 100%;
-  max-width: 300px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem auto;
-}
-
-.thumbnail-img {
-  display: inline-block;
-  width: 150px;
-  height: 100px;
-  overflow: hidden;
-}
-
-.thumbnail_images {
-  width: 100%;
-  max-width: 150px;
-  margin: 0 auto;
-}
-.thumbnail_images_alternative,
-.thumbnail_images_alternative > input {
-  width: 100%;
-  max-width: 300px;
 }

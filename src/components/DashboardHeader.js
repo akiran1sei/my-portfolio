@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import styles from "@/styles/page.module.css";
+import { SignedOut, SignOutButton } from "@clerk/nextjs";
+import { SignedIn, SignIn, SignInButton } from "@clerk/clerk-react";
 
 export function DashboardHeader() {
   return (
@@ -20,38 +22,23 @@ export function DashboardHeader() {
             <li className={styles.dashboard_header_nav_item}>
               <Link
                 className={styles.dashboard_header_nav_link}
-                href={"/pages/dashboard/edit"}
+                href={"/pages/dashboard/upload"}
                 passHref
               >
-                Edit
+                Upload
               </Link>
             </li>
             <li className={styles.dashboard_header_nav_item}>
-              <Link
-                className={styles.dashboard_header_nav_link}
-                href={"/pages/dashboard/delete"}
-                passHref
-              >
-                Delete
-              </Link>
-            </li>
-            <li className={styles.dashboard_header_nav_item}>
-              <Link
-                className={styles.dashboard_header_nav_link}
-                href={"/pages/dashboard/update"}
-                passHref
-              >
-                Update
-              </Link>
-            </li>
-            <li className={styles.dashboard_header_nav_item}>
-              <Link
-                className={styles.dashboard_header_nav_link}
-                href={"/pages/dashboard/preview"}
-                passHref
-              >
-                Preview
-              </Link>
+              <SignedIn>
+                <SignOutButton
+                  redirectUrl={`${process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL}`}
+                />
+              </SignedIn>
+              <SignedOut>
+                <SignInButton
+                  forceRedirectUrl={`${process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL}`}
+                />
+              </SignedOut>
             </li>
           </ul>
         </nav>

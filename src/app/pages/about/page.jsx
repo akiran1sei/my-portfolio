@@ -21,8 +21,8 @@ const About = () => {
         <h2 className={styles.page_title}>About</h2>
         <div className={styles.about_image}></div>
         <div className={styles.socialMediaBox}>
-          <button className={styles.socialMediaButton} type="button">
-            <Link href={"https://x.com/akiran1sei"} passHref={false}>
+          <Link href={"https://x.com/akiran1sei"} passHref={false}>
+            <button className={styles.socialMediaButton} type="button">
               <Image
                 src="/images/X_logo-black.png"
                 alt="Xの画像"
@@ -30,13 +30,10 @@ const About = () => {
                 height={25}
                 priority
               />
-            </Link>
-          </button>
-          <button className={styles.socialMediaButton} type="button">
-            <Link
-              href={"https://www.instagram.com/aquila1sei"}
-              passHref={false}
-            >
+            </button>
+          </Link>
+          <Link href={"https://www.instagram.com/aquila1sei"} passHref={false}>
+            <button className={styles.socialMediaButton} type="button">
               <Image
                 src="/images/Instagram_Glyph_Gradient.png"
                 alt="インスタグラムの画像"
@@ -44,10 +41,10 @@ const About = () => {
                 height={25}
                 priority
               />
-            </Link>
-          </button>
-          <button className={styles.socialMediaButton} type="button">
-            <Link href={"https://www.facebook.com/aquila1sei"} passHref={false}>
+            </button>
+          </Link>
+          <Link href={"https://www.facebook.com/aquila1sei"} passHref={false}>
+            <button className={styles.socialMediaButton} type="button">
               <Image
                 src="/images/Facebook_Logo_Primary.png"
                 alt="フェイスブックの画像"
@@ -55,8 +52,8 @@ const About = () => {
                 height={25}
                 priority
               />
-            </Link>
-          </button>
+            </button>
+          </Link>
           {/* <button className={styles.socialBox_} type="button"></button> */}
         </div>
         <div className={styles.about_text}>
