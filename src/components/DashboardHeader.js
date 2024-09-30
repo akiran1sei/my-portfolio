@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import styles from "@/styles/page.module.css";
+import { SignedOut, SignOutButton } from "@clerk/nextjs";
+import { SignedIn, SignIn, SignInButton } from "@clerk/clerk-react";
 
 export function DashboardHeader() {
   return (
@@ -25,6 +27,18 @@ export function DashboardHeader() {
               >
                 Upload
               </Link>
+            </li>
+            <li className={styles.dashboard_header_nav_item}>
+              <SignedIn>
+                <SignOutButton
+                  redirectUrl={`${process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL}`}
+                />
+              </SignedIn>
+              <SignedOut>
+                <SignInButton
+                  forceRedirectUrl={`${process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL}`}
+                />
+              </SignedOut>
             </li>
           </ul>
         </nav>

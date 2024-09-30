@@ -4,7 +4,7 @@ import styles from "@/styles/page.module.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { DashboardHeader } from "@/components/DashboardHeader";
-
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 const ImageUploadForm = ({ onImageUpload, isUploading }) => {
   const [file, setFile] = useState(null);
 
@@ -92,14 +92,17 @@ const Upload = () => {
         className={`${styles.upload_section} ${isActive ? styles.active : ""}`}
       >
         <h2 className={styles.page_title}>Update</h2>
-
-        {error && <p className={styles.error_message}>{error}</p>}
-
-        <ImageUploadForm
-          onImageUpload={handleImageUpload}
-          isUploading={isUploading}
-        />
-        {uploadedImageUrl && <p>アップロードされた画像: {uploadedImageUrl}</p>}
+        <SignedIn>
+          {error && <p className={styles.error_message}>{error}</p>}
+          <ImageUploadForm
+            onImageUpload={handleImageUpload}
+            isUploading={isUploading}
+          />
+          {uploadedImageUrl && (
+            <p>アップロードされた画像: {uploadedImageUrl}</p>
+          )}
+        </SignedIn>
+        <SignedOut></SignedOut>
       </section>
     </>
   );
