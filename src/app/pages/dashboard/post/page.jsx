@@ -49,6 +49,7 @@ const BlogPost = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        cache: "no-cache",
       });
 
       const jsonData = await response.json();

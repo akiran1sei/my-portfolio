@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import Image from "next/image";
 const ImageUploadForm = ({ onImageUpload, isUploading }) => {
   const [file, setFile] = useState(null);
 
@@ -23,6 +24,7 @@ const ImageUploadForm = ({ onImageUpload, isUploading }) => {
       const response = await fetch("/pages/api/upload", {
         method: "POST",
         body: formData,
+        cache: "no-cache",
       });
 
       const data = await response.json();
@@ -99,7 +101,16 @@ const Upload = () => {
             isUploading={isUploading}
           />
           {uploadedImageUrl && (
-            <p>アップロードされた画像: {uploadedImageUrl}</p>
+            <p>
+              アップロードされた画像:
+              <Image
+                src={uploadedImageUrl}
+                alt="アップロード画像"
+                width={100}
+                height={100}
+                priority
+              />
+            </p>
           )}
         </SignedIn>
         <SignedOut></SignedOut>

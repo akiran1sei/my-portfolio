@@ -28,6 +28,7 @@ const Contact = () => {
             email: email,
             contents: contents,
           }),
+          cache: "no-cache",
         });
 
         const data = await response.json();
