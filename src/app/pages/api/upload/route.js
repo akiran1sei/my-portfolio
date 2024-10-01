@@ -20,9 +20,7 @@ export async function POST(request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Save the file
-    // const filename = Date.now() + "_" + file.name;
-    console.log(file);
+    // Save the file (with cache control headers)
     const filename = file.name;
     const filepath = path.join(
       process.cwd(),
@@ -33,7 +31,16 @@ export async function POST(request) {
     );
     await writeFile(filepath, buffer);
 
-    // Save the URL to MongoDB
+    // Set appropriate cache headers for static files (optional)
+    const fileResponse = NextResponse.next();
+    const expires = new Date(Date.now() + 259200000); // 30 days
+    fileResponse.headers.set(
+      "Cache-Control",
+      `public, max-age=${Math.floor(expires.getTime() / 1000)}`
+    );
+    fileResponse.headers.set("Expires", expires.toUTCString());
+
+    // Save the URL to MongoDB (no cache control needed)
     const fileUrl = `/images/post/${filename}`;
     await ImageModel.create({ url: fileUrl });
 
