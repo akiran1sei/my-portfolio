@@ -815,10 +815,17 @@
 .signIn_section {
   min-height: calc(100vh - 100px);
 }
+.signIn_card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
 .contact_form_box,
 .post_form_box,
-.thumbnail_box,
-.signIn_form_box {
+.thumbnail_box {
   width: 100%;
   height: auto;
   max-width: 500px;
@@ -828,8 +835,7 @@
 }
 
 .contact_form,
-.post_form,
-.signIn_form {
+.post_form {
   width: 100%;
   height: auto;
   display: flex;
@@ -842,8 +848,7 @@
 .post_form_box label,
 .thumbnail_box label,
 .thumbnail_images_alternative label,
-.upload_images_box label,
-.signIn_form_box label {
+.upload_images_box label {
   border-bottom: 5px solid var(--accents-color);
   margin-bottom: 1rem;
   display: inline-block;
@@ -856,23 +861,20 @@
   align-items: center;
 }
 .contact_form_button,
-.post_form_button,
-.signIn_form_button {
+.post_form_button {
   text-align: center;
   margin: 1rem;
 }
 .contact_form_button_submit,
 .post_form_button_submit,
-.upload_form_button_submit,
-.signIn_form_button_submit {
+.upload_form_button_submit {
   background: var(--accents-color);
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 2px 2px 2px #33333333;
 }
 .contact_form_button_submit:active,
-.post_form_button_submit:active,
-.signIn_form_button_submit:active {
+.post_form_button_submit:active {
   background: var(--sub-color);
   box-shadow: inset 2px 2px 2px var(--black-color);
   transform: translate(2px, 2px);
