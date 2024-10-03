@@ -12,10 +12,10 @@ export function BlogSection() {
   }, []);
   const { data, error } = useSWR(`/pages/api/blog/readall`, fetcher, {
     initial: true,
-    onBackgroundUpdate: true,
     revalidateOnMount: true,
-    revalidateOnFocus: false,
-    revalidateIfStale: false,
+    revalidateOnFocus: true,
+    revalidateIfStale: true,
+    staleTime: 60 * 60, // 1時間後に再フェッチ
   });
 
   if (error) return <div>エラーが発生しました。</div>;
