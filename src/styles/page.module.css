@@ -783,7 +783,7 @@
   }
   .blog_post_img {
     width: 150px;
-    height: auto;
+    height: 120px;
     grid-area: 1 / 1 / 4 / 2;
     margin: 1rem 1rem 0;
     overflow-y: hidden;
