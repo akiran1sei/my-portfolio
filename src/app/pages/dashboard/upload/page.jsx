@@ -3,7 +3,7 @@
 import styles from "@/styles/page.module.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { DashboardHeader } from "@/components/DashboardHeader";
+import { DashboardHeader } from "@/components/Header/DashboardHeader";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
 const ImageUploadForm = ({ onImageUpload, isUploading }) => {
