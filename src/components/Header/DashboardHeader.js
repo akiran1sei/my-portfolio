@@ -7,7 +7,7 @@ import { SignedIn, SignIn, SignInButton } from "@clerk/clerk-react";
 export function DashboardHeader() {
   return (
     <header className={styles.dashboard_header} id="dashboard_header">
-      <div className={styles.dashboard_header_wrapper}>
+      <div className={styles.dashboard_header_wrap}>
         <nav className={styles.dashboard_header_nav}>
           <ul className={styles.dashboard_header_nav_list}>
             <li className={styles.dashboard_header_nav_item}>

@@ -12,7 +12,7 @@
   height: auto;
   position: relative;
 }
-.main_wrapper {
+.main_wrap {
   width: 100%;
   height: auto;
   position: relative;
@@ -848,7 +848,7 @@
 .post_form_box label,
 .thumbnail_box label,
 .thumbnail_images_alternative label,
-.upload_images_box label {
+.upload_section_wrap label {
   border-bottom: 5px solid var(--accents-color);
   margin-bottom: 1rem;
   display: inline-block;
@@ -880,7 +880,7 @@
   transform: translate(2px, 2px);
 }
 
-.upload_images_box {
+.upload_section_wrap {
   width: 100%;
   max-width: 500px;
   height: auto;
@@ -890,7 +890,7 @@
   border-radius: 5px;
   padding: 0.5rem 0;
 }
-.upload_images_box input[type="file"] {
+.upload_section_wrap input[type="file"] {
   margin: 1rem auto;
 }
 
@@ -911,7 +911,11 @@
   border: 2px solid var(--sub-color);
   background: var(--sub-color-10);
 }
-
+.upload_box {
+  width: 150px;
+  height: auto;
+  margin: 0 auto;
+}
 .thumbnail {
   width: 100%;
   max-width: 300px;
