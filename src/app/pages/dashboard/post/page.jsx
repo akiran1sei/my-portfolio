@@ -5,7 +5,7 @@ import useSWR from "swr";
 import CodeEditor from "@/components/CodeEditor";
 import styles from "@/styles/page.module.css";
 import DOMPurify from "dompurify";
-import { DashboardHeader } from "@/components/DashboardHeader";
+import { DashboardHeader } from "@/components/Header/DashboardHeader";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
