@@ -5,7 +5,7 @@ import styles from "@/styles/page.module.css";
 export function Header() {
   return (
     <header className={styles.header} id="header">
-      <div className={styles.header_wrapper}>
+      <div className={styles.header_wrap}>
         <nav className={styles.header_nav}>
           <ul className={styles.header_nav_list}>
             <li className={styles.header_nav_item}>
