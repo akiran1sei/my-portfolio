@@ -59,7 +59,7 @@
 
 //クラス名
 .main
-.main_wrapper
+.main_wrap
 .page_title
 .contents
 .socialmedia_box
@@ -70,7 +70,7 @@
 .nav_button
 
 .header
-.header_wrapper
+.header_wrap
 .header_nav
 .header_nav_list
 .header_nav_item
