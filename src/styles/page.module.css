@@ -737,9 +737,11 @@
   font-size: var(--font-base);
 }
 .blog_post_img {
-  width: 100px;
+  width: 150px;
   height: auto;
-  margin: 1rem auto 0;
+  grid-area: 1 / 1 / 4 / 2;
+  margin: 1rem 1rem 0;
+  overflow-y: hidden;
 }
 
 .blog_post_text {
