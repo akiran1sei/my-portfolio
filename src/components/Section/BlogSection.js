@@ -14,7 +14,8 @@ export function BlogSection() {
     initial: true,
     onBackgroundUpdate: true,
     revalidateOnMount: true,
-    revalidateOnReconnect: true,
+    revalidateOnFocus: false,
+    revalidateIfStale: false,
   });
 
   if (error) return <div>エラーが発生しました。</div>;
