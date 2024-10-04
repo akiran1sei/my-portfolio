@@ -1,3 +1,4 @@
+// pages/api/upload
 import { NextResponse } from "next/server";
 import connectDB from "@/utils/database";
 import { ImageModel } from "@/utils/schemaModels";
