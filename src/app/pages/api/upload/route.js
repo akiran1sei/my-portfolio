@@ -8,8 +8,8 @@ import path from "path";
 export async function POST(request) {
   try {
     await connectDB();
-    const data = await request.formData();
-    const file = data.get("file");
+    const formData = await request.formData();
+    const file = formData.get("file");
 
     if (!file) {
       return NextResponse.json(
@@ -19,7 +19,7 @@ export async function POST(request) {
     }
 
     const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    const buffer = await Buffer.from(bytes);
 
     // Save the file (with cache control headers)
     const filename = file.name;
