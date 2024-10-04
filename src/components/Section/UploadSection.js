@@ -30,7 +30,8 @@ export function UploadedSection() {
   useEffect(() => {
     setIsActive(true);
   }, []);
-  const handleImageUpload = async () => {
+  const handleImageUpload = async (e) => {
+    e.preventDefault();
     if (!selectedFile) {
       return; // Prevent unnecessary processing if no file is selected
     }
@@ -39,22 +40,24 @@ export function UploadedSection() {
     setIsUploading(true);
 
     const formData = new FormData();
-    const upData = formData.append("file", selectedFile);
-
+    formData.append("file", selectedFile); // 正しい形式でFormDataにappend
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_URL}/pages/api/upload`,
         {
           method: "POST",
-          body: upData,
-          cache: "no-store",
+          body: formData,
         }
       );
-      //
       const data = await response.json();
-      if (data.success === true) {
-        mutate({ success: true, url: data.url }); // Update uploadStatus in useSWR (optional)
+
+      if (data.success) {
         setUploadedImageUrl(data.url);
+        // router.push('/some-page') // アップロード後に遷移するページを指定
+        // または、特定の要素を更新するロジックを記述
+
+        // useSWRの更新 (必要であれば)
+        mutate({ success: true, url: data.url });
         alert("ファイルが正常にアップロードされました。");
         return location.reload();
         // Consider using router.reload() for full page refresh or partial re-rendering as needed
@@ -66,7 +69,7 @@ export function UploadedSection() {
       console.error("Error uploading image:", error);
       setError(error.message || "アップロードに失敗しました。");
     } finally {
-      setIsUploading(false); // Always set uploading state to false after completion
+      setIsUploading(false);
     }
   };
 
