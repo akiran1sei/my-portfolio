@@ -47,11 +47,7 @@ export function UploadedSection() {
         {
           method: "POST",
           body: formData,
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            "Cache-Control": "no-store",
-          },
+          cache: "no-store",
         }
       );
       //
