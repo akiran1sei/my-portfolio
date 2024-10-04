@@ -47,10 +47,14 @@ export function UploadedSection() {
         {
           method: "POST",
           body: formData,
-          // cache: "no-cache", (optional)
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Cache-Control": "no-store",
+          },
         }
       );
-
+      //
       const data = await response.json();
       if (data.success === true) {
         mutate({ success: true, url: data.url }); // Update uploadStatus in useSWR (optional)
