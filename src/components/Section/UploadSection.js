@@ -1,3 +1,4 @@
+// components/Section/UploadSection.js
 "use client";
 import styles from "@/styles/page.module.css";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
@@ -5,35 +6,30 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
+import dotenv from "dotenv";
 export function UploadedSection() {
   const [isActive, setIsActive] = useState(false);
-  const [date, setDate] = useState("");
+
   const [error, setError] = useState("");
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null); // Use null for initial state
   const router = useRouter();
-
+  dotenv.config();
   // useSWR hook for fetching image upload status (optional)
   const {
     data: uploadStatus,
     error: fetchError,
     mutate,
-  } = useSWR("/pages/api/upload", fetcher, {
+  } = useSWR(`${process.env.NEXT_PUBLIC_URL}/pages/api/upload`, fetcher, {
     // Adjust revalidate options as needed
     revalidateOnMount: true,
     revalidateOnFocus: false,
     revalidateIfStale: false,
   });
   useEffect(() => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
-    setDate(`<span class="math-inline">\{year\}/</span>{month}/${day}`);
     setIsActive(true);
   }, []);
-
   const handleImageUpload = async () => {
     if (!selectedFile) {
       return; // Prevent unnecessary processing if no file is selected
@@ -46,14 +42,17 @@ export function UploadedSection() {
     formData.append("file", selectedFile);
 
     try {
-      const response = await fetch("/pages/api/upload", {
-        method: "POST",
-        body: formData,
-        cache: "no-cache",
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/pages/api/upload`,
+        {
+          method: "POST",
+          body: formData,
+          // cache: "no-cache", (optional)
+        }
+      );
 
       const data = await response.json();
-      if (data.success) {
+      if (data.success === true) {
         mutate({ success: true, url: data.url }); // Update uploadStatus in useSWR (optional)
         setUploadedImageUrl(data.url);
         alert("ファイルが正常にアップロードされました。");
