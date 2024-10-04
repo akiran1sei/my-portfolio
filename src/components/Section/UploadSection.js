@@ -39,14 +39,14 @@ export function UploadedSection() {
     setIsUploading(true);
 
     const formData = new FormData();
-    formData.append("file", selectedFile);
+    const upData = formData.append("file", selectedFile);
 
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_URL}/pages/api/upload`,
         {
           method: "POST",
-          body: formData,
+          body: upData,
           cache: "no-store",
         }
       );

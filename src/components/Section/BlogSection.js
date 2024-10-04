@@ -10,11 +10,13 @@ export function BlogSection() {
   useEffect(() => {
     setIsActive(true);
   }, []);
+
   const { data, error } = useSWR(`/pages/api/blog/readall`, fetcher, {
     initial: true,
     revalidateOnMount: true,
     revalidateOnFocus: true,
     revalidateIfStale: true,
+    onBackgroundUpdate: true, // バックグラウンドで再読み込み
     staleTime: 60 * 60, // 1時間後に再フェッチ
   });
 
