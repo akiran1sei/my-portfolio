@@ -1,60 +1,42 @@
-// pages/api/upload
-import { NextResponse } from "next/server";
+// app/pages/api/upload/route.js
+import { put } from "@vercel/blob";
 import connectDB from "@/utils/database";
 import { ImageModel } from "@/utils/schemaModels";
-import { writeFile } from "fs/promises";
-import path from "path";
 
-export async function POST(request) {
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export async function POST(req) {
+  const filename = req.nextUrl.searchParams.get("filename");
+
+  if (!filename) {
+    return new Response(JSON.stringify({ error: "Filename is required" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
   try {
     await connectDB();
-    const formData = await request.formData();
-    const file = formData.get("file");
 
-    if (!file) {
-      return NextResponse.json(
-        { success: false, message: "No file uploaded" },
-        { status: 400 }
-      );
-    }
+    const blob = await put(`public/images/post/${filename}`, req.body, {
+      access: "public",
+    });
 
-    const bytes = await file.arrayBuffer();
-    const buffer = await Buffer.from(bytes);
+    const image = await ImageModel.create({ url: blob.url });
 
-    // Save the file (with cache control headers)
-    const filename = file.name;
-    const filepath = path.join(
-      process.cwd(),
-      "public",
-      "images",
-      "post",
-      filename
-    );
-    await writeFile(filepath, buffer);
-
-    // Set appropriate cache headers for static files (optional)
-    const fileResponse = NextResponse.next();
-    const expires = new Date(Date.now() + 259200000); // 30 days
-    fileResponse.headers.set(
-      "Cache-Control",
-      `public, max-age=${Math.floor(expires.getTime() / 1000)}`
-    );
-    fileResponse.headers.set("Expires", expires.toUTCString());
-
-    // Save the URL to MongoDB (no cache control needed)
-    const fileUrl = `/images/post/${filename}`;
-    await ImageModel.create({ url: fileUrl });
-
-    return NextResponse.json({
-      success: true,
-      message: "File uploaded successfully",
-      url: fileUrl,
+    return new Response(JSON.stringify(blob), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("Error uploading file:", error);
-    return NextResponse.json(
-      { success: false, message: "Error uploading file" },
-      { status: 500 }
-    );
+    console.error("Error in upload:", error);
+    return new Response(JSON.stringify({ error: "Error uploading file" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
