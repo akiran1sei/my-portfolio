@@ -1,75 +1,50 @@
 // components/Section/UploadSection.js
 "use client";
 import styles from "@/styles/page.module.css";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
-import Image from "next/image";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import useSWR from "swr";
-import dotenv from "dotenv";
-export function UploadedSection() {
-  const [isActive, setIsActive] = useState(false);
+import { put } from "@vercel/blob"; // Vercel Blob ライブラリをインポート
 
-  const [error, setError] = useState("");
-  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
-  const [isUploading, setIsUploading] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null); // Use null for initial state
-  const router = useRouter();
-  dotenv.config();
-  // useSWR hook for fetching image upload status (optional)
-  const {
-    data: uploadStatus,
-    error: fetchError,
-    mutate,
-  } = useSWR(`${process.env.NEXT_PUBLIC_URL}/pages/api/upload`, fetcher, {
-    // Adjust revalidate options as needed
-    revalidateOnMount: true,
-    revalidateOnFocus: false,
-    revalidateIfStale: false,
-  });
+// import Image from "next/image";
+import { useState, useEffect } from "react";
+
+export function UploadedSection() {
+  const [file, setFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadedUrl, setUploadedUrl] = useState("");
+  const [isActive, setIsActive] = useState(false);
   useEffect(() => {
     setIsActive(true);
   }, []);
-  const handleImageUpload = async (e) => {
-    e.preventDefault();
-    if (!selectedFile) {
-      return; // Prevent unnecessary processing if no file is selected
-    }
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+  const handleUpload = async () => {
+    if (!file) return;
 
-    setError(""); // Clear previous errors
-    setIsUploading(true);
-
-    const formData = new FormData();
-    formData.append("file", selectedFile); // 正しい形式でFormDataにappend
+    setUploading(true);
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/pages/api/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-      const data = await response.json();
+      const filename = encodeURIComponent(file.name);
+      const formData = new FormData();
+      formData.append("file", file);
 
-      if (data.success) {
-        setUploadedImageUrl(data.url);
-        // router.push('/some-page') // アップロード後に遷移するページを指定
-        // または、特定の要素を更新するロジックを記述
+      const res = await fetch("/pages/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
 
-        // useSWRの更新 (必要であれば)
-        mutate({ success: true, url: data.url });
-        alert("ファイルが正常にアップロードされました。");
-        return location.reload();
-        // Consider using router.reload() for full page refresh or partial re-rendering as needed
+      if (data.url) {
+        setUploadedUrl(data.url);
+        // Vercel Blob にアップロード
+        await put(`images/${filename}`, file, { access: "public" });
+        // リロードの代わりに適切な処理を行う
       } else {
-        setError(data.message || "アップロードに失敗しました。");
-        throw new Error(error); // Re-throw for potential error handling in caller
+        throw new Error("Upload failed");
       }
     } catch (error) {
-      console.error("Error uploading image:", error);
-      setError(error.message || "アップロードに失敗しました。");
+      console.error("Error uploading file:", error);
+      // ここでより具体的なエラーメッセージをユーザーに表示する
     } finally {
-      setIsUploading(false);
+      setUploading(false);
     }
   };
 
@@ -77,45 +52,19 @@ export function UploadedSection() {
     <section className={`${styles.upload_section} ${isActive ? "active" : ""}`}>
       <h2 className={styles.page_title}>Update</h2>
       <div className={styles.upload_section_wrap}>
-        <SignedIn>
-          {error && <p className={styles.error_message}>{error}</p>}
-          <form>
-            <input
-              type="file"
-              name="upload"
-              id="upload"
-              onChange={(e) => setSelectedFile(e.target.files[0])}
-            />
-            <br />
-            <button
-              type="button"
-              onClick={handleImageUpload}
-              className={styles.upload_form_button_submit}
-              disabled={isUploading}
-            >
-              {isUploading ? "アップロード中..." : "Upload"}
-            </button>
-          </form>
-          {uploadedImageUrl && (
-            <p className={styles.upload_box}>
-              アップロードされた画像:
-              <Image
-                src={uploadedImageUrl}
-                alt="アップロード画像"
-                width={150}
-                height={150}
-                priority
-              />
-            </p>
-          )}
-        </SignedIn>
-        <SignedOut></SignedOut>
+        <form>
+          <input type="file" onChange={handleFileChange} />
+          <button onClick={handleUpload} disabled={!file || uploading}>
+            {uploading ? "Uploading..." : "Upload to Blob"}
+          </button>
+        </form>
+        {uploadedUrl && (
+          <div>
+            <p>Uploaded successfully!</p>
+            {/* <Image src={uploadedUrl} width={300} height={300} alt="Uploaded" /> */}
+          </div>
+        )}
       </div>
     </section>
   );
 }
-const fetcher = async () => {
-  // Optional additional logic for fetching uploaded image
-  // Replace with actual API call if applicable
-  return { success: false, url: "" };
-};
