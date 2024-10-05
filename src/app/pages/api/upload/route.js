@@ -1,60 +1,60 @@
-// pages/api/upload
-import { NextResponse } from "next/server";
+import { put } from "@vercel/blob";
 import connectDB from "@/utils/database";
 import { ImageModel } from "@/utils/schemaModels";
-import { writeFile } from "fs/promises";
-import path from "path";
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 export async function POST(request) {
+  const formData = await request.formData();
+  const file = formData.get("file");
+  // ... (上記コードの続き)
+
+  const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+  const ALLOWED_FILE_TYPES = ["image/jpeg", "image/png"];
+
+  if (
+    !file ||
+    file.size > MAX_FILE_SIZE ||
+    !ALLOWED_FILE_TYPES.includes(file.type)
+  ) {
+    return new Response(JSON.stringify({ error: "Invalid file" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
+  const filename = file.name;
+
   try {
     await connectDB();
-    const formData = await request.formData();
-    const file = formData.get("file");
 
-    if (!file) {
-      return NextResponse.json(
-        { success: false, message: "No file uploaded" },
-        { status: 400 }
-      );
-    }
-
-    const bytes = await file.arrayBuffer();
-    const buffer = await Buffer.from(bytes);
-
-    // Save the file (with cache control headers)
-    const filename = file.name;
-    const filepath = path.join(
-      process.cwd(),
-      "public",
-      "images",
-      "post",
-      filename
+    const blob = await put(
+      `public/images/post/${encodeURIComponent(filename)}`,
+      file,
+      {
+        access: "public",
+        token: `${process.env.BLOB_READ_WRITE_TOKEN}`,
+      }
     );
-    await writeFile(filepath, buffer);
 
-    // Set appropriate cache headers for static files (optional)
-    const fileResponse = NextResponse.next();
-    const expires = new Date(Date.now() + 259200000); // 30 days
-    fileResponse.headers.set(
-      "Cache-Control",
-      `public, max-age=${Math.floor(expires.getTime() / 1000)}`
+    const image = await ImageModel.create({ url: blob.url });
+
+    return new Response(
+      JSON.stringify({ message: "Upload successful", url: blob.url }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
     );
-    fileResponse.headers.set("Expires", expires.toUTCString());
-
-    // Save the URL to MongoDB (no cache control needed)
-    const fileUrl = `/images/post/${filename}`;
-    await ImageModel.create({ url: fileUrl });
-
-    return NextResponse.json({
-      success: true,
-      message: "File uploaded successfully",
-      url: fileUrl,
-    });
   } catch (error) {
-    console.error("Error uploading file:", error);
-    return NextResponse.json(
-      { success: false, message: "Error uploading file" },
-      { status: 500 }
-    );
+    console.error("Error in upload:", error);
+    return new Response(JSON.stringify({ error: "Error uploading file" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
