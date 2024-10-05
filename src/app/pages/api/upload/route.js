@@ -2,12 +2,6 @@ import { put } from "@vercel/blob";
 import connectDB from "@/utils/database";
 import { ImageModel } from "@/utils/schemaModels";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 export async function POST(request) {
   const formData = await request.formData();
   const file = formData.get("file");
