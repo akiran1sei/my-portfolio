@@ -1,12 +1,10 @@
 "use client";
 import styles from "@/styles/page.module.css";
-
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import dotenv from "dotenv";
 import { DashboardHeader } from "@/components/Header/DashboardHeader";
-// import { UploadedSection } from "@/components/Section/UploadSection";
-// import Image from "next/image";
+import Image from "next/image";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function ImageUploader() {
@@ -14,8 +12,10 @@ export default function ImageUploader() {
   const [uploading, setUploading] = useState(false);
   const [uploadedUrl, setUploadedUrl] = useState("");
   const [isActive, setIsActive] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const router = useRouter();
   dotenv.config();
+
   useEffect(() => {
     setIsActive(true);
   }, []);
@@ -30,8 +30,6 @@ export default function ImageUploader() {
 
       setUploading(true);
       try {
-        const filename = file.name;
-        // const filename = encodeURIComponent(file.name);
         const formData = new FormData();
         formData.append("file", file);
 
@@ -43,36 +41,36 @@ export default function ImageUploader() {
         const data = await res.json();
         if (data.url) {
           setUploadedUrl(data.url);
-
-          // Vercel Blob にアップロード
-
-          // Success! Update UI or redirect (consider user experience)
-          console.log("Upload successful:", data.url);
-          alert("Upload successful:", data.url);
-          return location.reload();
+          alert("Upload successful");
         } else {
-          // Check for specific error messages from the API response (if available)
           const errorMessage = data.error || "Unknown upload error";
-          location.reload();
           throw new Error(errorMessage);
         }
       } catch (error) {
         console.error("Error uploading file:", error);
-        // Display a user-friendly error message
-        alert("Upload failed. Please try again."); // Replace with more specific error handling
-        return location.reload();
+        alert("Upload failed. Please try again.");
       } finally {
         setUploading(false);
       }
     }
   };
 
+  const handleImageLoad = useCallback(() => {
+    setImageLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (imageLoaded) {
+      setTimeout(() => {
+        location.reload();
+      }, 1000); // 1秒後にリロード
+    }
+  }, [imageLoaded]);
+
   return (
     <>
       <SignedIn>
         <DashboardHeader />
-        {/* <UploadedSection /> */}
-
         <section
           className={`${styles.upload_section} ${isActive ? "active" : ""}`}
         >
@@ -91,7 +89,13 @@ export default function ImageUploader() {
             {uploadedUrl && (
               <div>
                 <p>Uploaded successfully!</p>
-                {/* <Image src={uploadedUrl} width={300} height={300} alt="Uploaded" /> */}
+                <Image
+                  src={uploadedUrl}
+                  width={300}
+                  height={300}
+                  alt="Uploaded"
+                  onLoad={handleImageLoad}
+                />
               </div>
             )}
           </div>
