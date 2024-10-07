@@ -117,7 +117,7 @@ export default function ImageUploader() {
           </div>
         </SignedIn>
         <SignedOut>
-          <p>サインインしてください。</p>
+          <p className={styles.signOut_text}>サインインしてください。</p>
         </SignedOut>
       </section>
     </>
