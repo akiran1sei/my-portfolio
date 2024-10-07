@@ -178,7 +178,9 @@ const BlogPost = () => {
           </div>
           {error && <p className={styles.error_message}>{error}</p>}
         </SignedIn>
-        <SignedOut></SignedOut>
+        <SignedOut>
+          <p className={styles.signOut_text}>サインインしてください。</p>
+        </SignedOut>
       </section>
     </>
   );
