@@ -74,12 +74,12 @@ export default function ImageUploader() {
 
   return (
     <>
-      <DashboardHeader />
-      <SignedIn>
-        <section
-          className={`${styles.upload_section} ${isActive ? "active" : ""}`}
-        >
-          <h2 className={styles.page_title}>Update</h2>
+      <DashboardHeader />{" "}
+      <section
+        className={`${styles.upload_section} ${isActive ? "active" : ""}`}
+      >
+        <h2 className={styles.page_title}>Update</h2>
+        <SignedIn>
           <div className={styles.upload_section_wrap}>
             <form>
               <div className={styles.upload_form_wrap}>
@@ -115,11 +115,11 @@ export default function ImageUploader() {
               </div>
             )}
           </div>
-        </section>
-      </SignedIn>
-      <SignedOut>
-        <p>サインインしてください。</p>
-      </SignedOut>
+        </SignedIn>
+        <SignedOut>
+          <p>サインインしてください。</p>
+        </SignedOut>
+      </section>
     </>
   );
 }
