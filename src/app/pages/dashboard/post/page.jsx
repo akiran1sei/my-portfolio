@@ -76,12 +76,20 @@ const BlogPost = () => {
   if (!data) return <div>データを取得中...</div>;
 
   const options = data.value.map((img) => (
-    <option key={img._id} value={img.url}>
-      {img.url}
+    <option
+      key={img._id}
+      value={JSON.stringify({ url: img.url, name: img.name })}
+    >
+      {img.name}
     </option>
   ));
 
-  const handleChange = (e) => setImage(e.target.value);
+  const handleChange = (e) => {
+    const parsedObject = JSON.parse(e.target.value);
+    setAlt(parsedObject.name);
+
+    setImage(parsedObject.url);
+  };
 
   return (
     <>
@@ -118,7 +126,11 @@ const BlogPost = () => {
                     onChange={handleChange}
                     className={styles.thumbnail}
                   >
-                    <option value="">選択してください</option>
+                    <option value="">
+                      {alt ? alt : "選択してください"}
+
+                      {}
+                    </option>
                     {options}
                   </select>
 
@@ -128,7 +140,7 @@ const BlogPost = () => {
                         src={image}
                         width={100}
                         height={100}
-                        alt={image}
+                        alt={alt}
                         priority
                       />
                     ) : (
@@ -140,18 +152,6 @@ const BlogPost = () => {
                         priority
                       />
                     )}
-                  </div>
-                  <div className={styles.thumbnail_images_alternative}>
-                    <label htmlFor="alt">代換テキスト</label>
-
-                    <input
-                      type="text"
-                      name="alt"
-                      id="alt"
-                      value={alt}
-                      onChange={(e) => setAlt(e.target.value)}
-                      // required
-                    />
                   </div>
                 </div>
                 <CodeEditor
