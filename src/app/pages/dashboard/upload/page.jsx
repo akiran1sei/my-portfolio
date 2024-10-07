@@ -9,6 +9,7 @@ import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function ImageUploader() {
   const [file, setFile] = useState(null);
+  const [fileName, setNameFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [uploadedUrl, setUploadedUrl] = useState("");
   const [isActive, setIsActive] = useState(false);
@@ -23,16 +24,20 @@ export default function ImageUploader() {
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
+  const handleFileNameChange = (event) => {
+    console.log(event.target.value);
+    setNameFile(event.target.value);
+  };
 
   const handleUpload = async () => {
     if (confirm("アップロードしますか？")) {
-      if (!file) return;
+      if (!file || !fileName) return;
 
       setUploading(true);
       try {
         const formData = new FormData();
         formData.append("file", file);
-
+        formData.append("text", fileName);
         const res = await fetch("/pages/api/upload", {
           method: "POST",
           body: formData,
@@ -63,7 +68,7 @@ export default function ImageUploader() {
     if (imageLoaded) {
       setTimeout(() => {
         location.reload();
-      }, 1000); // 1秒後にリロード
+      }, 1500); // 1.5秒後にリロード
     }
   }, [imageLoaded]);
 
@@ -77,14 +82,25 @@ export default function ImageUploader() {
           <h2 className={styles.page_title}>Update</h2>
           <div className={styles.upload_section_wrap}>
             <form>
-              <input type="file" onChange={handleFileChange} />
-              <button
-                onClick={handleUpload}
-                disabled={!file || uploading}
-                className={styles.upload_form_button_submit}
-              >
-                {uploading ? "Uploading..." : "Upload to Blob"}
-              </button>
+              <div className={styles.upload_form_wrap}>
+                <div className={styles.upload_form_item}>
+                  <label>ファイル選択</label>
+                  <input type="file" onChange={handleFileChange} required />
+                </div>
+                <div className={styles.upload_form_item}>
+                  <label>代換テキスト</label>
+                  <input type="text" onChange={handleFileNameChange} required />
+                </div>
+                <div className={styles.upload_form_item}>
+                  <button
+                    onClick={handleUpload}
+                    disabled={!file || uploading}
+                    className={styles.upload_form_button_submit}
+                  >
+                    {uploading ? "Uploading..." : "Upload to Blob"}
+                  </button>
+                </div>
+              </div>
             </form>
             {uploadedUrl && (
               <div>

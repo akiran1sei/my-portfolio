@@ -5,6 +5,7 @@ import { ImageModel } from "@/utils/schemaModels";
 export async function POST(request) {
   const formData = await request.formData();
   const file = formData.get("file");
+  const text = formData.get("text");
   // ... (上記コードの続き)
 
   const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
@@ -35,7 +36,7 @@ export async function POST(request) {
       }
     );
 
-    const image = await ImageModel.create({ url: blob.url });
+    const image = await ImageModel.create({ url: blob.url, name: text });
 
     return new Response(
       JSON.stringify({ message: "Upload successful", url: blob.url }),
