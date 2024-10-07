@@ -74,8 +74,8 @@ export default function ImageUploader() {
 
   return (
     <>
+      <DashboardHeader />
       <SignedIn>
-        <DashboardHeader />
         <section
           className={`${styles.upload_section} ${isActive ? "active" : ""}`}
         >
