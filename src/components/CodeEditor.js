@@ -1,32 +1,38 @@
-import React, { useEffect, useRef, forwardRef } from "react";
+"use client";
+import React, { forwardRef } from "react";
 import dynamic from "next/dynamic";
-// ダイナミックインポートでAceEditorを遅延読み込み
+
+// AceEditorを動的インポート
 const AceEditor = dynamic(
   async () => {
-    const ace = await import("react-ace");
-    await import("ace-builds/src-noconflict/mode-html");
-    await import("ace-builds/src-noconflict/theme-monokai");
-    return ace;
+    // クライアントサイドでのみ実行されるように条件分岐
+    if (typeof window !== "undefined") {
+      const ace = await import("react-ace");
+      // worker-loaderの問題を回避するため、直接モードとテーマをインポート
+      require("ace-builds/src-noconflict/mode-html");
+      require("ace-builds/src-noconflict/theme-monokai");
+      require("ace-builds/src-noconflict/ext-language_tools");
+      return ace;
+    }
+    return null;
   },
-  { ssr: false }
+  {
+    ssr: false,
+    loading: () => <div>エディターを読み込み中...</div>,
+  }
 );
 
 const CodeEditor = forwardRef(({ value, onChange }, ref) => {
-  const editorRef = useRef(null);
 
-  useEffect(() => {
-    if (editorRef.current) {
-      const editor = editorRef.current.editor;
-      editor.session.$wrapAsCode = true;
-      editor.session.setUseWrapMode(true);
-      editor.session.setWrapLimitRange(null, null);
-    }
-  }, []);
+  // クライアントサイドでのみレンダリング
+  if (typeof window === "undefined") {
+    return null;
+  }
 
   return (
-    <>
+    <div className="code-editor-container">
       <AceEditor
-        ref={ref} // refをAceEditorコンポーネントに渡す
+        ref={ref} // 外部から渡されたrefを直接渡す
         mode="html"
         theme="monokai"
         onChange={onChange}
@@ -39,16 +45,17 @@ const CodeEditor = forwardRef(({ value, onChange }, ref) => {
           enableSnippets: true,
           showLineNumbers: true,
           tabSize: 2,
+          useWorker: false, // Workerを無効化
         }}
         style={{ width: "100%", height: "400px" }}
       />
-    </>
+    </div>
   );
 });
 
 CodeEditor.displayName = "CodeEditor";
 
-// AceEditorコンポーネントにrefを直接渡す
+// 高階コンポーネントはそのまま維持
 const EnhancedCodeEditor = forwardRef((props, ref) => (
   <CodeEditor {...props} ref={ref} />
 ));
