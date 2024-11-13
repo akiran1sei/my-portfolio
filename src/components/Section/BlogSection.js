@@ -5,19 +5,32 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "dompurify";
+
 export function BlogSection() {
   const [isActive, setIsActive] = useState(false);
+
   useEffect(() => {
     setIsActive(true);
   }, []);
 
+  const fetcher = async (url) => {
+    const response = await fetch(url, {
+      headers: {
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
+      },
+      next: { revalidate: 0 },
+    });
+    return response.json();
+  };
+
   const { data, error } = useSWR(`/pages/api/blog/readall`, fetcher, {
-    initial: true,
+    refreshInterval: 30000, // 30秒ごとにポーリング
     revalidateOnMount: true,
     revalidateOnFocus: true,
     revalidateIfStale: true,
-    onBackgroundUpdate: true, // バックグラウンドで再読み込み
-    staleTime: 60 * 60, // 1時間後に再フェッチ
+    dedupingInterval: 1000, // 重複リクエストを防ぐ間隔
   });
 
   if (error) return <div>エラーが発生しました。</div>;
@@ -41,6 +54,7 @@ export function BlogSection() {
     const strippedText = sanitizedText.replace(/<[^>]*>/g, "");
     return truncateText(strippedText, maxLength);
   };
+
   return (
     <section
       className={`${styles.blog_section} ${isActive ? styles.active : ""}`}
@@ -76,7 +90,3 @@ export function BlogSection() {
     </section>
   );
 }
-const fetcher = async (url) => {
-  const response = await fetch(url);
-  return response.json();
-};
