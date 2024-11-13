@@ -69,7 +69,20 @@ const BlogPost = () => {
       setError("エラーが発生しました。もう一度お試しください。");
     }
   };
+  const truncateText = (text, maxLength) => {
+    if (typeof text !== "string") {
+      console.error("truncateText received non-string input:", text);
+      return "";
+    }
+    return text.length > maxLength
+      ? text.substring(0, maxLength) + "..."
+      : text;
+  };
 
+  const sanitizeAndTruncateText = (text, maxLength) => {
+    const strippedText = text.replace(/<[^>]*>/g, "");
+    return truncateText(strippedText, maxLength);
+  };
   const { data, error: swrError } = useSWR(`/pages/api/blog/img`, fetcher);
 
   if (swrError) return <div>エラーが発生しました。</div>;
@@ -82,6 +95,15 @@ const BlogPost = () => {
     >
       {img.name}
     </option>
+  ));
+
+  const LinkText = data.value.map((img) => (
+    <span
+      key={img._id}
+      value={JSON.stringify({ url: img.url, name: img.name })}
+    >
+      {sanitizeAndTruncateText(img.url, 20)}
+    </span>
   ));
 
   const handleChange = (e) => {
@@ -136,13 +158,16 @@ const BlogPost = () => {
 
                   <div className={styles.thumbnail_images}>
                     {image ? (
-                      <Image
-                        src={image}
-                        width={100}
-                        height={100}
-                        alt={alt}
-                        priority
-                      />
+                      <figure>
+                        <Image
+                          src={image}
+                          width={100}
+                          height={100}
+                          alt={alt}
+                          priority
+                        />
+                        <figcaption>{alt}</figcaption>
+                      </figure>
                     ) : (
                       <Image
                         src="/images/no-image.jpg"
