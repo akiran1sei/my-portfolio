@@ -18,7 +18,9 @@ const BlogPost = () => {
   const [image, setImage] = useState("");
   const [alt, setAlt] = useState("");
   const [preview, setPreview] = useState(""); // プレビュー用の state
-
+  const [subMenu, setSubMenu] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [IsUrl, setUrl] = useState("");
   useEffect(() => {
     const today = new Date();
     const year = today.getFullYear();
@@ -27,7 +29,22 @@ const BlogPost = () => {
     setDate(`${year}/${month}/${day}`);
     setIsActive(true);
   }, []);
+  const toggleSubMenu = () => {
+    setSubMenu(!subMenu);
+  };
+  const handleCopy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
 
+      // 2秒後に表示を元に戻す
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    } catch (err) {
+      console.error("クリップボードへのコピーに失敗しました:", err);
+    }
+  };
   const handleCodeChange = (newCode) => {
     setCurrentContent(newCode);
     const cleanContent = DOMPurify.sanitize(newCode); // DOMPurify を使用
@@ -97,13 +114,16 @@ const BlogPost = () => {
     </option>
   ));
 
-  const LinkText = data.value.map((img) => (
-    <span
-      key={img._id}
-      value={JSON.stringify({ url: img.url, name: img.name })}
-    >
-      {sanitizeAndTruncateText(img.url, 20)}
-    </span>
+  const Gallery = data.value.map((img) => (
+    <div key={img._id} className={styles.post_gallery_itemBox}>
+      <figure
+        className={styles.post_gallery_item}
+        onClick={() => handleCopy(img.url)} // クリック時にimg.urlを渡す
+      >
+        <Image src={img.url} alt={img.name} width={100} height={100} priority />
+        <figcaption>{img.name}</figcaption>
+      </figure>
+    </div>
   ));
 
   const handleChange = (e) => {
@@ -121,6 +141,29 @@ const BlogPost = () => {
       >
         <h2 className={styles.page_title}>POST</h2>
         <SignedIn>
+          <div
+            onClick={toggleSubMenu}
+            role="button"
+            tabIndex="0"
+            aria-label="画像ギャラリーを開閉"
+            aria-pressed="false"
+            className={styles.post_gallery_btn}
+          >
+            <Image
+              src="/images/image.png"
+              width={28}
+              height={28}
+              alt="画像イメージ"
+            />
+          </div>
+          {subMenu && (
+            <div className={styles.post_modalWindow}>
+              <div className={styles.post_gallery_box}>
+                <p>クリックすると、URIをコピーできます。</p>
+                <div className={styles.post_gallery}>{Gallery}</div>
+              </div>
+            </div>
+          )}
           <div className={styles.post_form_box}>
             <form onSubmit={handlePostSubmit} className={styles.post_form}>
               <div className={styles.post_form_title}>

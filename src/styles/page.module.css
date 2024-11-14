@@ -760,6 +760,64 @@
 #html-editor {
   font-size: 18px !important;
 }
+.post_modalWindow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #33333380;
+  z-index: var(--z-index-popup);
+  overflow: scroll;
+}
+.post_modalWindow:active {
+}
+.post_gallery {
+  width: 100%;
+  max-width: 575px;
+  height: auto;
+  margin: 0 auto;
+  display: grid;
+  align-content: center;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  position: absolute;
+  top: 120px;
+  left: 0;
+  right: 0;
+}
+.post_gallery_itemBox {
+  box-shadow: 2px 2px 2px var(--accents-color);
+  background: var(--sub-color-50);
+}
+
+.post_gallery_itemBox:active {
+  transform: translate(4px, 4px);
+  box-shadow: unset;
+}
+.post_gallery_item {
+  width: 150px;
+  height: auto;
+  font-weight: 100;
+  color: white;
+}
+.post_gallery_btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: inset 2px 2px 0px var(--black-color);
+}
+.post_gallery_btn {
+  width: 28px;
+  height: 28px;
+  padding: 1rem;
+  position: fixed;
+  top: 100px;
+  background: var(--accents-color);
+  border-radius: 5px;
+  box-shadow: 2px 2px 0px var(--black-color);
+  z-index: 100;
+}
 .thumbnail_box {
   display: flex;
   flex-direction: column;
