@@ -18,7 +18,8 @@ const BlogPost = () => {
   const [image, setImage] = useState("");
   const [alt, setAlt] = useState("");
   const [preview, setPreview] = useState(""); // プレビュー用の state
-  const [subMenu, setSubMenu] = useState(false);
+  const [imageMenu, setImageMenu] = useState(false);
+  const [codeMenu, setCodeMenu] = useState(false);
   const [copied, setCopied] = useState(false);
   const [IsUrl, setUrl] = useState("");
   useEffect(() => {
@@ -29,8 +30,11 @@ const BlogPost = () => {
     setDate(`${year}/${month}/${day}`);
     setIsActive(true);
   }, []);
-  const toggleSubMenu = () => {
-    setSubMenu(!subMenu);
+  const toggleImageMenu = () => {
+    setImageMenu(!imageMenu);
+  };
+  const toggleCodeMenu = () => {
+    setCodeMenu(!codeMenu);
   };
   const handleCopy = async (text) => {
     try {
@@ -115,9 +119,9 @@ const BlogPost = () => {
   ));
 
   const Gallery = data.value.map((img) => (
-    <div key={img._id} className={styles.post_gallery_itemBox}>
+    <div key={img._id} className={styles.post_imageGallery_itemBox}>
       <figure
-        className={styles.post_gallery_item}
+        className={styles.post_imageGallery_item}
         onClick={() => handleCopy(img.url)} // クリック時にimg.urlを渡す
       >
         <Image src={img.url} alt={img.name} width={100} height={100} priority />
@@ -125,6 +129,10 @@ const BlogPost = () => {
       </figure>
     </div>
   ));
+  const codeImg = `<div style="width:100%;height:auto;max-width:300px;margin:5rem auto">
+      <img src="/images/no-image.jpg" alt="no image" />
+    </div>`;
+  const codeHeading2 = `<h2 style="background: var(--accents-color);border-radius: 10px;margin: 1rem"><span style="border-bottom:5px solid var(--sub-color)"> サブタイトル </span></h2>`;
 
   const handleChange = (e) => {
     const parsedObject = JSON.parse(e.target.value);
@@ -142,12 +150,12 @@ const BlogPost = () => {
         <h2 className={styles.page_title}>POST</h2>
         <SignedIn>
           <div
-            onClick={toggleSubMenu}
+            onClick={toggleImageMenu}
             role="button"
             tabIndex="0"
             aria-label="画像ギャラリーを開閉"
             aria-pressed="false"
-            className={styles.post_gallery_btn}
+            className={styles.post_imageGallery_btn}
           >
             <Image
               src="/images/image.png"
@@ -156,11 +164,54 @@ const BlogPost = () => {
               alt="画像イメージ"
             />
           </div>
-          {subMenu && (
-            <div className={styles.post_modalWindow}>
-              <div className={styles.post_gallery_box}>
+          <div
+            onClick={toggleCodeMenu}
+            role="button"
+            tabIndex="0"
+            aria-label="コードギャラリーを開閉"
+            aria-pressed="false"
+            className={styles.post_codeGallery_btn}
+          >
+            <Image
+              src="/images/code-image.png"
+              width={28}
+              height={28}
+              alt="codeイメージ"
+            />
+          </div>
+          {codeMenu && (
+            <div className={styles.post_codeGallery}>
+              <ul className={styles.post_codeGallery_list}>
+                <li className={styles.post_codeGallery_item}>
+                  <button
+                    type="button"
+                    className={styles.post_form_button_submit}
+                    onClick={() => handleCopy(codeImg)}
+                  >
+                    <span>画像コード</span>
+                  </button>
+                </li>
+                <li className={styles.post_codeItem}>
+                  <button
+                    type="button"
+                    className={styles.post_form_button_submit}
+                    onClick={() => handleCopy(codeHeading2)}
+                  >
+                    <span>サブタイトルコード</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
+          {imageMenu && (
+            <div
+              className={`${styles.post_modalWindow} ${
+                imageMenu ? styles.modalWindow_animation : ""
+              }`}
+            >
+              <div className={styles.post_imageGallery_box}>
                 <p>クリックすると、URIをコピーできます。</p>
-                <div className={styles.post_gallery}>{Gallery}</div>
+                <div className={styles.post_imageGallery}>{Gallery}</div>
               </div>
             </div>
           )}
