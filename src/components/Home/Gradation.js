@@ -15,7 +15,7 @@ export function Gradation() {
       </div>
       <h1 className={styles.home_gradation_title}>
         <Link href={"/pages/about"} passHref={false}>
-          <button type="button">
+          <button type="button"className={styles.home_gradation_titleButton}>
             <span className={styles.home_text_gradation}>Portfolio</span>
           </button>
         </Link>

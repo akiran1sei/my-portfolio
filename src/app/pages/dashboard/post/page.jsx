@@ -32,9 +32,11 @@ const BlogPost = () => {
   }, []);
   const toggleImageMenu = () => {
     setImageMenu(!imageMenu);
+    setCodeMenu(false);
   };
   const toggleCodeMenu = () => {
     setCodeMenu(!codeMenu);
+    setImageMenu(false);
   };
   const handleCopy = async (text) => {
     try {
@@ -182,19 +184,22 @@ const BlogPost = () => {
           {codeMenu && (
             <div className={styles.post_codeGallery}>
               <ul className={styles.post_codeGallery_list}>
+                <li className={styles.post_Gallery_text}>
+                  クリックすると、Codeをコピーできます。
+                </li>
                 <li className={styles.post_codeGallery_item}>
                   <button
                     type="button"
-                    className={styles.post_form_button_submit}
+                    className={styles.post_codeGallery_button}
                     onClick={() => handleCopy(codeImg)}
                   >
                     <span>画像コード</span>
                   </button>
                 </li>
-                <li className={styles.post_codeItem}>
+                <li className={styles.post_codeGallery_item}>
                   <button
                     type="button"
-                    className={styles.post_form_button_submit}
+                    className={styles.post_codeGallery_button}
                     onClick={() => handleCopy(codeHeading2)}
                   >
                     <span>サブタイトルコード</span>
@@ -210,8 +215,12 @@ const BlogPost = () => {
               }`}
             >
               <div className={styles.post_imageGallery_box}>
-                <p>クリックすると、URIをコピーできます。</p>
-                <div className={styles.post_imageGallery}>{Gallery}</div>
+                <div className={styles.post_imageGallery}>
+                  <p className={styles.post_Gallery_text}>
+                    クリックすると、URIをコピーできます。
+                  </p>
+                  {Gallery}
+                </div>
               </div>
             </div>
           )}
