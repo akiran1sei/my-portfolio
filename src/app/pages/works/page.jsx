@@ -7,7 +7,23 @@ import Link from "next/link";
 
 const Works = () => {
   const [isActive, setIsActive] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState("akira.application@gmail.com");
+  const [copiedPassword, setCopiedPassword] = useState("1111");
 
+  const handleCopy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+
+      // 2秒後に表示を元に戻す
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    } catch (err) {
+      console.error("クリップボードへのコピーに失敗しました:", err);
+    }
+  };
   useEffect(() => {
     // ページ読み込み時に実行される処理
     setIsActive(true);
@@ -50,6 +66,30 @@ const Works = () => {
               『Tasting Note』は、こちらからどうぞ！
             </Link>
           </p>
+          <div className={styles.works_app_point}>
+            <span className={styles.works_app_pointText}>
+              このアプリは、メール登録とpassword登録必須です。
+              お試しで使いたい方向けにこちらをどうぞ！
+              ボタンになってますので、押すとコピーできます。
+            </span>
+
+            <button
+              type="button"
+              onClick={() => handleCopy(copiedEmail)}
+              className={styles.works_app_pointButton}
+            >
+              <span className={styles.TextWhiteColor}>email:</span>
+              akira.application@gmail.com
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleCopy(copiedPassword)}
+              className={styles.works_app_pointButton}
+            >
+              <span className={styles.TextWhiteColor}>password:</span>1111
+            </button>
+          </div>
           <div className={styles.works_overview}>
             <h4 className={styles.works_overview_title}>概要</h4>
             <p className={styles.works_overview_text}>
