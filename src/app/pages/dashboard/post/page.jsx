@@ -190,7 +190,7 @@ const BlogPost = () => {
                 <li className={styles.post_codeGallery_item}>
                   <button
                     type="button"
-                    className={styles.post_codeGallery_button}
+                    className={styles.post_codeGallery_itemBtn}
                     onClick={() => handleCopy(codeImg)}
                   >
                     <span>画像コード</span>
@@ -199,7 +199,7 @@ const BlogPost = () => {
                 <li className={styles.post_codeGallery_item}>
                   <button
                     type="button"
-                    className={styles.post_codeGallery_button}
+                    className={styles.post_codeGallery_itemBtn}
                     onClick={() => handleCopy(codeHeading2)}
                   >
                     <span>サブタイトルコード</span>
