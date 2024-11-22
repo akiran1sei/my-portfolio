@@ -568,49 +568,33 @@
 .works_app_link {
   border-bottom: 2px solid var(--base-color);
 
-  animation: color 1s infinite;
+  animation: color 2s infinite;
 }
-.works_app_link_Text {
+.works_app_link_button {
+  display: block;
   text-align: center;
   margin: 1rem auto;
+  background: var(--accents-color);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px #33333333;
+}
+.works_app_link_button:active {
+  background: var(--sub-color);
+  box-shadow: inset 2px 2px 2px var(--black-color);
+  transform: translate(2px, 2px);
 }
 @keyframes color {
   0% {
-    color: var(--sub-color);
+    color: var(--white-color);
   }
   50% {
     color: var(--accents-color);
   }
 
   100% {
-    color: var(--sub-color);
+    color: var(--white-color);
   }
-}
-.works_app_point {
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  display: flex;
-  word-break: break-all;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-}
-.works_app_pointButton {
-  background: var(--accents-color);
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px #33333333;
-  margin: 1rem auto;
-}
-.works_app_pointButton:active {
-  background: var(--sub-color);
-  box-shadow: inset 2px 2px 2px var(--black-color);
-  transform: translate(2px, 2px);
-}
-.works_app_pointText {
-  width: 100%;
 }
 .works_overview {
   padding-top: 2rem;
