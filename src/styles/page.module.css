@@ -738,13 +738,17 @@
 }
 
 .contact_form_box,
+.post_form_box,
 .thumbnail_box {
   width: 100%;
   height: auto;
-  max-width: 500px;
   margin: 0 auto;
   text-align: center;
   margin-top: 1rem;
+}
+.contact_form_box,
+.thumbnail_box {
+  max-width: 500px;
 }
 .post_form_box {
   max-width: 900px;
