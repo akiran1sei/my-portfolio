@@ -6,29 +6,27 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { BackButton } from "@/components/Buttons/BackButton";
 import DOMPurify from "dompurify";
-
-const Article = (request) => {
+import React from "react";
+const Article = ({ params }) => {
   const [isActive, setIsActive] = useState(false);
+  const resolvedParams = React.use(params);
+  const postId = resolvedParams.id;
 
   useEffect(() => {
     setIsActive(true);
   }, []);
 
-  const { data, error } = useSWR(
-    `/pages/api/blog/${request.params.id}`,
-    fetcher,
-    {
-      initial: true,
-      onBackgroundUpdate: true,
-      revalidateOnMount: true,
-      revalidateOnReconnect: true,
-    }
-  );
+  const { data, error } = useSWR(`/pages/api/blog/${postId}`, fetcher, {
+    initial: true,
+    onBackgroundUpdate: true,
+    revalidateOnMount: true,
+    revalidateOnReconnect: true,
+  });
 
   if (error) return <div>エラーが発生しました。</div>;
   if (!data) return <div>データを取得中</div>;
   const blogItem = data.value;
-
+  console.log("ブログ記事データ:", blogItem);
   const dirtyHtml = blogItem.postMessage;
   const sanitizedHtml = DOMPurify.sanitize(dirtyHtml, {
     ALLOWED_TAGS: [
