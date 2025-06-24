@@ -6,7 +6,6 @@ export async function POST(request) {
   const formData = await request.formData();
   const file = formData.get("file");
   const text = formData.get("text");
-  // ... (上記コードの続き)
 
   const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
   const ALLOWED_FILE_TYPES = ["image/jpeg", "image/png"];
@@ -32,7 +31,8 @@ export async function POST(request) {
       file,
       {
         access: "public",
-        token: `${process.env.BLOB_READ_WRITE_TOKEN}`,
+        // ここを修正: テンプレートリテラルを削除し、直接 process.env.BLOB_READ_WRITE_TOKEN を渡す
+        token: process.env.BLOB_READ_WRITE_TOKEN,
       }
     );
 
@@ -47,9 +47,13 @@ export async function POST(request) {
     );
   } catch (error) {
     console.error("Error in upload:", error);
-    return new Response(JSON.stringify({ error: "Error uploading file" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    // エラーメッセージをより具体的に返すことを検討するとデバッグが楽になります
+    return new Response(
+      JSON.stringify({ error: "Error uploading file", details: error.message }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 }
