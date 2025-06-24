@@ -5,25 +5,45 @@ import dynamic from "next/dynamic";
 // AceEditorを動的インポート
 const AceEditor = dynamic(
   async () => {
-    // クライアントサイドでのみ実行されるように条件分岐
-    if (typeof window !== "undefined") {
-      const ace = await import("react-ace");
-      // worker-loaderの問題を回避するため、直接モードとテーマをインポート
-      require("ace-builds/src-noconflict/mode-html");
-      require("ace-builds/src-noconflict/theme-monokai");
-      require("ace-builds/src-noconflict/ext-language_tools");
-      return ace;
-    }
-    return null;
+    // react-aceをインポート
+    const ace = await import("react-ace");
+
+    // ace-buildsの設定を先に行う
+    const aceBuilds = await import("ace-builds");
+
+    // CDNパスを設定してエラーを回避
+    aceBuilds.config.set(
+      "basePath",
+      "https://cdn.jsdelivr.net/npm/ace-builds@1.36.2/src-noconflict/"
+    );
+    aceBuilds.config.set(
+      "modePath",
+      "https://cdn.jsdelivr.net/npm/ace-builds@1.36.2/src-noconflict/"
+    );
+    aceBuilds.config.set(
+      "themePath",
+      "https://cdn.jsdelivr.net/npm/ace-builds@1.36.2/src-noconflict/"
+    );
+    aceBuilds.config.set(
+      "workerPath",
+      "https://cdn.jsdelivr.net/npm/ace-builds@1.36.2/src-noconflict/"
+    );
+
+    // 必要なモードとテーマを動的インポート
+    await Promise.all([
+      import("ace-builds/src-noconflict/mode-html"),
+      import("ace-builds/src-noconflict/theme-monokai"),
+      import("ace-builds/src-noconflict/ext-language_tools"),
+    ]);
+
+    return ace.default;
   },
   {
     ssr: false,
     loading: () => <div>エディターを読み込み中...</div>,
   }
 );
-
 const CodeEditor = forwardRef(({ value, onChange }, ref) => {
-
   // クライアントサイドでのみレンダリング
   if (typeof window === "undefined") {
     return null;
@@ -42,7 +62,7 @@ const CodeEditor = forwardRef(({ value, onChange }, ref) => {
         setOptions={{
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,
-          enableSnippets: true,
+          enableSnippets: false,
           showLineNumbers: true,
           tabSize: 2,
           useWorker: false, // Workerを無効化
