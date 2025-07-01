@@ -557,6 +557,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-bottom: 0.5px dashed var(--black-color);
+  margin-bottom: 2rem;
 }
 .works_card {
   width: 100%;
@@ -586,23 +588,36 @@
 }
 .works_scroll_image {
   display: inline-block;
-  width: 240px;
-  height: 450px;
   margin-right: 10px;
   scroll-snap-align: start;
-
+  background-size: cover;
   min-width: 240px;
   border-radius: 5px;
   background-repeat: no-repeat;
 }
-.works_img_1 {
-  background-image: url(/images/works-img-sp-1.png);
+.works_scroll_image.works_web,
+.works_scroll_image.works_sp {
+  width: 240px;
+  height: 450px;
 }
-.works_img_2 {
-  background-image: url(/images/works-img-sp-2.png);
+
+.tasting_note_img_1 {
+  background-image: url(/images/works/tasting_note/tasting_note-sp-1.png);
 }
-.works_img_3 {
-  background-image: url(/images/works-img-sp-3.png);
+.tasting_note_img_2 {
+  background-image: url(/images/works/tasting_note/tasting_note-sp-2.png);
+}
+.tasting_note_img_3 {
+  background-image: url(/images/works/tasting_note/tasting_note-sp-3.png);
+}
+.coffee_note_img_1 {
+  background-image: url(/images/works/coffee_note/coffee-note-1.png);
+}
+.coffee_note_img_2 {
+  background-image: url(/images/works/coffee_note/coffee-note-2.png);
+}
+.coffee_note_img_3 {
+  background-image: url(/images/works/coffee_note/coffee-note-3.png);
 }
 
 .works_text {
@@ -625,7 +640,7 @@
   text-align: center;
   margin: 1rem auto;
   background: var(--accents-color);
-  padding: 1rem;
+  padding: 1rem 1rem 2rem;
   border-radius: 10px;
   box-shadow: 2px 2px 2px #33333333;
 }
@@ -1195,25 +1210,23 @@
   .about_section {
     max-width: 600px;
   }
-  .works_scroll_image {
+  .works_scroll_image.works_web {
     width: 600px;
     height: 330px;
   }
+
   .works_section {
     max-width: 600px;
   }
-  .works_scroll_image {
-    max-width: 600px;
-    min-width: 600px;
+
+  .tasting_note_img_1 {
+    background-image: url(/images/works/tasting_note/tasting_note-pc-1.png);
   }
-  .works_img_1 {
-    background-image: url(/images/works-img-pc-1.png);
+  .tasting_note_img_2 {
+    background-image: url(/images/works/tasting_note/tasting_note-pc-2.png);
   }
-  .works_img_2 {
-    background-image: url(/images/works-img-pc-2.png);
-  }
-  .works_img_3 {
-    background-image: url(/images/works-img-pc-3.png);
+  .tasting_note_img_3 {
+    background-image: url(/images/works/tasting_note/tasting_note-pc-3.png);
   }
   .blog_contents {
     max-width: 1000px;

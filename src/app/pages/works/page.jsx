@@ -32,7 +32,7 @@ const Works = () => {
             </h3>
             <div className={styles.works_image}>
               <Image
-                src="/images/works-img-pc-1.png"
+                src="/images/works/tasting_note/tasting_note-pc-1.png"
                 alt="Tasting Note"
                 width={600}
                 height={324}
@@ -56,14 +56,14 @@ const Works = () => {
             <h3 className={styles.works_app_title}>
               コーヒー アプリ
               <br className={styles.pc} />
-              『Tasting Note』
+              『Coffee Note』
             </h3>
             <div className={styles.works_image}>
               <Image
-                src="/images/works-img-sp-1.png"
-                alt="Tasting Note"
-                width={240}
-                height={448}
+                src="/images/works/coffee_note/feature_graphic.png"
+                alt="Coffee Note"
+                width={1024}
+                height={500}
                 priority
               />
             </div>

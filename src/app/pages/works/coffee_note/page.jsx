@@ -27,13 +27,13 @@ const CoffeeNoteContents = () => {
         </h2>
         <div className={styles.works_scroll}>
           <div
-            className={`${styles.works_scroll_image} ${styles.works_img_1}`}
+            className={`${styles.works_scroll_image} ${styles.coffee_note_img_1} ${styles.works_sp}`}
           ></div>
           <div
-            className={`${styles.works_scroll_image} ${styles.works_img_2}`}
+            className={`${styles.works_scroll_image} ${styles.coffee_note_img_2} ${styles.works_sp}`}
           ></div>
           <div
-            className={`${styles.works_scroll_image} ${styles.works_img_3}`}
+            className={`${styles.works_scroll_image} ${styles.coffee_note_img_3} ${styles.works_sp}`}
           ></div>
         </div>
 
