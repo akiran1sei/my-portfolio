@@ -39,54 +39,48 @@ const CoffeeNoteContents = () => {
 
         <div className={styles.works_text}>
           <h3 className={styles.works_app_title}>
-            コーヒーテイスティングアプリ『Tasting Note』
+            コーヒーアプリ『Coffee Note』
           </h3>
-          <button className={styles.works_app_link_button} type="button">
+          {/* <button className={styles.works_app_link_button} type="button">
             <Link
               className={styles.works_app_link}
-              href={`https://tastingnote.vercel.app/`}
+              href={`/`}
               passHref
             >
-              『Tasting Note』は、こちらからどうぞ！
+              『Coffee Note』のダウンロードはこちらからどうぞ！
             </Link>
-          </button>
+          </button> */}
 
           <div className={styles.works_overview}>
             <h4 className={styles.works_overview_title}>概要</h4>
-            <p className={styles.works_overview_text}>
-              「カップ・オブ・エクセレンス」という国際的なコーヒー品評会で使用されるシートを参考に作成したWebアプリです。ユーザーがコーヒーの味わいを詳細に記録し、自分好みのコーヒーを探求できるツールです
-            </p>
+            <p className={styles.works_overview_text}>サンプルテキスト </p>
           </div>
           <div className={styles.works_features}>
             <h4 className={styles.works_features_title}>主な特徴</h4>
             <ul className={styles.works_features_list}>
-              <li className={styles.works_features_item}>
-                コーヒーの味わいを詳細に記録
-              </li>
-              <li className={styles.works_features_item}>
-                ユーザーの好みに合ったコーヒー探しをサポート
-              </li>
-              <li className={styles.works_features_item}>
-                シンプルで使いやすいインターフェース
-              </li>
+              <li className={styles.works_features_item}>サンプルテキスト </li>
+              <li className={styles.works_features_item}>サンプルテキスト </li>
+              <li className={styles.works_features_item}>サンプルテキスト </li>
             </ul>
           </div>
           <div className={styles.works_techUsed}>
             <h4 className={styles.works_techUsed_title}>使用技術</h4>
             <ul className={styles.works_techUsed_list}>
               <li className={styles.works_techUsed_item}>
-                フロントエンド: HTML, CSS, JavaScript
+                フロントエンド: サンプルテキスト
               </li>
               <li className={styles.works_techUsed_item}>
-                バックエンド: Node.js
+                バックエンド:サンプルテキスト
               </li>
               <li className={styles.works_techUsed_item}>
-                フレームワーク: Next.js (App Router使用)
+                フレームワーク: サンプルテキスト
               </li>
               <li className={styles.works_techUsed_item}>
-                データベース: MongoDB Atlas
+                データベース: サンプルテキスト
               </li>
-              <li className={styles.works_techUsed_item}>デプロイ: Vercel</li>
+              <li className={styles.works_techUsed_item}>
+                デプロイ: サンプルテキスト
+              </li>
             </ul>
           </div>
           <div className={styles.works_devProcess}>
@@ -96,68 +90,64 @@ const CoffeeNoteContents = () => {
                 <span className={styles.itemTitle}>企画・設計</span>
                 <ul className={styles.works_devProcess_item_list}>
                   <li className={styles.works_devProcess_item_list_item}>
-                    初めてのアプリ開発としてコーヒー関連のテーマを選択
+                    サンプルテキスト
                   </li>
                 </ul>
               </li>
               <li className={styles.works_devProcess_item}>
-                <span className={styles.itemTitle}>開発スタート</span>
+                <span className={styles.itemTitle}>開発1</span>
                 <ul className={styles.works_devProcess_item_list}>
                   <li className={styles.works_devProcess_item_list_item}>
-                    当初はHTML/CSS/JavaScriptのみで開発開始
+                    サンプルテキスト
                   </li>
                   <li className={styles.works_devProcess_item_list_item}>
-                    将来的な拡張性を考慮し、段階的に高度な技術導入を計画
+                    サンプルテキスト
                   </li>
                 </ul>
               </li>
               <li className={styles.works_devProcess_item}>
-                <span className={styles.itemTitle}>React導入</span>
+                <span className={styles.itemTitle}>開発2</span>
                 <ul className={styles.works_devProcess_item_list}>
                   <li className={styles.works_devProcess_item_list_item}>
-                    JavaScript習熟度向上に伴い、Reactライブラリの導入を決定
+                    サンプルテキスト
                   </li>
                 </ul>
               </li>
               <li className={styles.works_devProcess_item}>
-                <span className={styles.itemTitle}>Next.jsへの移行</span>
+                <span className={styles.itemTitle}>開発3</span>
                 <ul className={styles.works_devProcess_item_list}>
                   <li className={styles.works_devProcess_item_list_item}>
-                    ReactベースのフレームワークであるNext.jsの採用
+                    サンプルテキスト
                   </li>
                   <li className={styles.works_devProcess_item_list_item}>
-                    初めはPages Router機能でデモアプリを開発
+                    サンプルテキスト
                   </li>
                 </ul>
               </li>
               <li className={styles.works_devProcess_item}>
-                <span className={styles.itemTitle}>App Routerへの切り替え</span>
+                <span className={styles.itemTitle}>開発4</span>
                 <ul className={styles.works_devProcess_item_list}>
                   <li className={styles.works_devProcess_item_list_item}>
-                    調査の結果、App Router機能の習得が有益と判断
+                    サンプルテキスト
                   </li>
                   <li className={styles.works_devProcess_item_list_item}>
-                    Pages RouterからApp Routerへ移行
-                  </li>
-                </ul>
-              </li>
-              <li className={styles.works_devProcess_item}>
-                <span className={styles.itemTitle}>
-                  データベース不具合の修正
-                </span>
-                <ul className={styles.works_devProcess_item_list}>
-                  <li className={styles.works_devProcess_item_list_item}>
-                    更新機能の不具合を発見し修正
+                    サンプルテキスト
                   </li>
                 </ul>
               </li>
               <li className={styles.works_devProcess_item}>
-                <span className={styles.itemTitle}>
-                  『Tasting Note』アプリの完成
-                </span>
+                <span className={styles.itemTitle}>開発5</span>
                 <ul className={styles.works_devProcess_item_list}>
                   <li className={styles.works_devProcess_item_list_item}>
-                    App Router機能を活用し、最終版のアプリを開発
+                    サンプルテキスト
+                  </li>
+                </ul>
+              </li>
+              <li className={styles.works_devProcess_item}>
+                <span className={styles.itemTitle}>開発6</span>
+                <ul className={styles.works_devProcess_item_list}>
+                  <li className={styles.works_devProcess_item_list_item}>
+                    サンプルテキスト
                   </li>
                 </ul>
               </li>

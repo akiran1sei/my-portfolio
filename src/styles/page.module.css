@@ -211,8 +211,10 @@
   align-items: flex-start;
 }
 .header_nav_item {
-  width: 60px;
-  height: 25px;
+  width: 100%;
+  max-width: 80px;
+  font-size: var(--font-base);
+  height: 100%;
   text-align: center;
   letter-spacing: -1.5px;
   border: 1px solid var(--sub-color);
@@ -1209,6 +1211,9 @@
   }
   .about_section {
     max-width: 600px;
+  }
+  .works_scroll {
+    display: block;
   }
   .works_scroll_image.works_web {
     width: 600px;
