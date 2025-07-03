@@ -21,7 +21,7 @@ const BlogPost = () => {
   const [imageMenu, setImageMenu] = useState(false);
   const [codeMenu, setCodeMenu] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [IsUrl, setUrl] = useState("");
+  const [draft, setDraft] = useState(true);
   useEffect(() => {
     const today = new Date();
     const year = today.getFullYear();
@@ -56,38 +56,42 @@ const BlogPost = () => {
     const cleanContent = DOMPurify.sanitize(newCode); // DOMPurify を使用
     setPreview(cleanContent); // プレビューを更新
   };
+  console.log(Boolean(draft));
   const handlePostSubmit = async (e) => {
     e.preventDefault();
     try {
-      setError(null);
-      const response = await fetch("/pages/api/post", {
-        method: "POST",
-        body: JSON.stringify({
-          postTitle: title,
-          postMessage: currentContent,
-          postDate: date,
-          postImage: image,
-          postImageAlt: alt,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        cache: "no-cache",
-      });
+      if (draft) {
+        setError(null);
+        const response = await fetch("/pages/api/post", {
+          method: "POST",
+          body: JSON.stringify({
+            postTitle: title,
+            postMessage: currentContent,
+            postDate: date,
+            postImage: image,
+            postImageAlt: alt,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          cache: "no-cache",
+        });
 
-      const jsonData = await response.json();
+        const jsonData = await response.json();
 
-      if (jsonData.success) {
-        setCurrentContent("");
-        setTitle("");
-        setImage("");
-        // ユーザーに成功メッセージを表示
-      } else {
-        setError(jsonData.message || "投稿に失敗しました。");
+        if (jsonData.success) {
+          setCurrentContent("");
+          setTitle("");
+          setImage("");
+          // ユーザーに成功メッセージを表示
+        } else {
+          setError(jsonData.message || "投稿に失敗しました。");
+        }
+        alert("投稿が成功しました！");
+        // オプション: 成功後にページをリロード
+        return location.reload();
+      } else if (!draft) {
       }
-      alert("投稿が成功しました！");
-      // オプション: 成功後にページをリロード
-      return location.reload();
     } catch (error) {
       setError("エラーが発生しました。もう一度お試しください。");
     }
@@ -299,7 +303,7 @@ const BlogPost = () => {
                   type="submit"
                   className={styles.post_form_button_submit}
                 >
-                  投稿
+                  {draft ? "投稿" : "下書き保存"}
                 </button>
               </div>
             </form>
