@@ -634,8 +634,8 @@
 }
 .works_app_link {
   border-bottom: 2px solid var(--base-color);
-
-  animation: color 2s infinite;
+  font-weight: bold;
+  animation: color 3s infinite;
 }
 .works_app_link_button {
   display: block;
@@ -653,14 +653,13 @@
 }
 @keyframes color {
   0% {
-    color: var(--white-color);
+    color: var(--black-color);
   }
   50% {
     color: var(--accents-color);
   }
-
   100% {
-    color: var(--white-color);
+    color: var(--black-color);
   }
 }
 .works_overview {
