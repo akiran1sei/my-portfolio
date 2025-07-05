@@ -958,12 +958,21 @@
   font-weight: 100;
   color: white;
 }
+.post_draft_btn:active,
 .post_imageGallery_btn:active,
 .post_codeGallery_btn:active,
 .post_codeGallery_itemBtn:active {
   transform: translate(2px, 2px);
   box-shadow: inset 2px 2px 0px var(--black-color);
   background: #ffffffb3;
+}
+.post_draft_btn {
+  width: fit-content;
+  height: auto;
+  padding: 1rem;
+  background: var(--accents-color);
+  border-radius: 5px;
+  box-shadow: 2px 2px 0px var(--black-color);
 }
 .post_imageGallery_btn,
 .post_codeGallery_btn {

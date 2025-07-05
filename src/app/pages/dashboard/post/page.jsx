@@ -34,6 +34,9 @@ const BlogPost = () => {
     setImageMenu(!imageMenu);
     setCodeMenu(false);
   };
+  const toggleDraftMenu = () => {
+    setDraft(!draft);
+  };
   const toggleCodeMenu = () => {
     setCodeMenu(!codeMenu);
     setImageMenu(false);
@@ -185,6 +188,16 @@ const BlogPost = () => {
               alt="codeイメージ"
             />
           </div>
+          <div
+            onClick={toggleDraftMenu}
+            role="button"
+            tabIndex="0"
+            aria-label="下書き・投稿の切り替えスイッチ"
+            aria-pressed="false"
+            className={styles.post_draft_btn}
+          >
+            {draft ? "投稿" : "下書き"}
+          </div>
           {codeMenu && (
             <div className={styles.post_codeGallery}>
               <ul className={styles.post_codeGallery_list}>
@@ -228,6 +241,7 @@ const BlogPost = () => {
               </div>
             </div>
           )}
+
           <div className={styles.post_form_box}>
             <form onSubmit={handlePostSubmit} className={styles.post_form}>
               <div className={styles.post_form_title}>
