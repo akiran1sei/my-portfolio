@@ -21,7 +21,7 @@ const BlogPost = () => {
   const [imageMenu, setImageMenu] = useState(false);
   const [codeMenu, setCodeMenu] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [draft, setDraft] = useState(true);
+  const [draft, setDraft] = useState(false);
   useEffect(() => {
     const today = new Date();
     const year = today.getFullYear();
@@ -188,16 +188,19 @@ const BlogPost = () => {
               alt="codeイメージ"
             />
           </div>
-          <div
-            onClick={toggleDraftMenu}
-            role="button"
-            tabIndex="0"
-            aria-label="下書き・投稿の切り替えスイッチ"
-            aria-pressed="false"
-            className={styles.post_draft_btn}
-          >
-            {draft ? "投稿" : "下書き"}
+
+          <div className={styles.switch_wrapper}>
+            <input
+              type="checkbox"
+              id="toggle-switch"
+              onChange={toggleDraftMenu}
+            />
+            <label htmlFor="toggle-switch" className={styles.switch_label}>
+              <span className={styles.switch_inner}>投稿</span>
+              <span className={styles.switch_handle}></span>
+            </label>
           </div>
+
           {codeMenu && (
             <div className={styles.post_codeGallery}>
               <ul className={styles.post_codeGallery_list}>
