@@ -23,6 +23,14 @@ export function DashboardHeader() {
             <li className={styles.dashboard_header_nav_item}>
               <Link
                 className={styles.dashboard_header_nav_link}
+                href={`/pages/dashboard/edit`}
+              >
+                Post List
+              </Link>
+            </li>
+            <li className={styles.dashboard_header_nav_item}>
+              <Link
+                className={styles.dashboard_header_nav_link}
                 href={"/pages/dashboard/upload"}
                 passHref
               >

@@ -59,7 +59,7 @@ const BlogPost = () => {
     const cleanContent = DOMPurify.sanitize(newCode); // DOMPurify を使用
     setPreview(cleanContent); // プレビューを更新
   };
-  console.log(Boolean(draft));
+  console.log("draft", draft);
   const handlePostSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -73,6 +73,7 @@ const BlogPost = () => {
             postDate: date,
             postImage: image,
             postImageAlt: alt,
+            postDraft: draft,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -94,6 +95,36 @@ const BlogPost = () => {
         // オプション: 成功後にページをリロード
         return location.reload();
       } else if (!draft) {
+        setError(null);
+        const response = await fetch("/pages/api/post", {
+          method: "POST",
+          body: JSON.stringify({
+            postTitle: title,
+            postMessage: currentContent,
+            postDate: date,
+            postImage: image,
+            postImageAlt: alt,
+            postDraft: draft,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          cache: "no-cache",
+        });
+
+        const jsonData = await response.json();
+
+        if (jsonData.success) {
+          setCurrentContent("");
+          setTitle("");
+          setImage("");
+          // ユーザーに成功メッセージを表示
+        } else {
+          setError(jsonData.message || "下書きに失敗しました。");
+        }
+        alert("下書きが成功しました！");
+        // オプション: 成功後にページをリロード
+        return location.reload();
       }
     } catch (error) {
       setError("エラーが発生しました。もう一度お試しください。");
