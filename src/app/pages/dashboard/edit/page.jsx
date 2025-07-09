@@ -6,6 +6,7 @@ import styles from "@/styles/page.module.css";
 import { DashboardHeader } from "@/components/Header/DashboardHeader";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { BlogSection } from "@/components/Section/BlogSection";
+import { UpButton } from "@/components/Buttons/UpButton";
 const PostDraft = () => {
   const [error, setError] = useState("");
 
@@ -13,6 +14,7 @@ const PostDraft = () => {
     <>
       <DashboardHeader />
       <SignedIn>
+        <UpButton />
         <BlogSection />
         {error && <p className={styles.error_message}>{error}</p>}
       </SignedIn>

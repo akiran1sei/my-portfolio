@@ -7,6 +7,7 @@ import styles from "@/styles/page.module.css";
 import DOMPurify from "dompurify";
 import { DashboardHeader } from "@/components/Header/DashboardHeader";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { UpButton } from "@/components/Buttons/UpButton";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const EditPost = ({ params }) => {
@@ -215,6 +216,7 @@ const EditPost = ({ params }) => {
       >
         <h2 className={styles.page_title}>Edit</h2>
         <SignedIn>
+          <UpButton />
           <div
             onClick={toggleImageMenu}
             role="button"

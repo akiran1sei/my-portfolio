@@ -87,11 +87,11 @@
 }
 .upButton,
 .blogButton {
-  width: 25px;
-  height: 25px;
+  width: 50px;
+  height: 50px;
   padding: 0;
   border: 1px solid var(--accents-color);
-  background: var(--base-color);
+  background: var(--white-color);
   border-radius: 5px 0px 0px 5px;
 }
 .blogButton {
@@ -848,7 +848,7 @@ signOut
 
 .contact_form_box label,
 .post_form_box label,
-.post_form_box span,
+.post_form_box > span,
 .thumbnail_box label,
 .thumbnail_images_alternative label,
 .upload_section_wrap label {
@@ -996,12 +996,12 @@ signOut
 }
 .post_codeGallery_btn {
   position: absolute;
-  top: 60px;
+  top: 100px;
   right: 30px;
 }
 .post_imageGallery_btn {
   position: absolute;
-  top: 60px;
+  top: 100px;
   left: 30px;
 }
 .post_codeGallery_itemBtn {
@@ -1156,6 +1156,8 @@ article（個別記事ページ）
 
 .switch_label {
   position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   display: inline-block;
   width: 120px;
   height: 60px;
