@@ -258,7 +258,7 @@ header（グローバルヘッダーとダッシュボート用ヘッダー）
 }
 .dashboard_header_nav_list {
   width: 100%;
-  height: 50px;
+  height: auto;
   min-width: 280px;
   display: flex;
   flex-direction: row;
