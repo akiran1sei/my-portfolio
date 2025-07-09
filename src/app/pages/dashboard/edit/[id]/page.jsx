@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import useSWR from "swr";
 import CodeEditor from "@/components/CodeEditor";
@@ -7,13 +7,17 @@ import styles from "@/styles/page.module.css";
 import DOMPurify from "dompurify";
 import { DashboardHeader } from "@/components/Header/DashboardHeader";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { UpButton } from "@/components/Buttons/UpButton";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-const BlogPost = () => {
+const EditPost = ({ params }) => {
+  const resolvedParams = React.use(params);
+  const postId = resolvedParams.id;
   const [currentContent, setCurrentContent] = useState("");
   const [isActive, setIsActive] = useState(false);
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
+  const [prevUpdateDate, setPrevUpdateDate] = useState("");
   const [error, setError] = useState("");
   const [image, setImage] = useState("");
   const [alt, setAlt] = useState("");
@@ -21,25 +25,45 @@ const BlogPost = () => {
   const [imageMenu, setImageMenu] = useState(false);
   const [codeMenu, setCodeMenu] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [draft, setDraft] = useState(false);
+  const [draft, setDraft] = useState(true);
   const [switchPreview, setSwitchPreview] = useState(false);
-  const togglePreviewMenu = () => {
-    setSwitchPreview(!switchPreview);
-  };
   useEffect(() => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
-    setDate(`${year}/${month}/${day}`);
-    setIsActive(true);
+    const ReadCode = async () => {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, "0");
+      const day = String(today.getDate()).padStart(2, "0");
+      const response = await fetch(`/pages/api/blog/${postId}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-cache",
+      });
+      const jsonData = await response.json();
+
+      setDate(`${year}/${month}/${day}`);
+      setSwitchPreview(true);
+      setPrevUpdateDate(jsonData.value.postDate);
+      setAlt(jsonData.value.postImageAlt);
+      setImage(jsonData.value.postImage);
+      setTitle(jsonData.value.postTitle);
+      setCurrentContent(jsonData.value.postMessage);
+      //  setPreview
+      setIsActive(true);
+      return;
+    };
+    ReadCode();
   }, []);
+
   const toggleImageMenu = () => {
     setImageMenu(!imageMenu);
     setCodeMenu(false);
   };
   const toggleDraftMenu = () => {
     setDraft(!draft);
+  };
+  const togglePreviewMenu = () => {
+    setSwitchPreview(!switchPreview);
   };
   const toggleCodeMenu = () => {
     setCodeMenu(!codeMenu);
@@ -63,15 +87,16 @@ const BlogPost = () => {
     const cleanContent = DOMPurify.sanitize(newCode); // DOMPurify を使用
     setPreview(cleanContent); // プレビューを更新
   };
-
+  console.log(Boolean(draft));
   const handlePostSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (draft) {
+      if (!draft) {
         setError(null);
         const response = await fetch("/pages/api/post", {
-          method: "POST",
+          method: "PUT",
           body: JSON.stringify({
+            postId: postId,
             postTitle: title,
             postMessage: currentContent,
             postDate: date,
@@ -98,11 +123,12 @@ const BlogPost = () => {
         alert("投稿が成功しました！");
         // オプション: 成功後にページをリロード
         return location.reload();
-      } else if (!draft) {
+      } else if (draft) {
         setError(null);
         const response = await fetch("/pages/api/post", {
-          method: "POST",
+          method: "PUT",
           body: JSON.stringify({
+            postId: postId,
             postTitle: title,
             postMessage: currentContent,
             postDate: date,
@@ -144,10 +170,7 @@ const BlogPost = () => {
       : text;
   };
 
-  const sanitizeAndTruncateText = (text, maxLength) => {
-    const strippedText = text.replace(/<[^>]*>/g, "");
-    return truncateText(strippedText, maxLength);
-  };
+  // console.log(ReadCode);
   const { data, error: swrError } = useSWR(`/pages/api/blog/img`, fetcher);
 
   if (swrError) return <div>エラーが発生しました。</div>;
@@ -191,8 +214,9 @@ const BlogPost = () => {
       <section
         className={`${styles.post_section} ${isActive ? styles.active : ""}`}
       >
-        <h2 className={styles.page_title}>POST</h2>
+        <h2 className={styles.page_title}>Edit</h2>
         <SignedIn>
+          <UpButton />
           <div
             onClick={toggleImageMenu}
             role="button"
@@ -294,7 +318,12 @@ const BlogPost = () => {
                   required
                 />
               </div>
-              <div className={styles.post_form_date}>{date}</div>
+              <div className={styles.post_form_date}>
+                <span>作　成　日</span>：{date}
+              </div>
+              <div className={styles.post_form_date}>
+                <span>前回更新日</span>：{prevUpdateDate}
+              </div>
               <div className={styles.post_form_contents}>
                 <label>投稿内容</label>
 
@@ -373,7 +402,7 @@ const BlogPost = () => {
                   type="submit"
                   className={styles.post_form_button_submit}
                 >
-                  {draft ? "投稿" : "下書き保存"}
+                  {draft ? "下書き保存" : "投稿"}
                 </button>
               </div>
             </form>
@@ -388,4 +417,4 @@ const BlogPost = () => {
   );
 };
 
-export default BlogPost;
+export default EditPost;

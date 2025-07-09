@@ -37,6 +37,7 @@
   /* background-image: url(/images/bg-sp.png); */
   background-repeat: repeat-y;
   margin: 0 auto;
+  padding-bottom: 5rem;
   border: 1px solid var(--sub-color);
   background-color: var(--white-color);
 }
@@ -86,11 +87,11 @@
 }
 .upButton,
 .blogButton {
-  width: 25px;
-  height: 25px;
+  width: 50px;
+  height: 50px;
   padding: 0;
   border: 1px solid var(--accents-color);
-  background: var(--base-color);
+  background: var(--white-color);
   border-radius: 5px 0px 0px 5px;
 }
 .blogButton {
@@ -196,6 +197,11 @@
 .error_message {
   text-align: center;
 }
+/* 
+==============================
+header（グローバルヘッダーとダッシュボート用ヘッダー）
+==============================
+*/
 .header {
   width: 100%;
   height: 50px;
@@ -252,7 +258,7 @@
 }
 .dashboard_header_nav_list {
   width: 100%;
-  height: 50px;
+  height: auto;
   min-width: 280px;
   display: flex;
   flex-direction: row;
@@ -276,9 +282,9 @@
 }
 
 /* 
-
------home-----
-
+==============================
+home（トップページ）
+==============================
 */
 .home_header {
   width: 100%;
@@ -455,9 +461,9 @@
 }
 
 /* 
-
------about----- 
-
+==============================
+about（自己紹介ページ）
+============================== 
 */
 .about_section {
   width: calc(100% - 20px);
@@ -535,9 +541,9 @@
 }
 
 /* 
-
------works-----
-
+==============================
+works（成果及び制作ページ）
+==============================
 */
 .works_section {
   width: calc(100% - 20px);
@@ -736,7 +742,11 @@
   margin: 0.5rem 0;
 }
 
-/* blog */
+/*
+==============================
+Blog（投稿リスト）（下書き 一覧）
+==============================
+ */
 .blog_section {
   width: calc(100% - 20px);
   height: 100%;
@@ -783,14 +793,21 @@
 }
 
 /* 
-
------ contact -----
------  post   -----
------thumbnail-----
------ upload  -----
------ signIn  ----- 
------ signOut  ----- 
-
+==============================
+contact
+==============================
+post
+==============================
+==============================
+thumbnail
+==============================
+upload
+==============================
+signIn  
+============================== 
+============================== 
+signOut
+============================== 
 */
 .contact_section,
 .post_section,
@@ -831,6 +848,7 @@
 
 .contact_form_box label,
 .post_form_box label,
+.post_form_box > span,
 .thumbnail_box label,
 .thumbnail_images_alternative label,
 .upload_section_wrap label {
@@ -844,6 +862,7 @@
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: center;
+  margin-bottom: 2rem;
 }
 .contact_form_button,
 .post_form_button {
@@ -939,8 +958,6 @@
   color: var(--base-color);
   text-shadow: 1px 1px 5px var(--white-color);
 }
-.post_imageGallery_box {
-}
 
 .post_imageGallery_itemBox {
   box-shadow: 2px 2px 2px var(--accents-color);
@@ -958,6 +975,7 @@
   font-weight: 100;
   color: white;
 }
+
 .post_imageGallery_btn:active,
 .post_codeGallery_btn:active,
 .post_codeGallery_itemBtn:active {
@@ -965,6 +983,7 @@
   box-shadow: inset 2px 2px 0px var(--black-color);
   background: #ffffffb3;
 }
+
 .post_imageGallery_btn,
 .post_codeGallery_btn {
   width: 28px;
@@ -977,12 +996,12 @@
 }
 .post_codeGallery_btn {
   position: absolute;
-  top: 60px;
+  top: 100px;
   right: 30px;
 }
 .post_imageGallery_btn {
   position: absolute;
-  top: 60px;
+  top: 100px;
   left: 30px;
 }
 .post_codeGallery_itemBtn {
@@ -991,7 +1010,12 @@
   border-radius: 5px;
   box-shadow: 2px 2px 0px var(--black-color);
 }
-
+.post_form_preview h3 {
+  margin: 1rem auto;
+  width: auto;
+  padding: 1rem;
+  border-radius: 5px;
+}
 .thumbnail_box {
   display: flex;
   flex-direction: column;
@@ -1077,9 +1101,9 @@
 }
 
 /* 
-
------article-----
-
+============================== 
+article（個別記事ページ）
+============================== 
 */
 .article_section {
   width: 100%;
@@ -1121,9 +1145,82 @@
   text-align: center;
   padding: 100px 0;
 }
+.switch_wrapper {
+  position: relative;
+}
+
+/* チェックボックス非表示 */
+.switch_wrapper input[type="checkbox"] {
+  display: none;
+}
+
+.switch_label {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-block;
+  width: 120px;
+  height: 60px;
+  background: #aaa;
+  border-radius: 60px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.switch_label .switch_inner {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: white;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.switch_label .switch_handle {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ON状態 */
+.switch_wrapper input[type="checkbox"]:checked + .switch_label {
+  background: var(--base-color);
+}
+
+.switch_wrapper input[type="checkbox"]:checked + .switch_label .switch_handle {
+  transform: translateX(60px);
+}
+
+.switch_wrapper
+  input[type="checkbox"]:checked
+  + .switch_label
+  .switch_inner::after {
+  content: "ON";
+  color: #d3ffd9;
+  margin-left: 8px;
+}
+
+.switch_label .switch_inner::after {
+  content: "OFF";
+  color: #eee;
+  margin-left: 8px;
+  transition: color 0.3s ease;
+}
 /* 
 
-----------576px以上----------
+============================== 
+576px以上
+============================== 
+
 
 */
 @media screen and (min-width: 576px) {
@@ -1175,8 +1272,6 @@
   }
   .blog_contents {
     padding: 3rem 0px 100px;
-  }
-  .blog_contents {
     max-width: 500px;
   }
 
@@ -1187,7 +1282,10 @@
 }
 /* 
 
-----------1024px以上----------
+============================== 
+1024px以上
+============================== 
+
 
 */
 @media screen and (min-width: 1024px) {

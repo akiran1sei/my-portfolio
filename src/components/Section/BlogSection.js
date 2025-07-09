@@ -5,10 +5,11 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "dompurify";
-
+import { usePathname } from "next/navigation";
 export function BlogSection() {
   const [isActive, setIsActive] = useState(false);
-
+  const pathname = usePathname();
+  console.log(pathname);
   useEffect(() => {
     setIsActive(true);
   }, []);
@@ -32,7 +33,6 @@ export function BlogSection() {
     revalidateIfStale: true,
     dedupingInterval: 1000, // 重複リクエストを防ぐ間隔
   });
-
   if (error) return <div>エラーが発生しました。</div>;
   if (!data) return <div>データを取得中...</div>;
 
@@ -54,14 +54,25 @@ export function BlogSection() {
     const strippedText = sanitizedText.replace(/<[^>]*>/g, "");
     return truncateText(strippedText, maxLength);
   };
-
+  // フィルタリングロジックをパスに基づいて適用
+  const filteredData = data.value.filter((item) => {
+    if (pathname === "/pages/blog") {
+      // /pages/blog の場合、postDraft が true のものは表示しない
+      return !item.postDraft;
+    } else if (pathname === "/pages/dashboard/edit") {
+      // /pages/dashboard/edit の場合、postDraft が true のものも表示する
+      return true; // 全てのアイテムを表示
+    }
+    // その他のパスの場合（必要であればデフォルトの動作を定義）
+    return true; // 例: デフォルトでは全て表示
+  });
   return (
     <section
       className={`${styles.blog_section} ${isActive ? styles.active : ""}`}
     >
       <h2 className={styles.page_title}>Blog</h2>
       <div className={styles.blog_contents}>
-        {data.value.map((item) => (
+        {filteredData.map((item) => (
           <article className={styles.blog_post} key={item._id}>
             <h2 className={styles.blog_post_title}>{item.postTitle}</h2>
             <figure className={styles.blog_post_img}>
@@ -79,10 +90,20 @@ export function BlogSection() {
               {sanitizeAndTruncateText(item.postMessage, 80)}
             </div>
             <div className={styles.blog_post_next}>
-              <Link href={`/pages/blog/${item._id}`}>
-                <span>&gt;</span>
-                <span>続きを読む</span>
-              </Link>
+              {pathname === "/pages/dashboard/edit" ? (
+                // ダッシュボードの下書き記事の場合のリンク
+
+                <Link href={`/pages/dashboard/edit/${item._id}`}>
+                  <span>&gt;</span>
+                  <span>編集する</span>
+                </Link>
+              ) : (
+                // 公開記事、または/pages/blogページの場合のリンク
+                <Link href={`/pages/blog/${item._id}`}>
+                  <span>&gt;</span>
+                  <span>続きを読む</span>
+                </Link>
+              )}
             </div>
           </article>
         ))}
