@@ -90,8 +90,9 @@ export function BlogSection() {
               {sanitizeAndTruncateText(item.postMessage, 80)}
             </div>
             <div className={styles.blog_post_next}>
-              {pathname === "/pages/dashboard/edit" && item.postDraft ? (
+              {pathname === "/pages/dashboard/edit" ? (
                 // ダッシュボードの下書き記事の場合のリンク
+
                 <Link href={`/pages/dashboard/edit/${item._id}`}>
                   <span>&gt;</span>
                   <span>編集する</span>

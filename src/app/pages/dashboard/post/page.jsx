@@ -22,6 +22,10 @@ const BlogPost = () => {
   const [codeMenu, setCodeMenu] = useState(false);
   const [copied, setCopied] = useState(false);
   const [draft, setDraft] = useState(false);
+  const [switchPreview, setSwitchPreview] = useState(false);
+  const togglePreviewMenu = () => {
+    setSwitchPreview(!switchPreview);
+  };
   useEffect(() => {
     const today = new Date();
     const year = today.getFullYear();
@@ -59,7 +63,7 @@ const BlogPost = () => {
     const cleanContent = DOMPurify.sanitize(newCode); // DOMPurify を使用
     setPreview(cleanContent); // プレビューを更新
   };
-  console.log("draft", draft);
+
   const handlePostSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -341,10 +345,28 @@ const BlogPost = () => {
               </div>
               <div className={styles.post_form_preview}>
                 <h3>プレビュー</h3>
-                <div
-                  className={styles.post_preview_content}
-                  dangerouslySetInnerHTML={{ __html: preview }}
-                />
+                <div className={styles.switch_wrapper}>
+                  <input
+                    type="checkbox"
+                    id="toggle-switch-preview"
+                    onChange={togglePreviewMenu}
+                  />
+                  <label
+                    htmlFor="toggle-switch-preview"
+                    className={styles.switch_label}
+                  >
+                    <span className={styles.switch_inner}></span>
+                    <span className={styles.switch_handle}></span>
+                  </label>
+                </div>
+                {switchPreview ? (
+                  <div
+                    className={styles.post_preview_content}
+                    dangerouslySetInnerHTML={{ __html: preview }}
+                  />
+                ) : (
+                  <div></div>
+                )}
               </div>
               <div className={styles.post_form_button}>
                 <button
