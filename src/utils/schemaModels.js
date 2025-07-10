@@ -23,7 +23,7 @@ const ImageSchema = new Schema({
 });
 export const BlogModel =
   mongoose.models.Blog || mongoose.model("Blog", BlogSchema);
-export const DraftModel =
-  mongoose.models.Draft || mongoose.model("Draft", CodesSchema);
+export const CodesModel =
+  mongoose.models.Code || mongoose.model("Code", CodesSchema);
 export const ImageModel =
   mongoose.models.Image || mongoose.model("Image", ImageSchema);
