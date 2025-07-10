@@ -911,25 +911,28 @@ signOut
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: flex-start;
   position: absolute;
   top: 50px;
   left: 0;
-  padding-top: 60px;
+  padding-top: 10rem;
   background: #33333380;
   z-index: var(--z-index-popup);
 }
 .post_codeGallery_list {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  position: relative;
-  top: 50px;
 }
 .post_codeGallery_item {
+  margin: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   margin: 1rem;
 }
 
@@ -952,13 +955,17 @@ signOut
 .post_Gallery_text {
   width: 100%;
   position: absolute;
-  top: -50px;
   text-align: center;
   font-size: var(--font-base);
   color: var(--base-color);
   text-shadow: 1px 1px 5px var(--white-color);
 }
-
+li.post_Gallery_text {
+  top: 50px;
+}
+p.post_Gallery_text {
+  top: -50px;
+}
 .post_imageGallery_itemBox {
   box-shadow: 2px 2px 2px var(--accents-color);
   background: var(--sub-color-50);
@@ -1009,6 +1016,10 @@ signOut
   background: var(--accents-color);
   border-radius: 5px;
   box-shadow: 2px 2px 0px var(--black-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 .post_form_preview h3 {
   margin: 1rem auto;
@@ -1068,12 +1079,62 @@ signOut
   height: auto;
   text-align: center;
   margin: 5rem auto;
-  border: 1px solid var(--black-color);
+
   border-radius: 5px;
   padding: 0.5rem 0;
 }
 .upload_section_wrap input[type="file"] {
   margin: 1rem auto;
+}
+.upload_form_image {
+  border: 1px solid var(--black-color);
+}
+.upload_form_code {
+}
+.upload_codeCreate_box {
+  width: 100%;
+  max-width: 500px;
+  background: var(--base-color);
+  border: 5px solid var(--accents-color);
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.upload_codeCreate_wrap {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.upload_codeCreate_label {
+  font-weight: bold;
+  color: var(--white-color);
+  text-shadow: 1px 1px 2px var(--black-color);
+  padding: 1rem 0rem;
+}
+.upload_codeCreate_input {
+  width: 100%;
+  height: 3rem;
+  border-radius: 5px;
+}
+.upload_codeCreate_textarea {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 5px;
+}
+.upload_codeCreate_button {
+  background: var(--white-color);
+  padding: 1rem;
+  margin: 2rem auto;
+  border: 0.5px solid var(--black-color);
+  border-radius: 5px;
+  color: var(--black-color);
+  font-weight: bold;
+  font-size: var(--size-s);
+  text-shadow: 0 0 0 var(--white-color);
 }
 .upload_form_wrap,
 .upload_form_item {

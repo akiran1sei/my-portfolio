@@ -15,6 +15,7 @@ const BlogSchema = new Schema(
 );
 const CodesSchema = new Schema({
   code: String,
+  codeName: String,
 });
 const ImageSchema = new Schema({
   name: String,

@@ -12,6 +12,8 @@ export default function ImageUploader() {
   const [fileName, setNameFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [uploadedUrl, setUploadedUrl] = useState("");
+  const [codeText, setCodeText] = useState("");
+  const [codeName, setCodeName] = useState("");
   const [isActive, setIsActive] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const router = useRouter();
@@ -20,7 +22,31 @@ export default function ImageUploader() {
   useEffect(() => {
     setIsActive(true);
   }, []);
+  const toggleShortCode = async () => {
+    const response = await fetch("/pages/api/code", {
+      method: "POST",
+      body: JSON.stringify({
+        code: codeText,
+        codeName: codeName,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-cache",
+    });
 
+    const jsonData = await response.json();
+    if (jsonData.success) {
+      setCodeName("");
+      setCodeText("");
+      // ユーザーに成功メッセージを表示
+    } else {
+      setError(jsonData.message || "追加に失敗しました。");
+    }
+    alert("追加に成功しました！");
+    // オプション: 成功後にページをリロード
+    return location.reload();
+  };
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
@@ -81,39 +107,90 @@ export default function ImageUploader() {
         <h2 className={styles.page_title}>Update</h2>
         <SignedIn>
           <div className={styles.upload_section_wrap}>
-            <form>
-              <div className={styles.upload_form_wrap}>
-                <div className={styles.upload_form_item}>
-                  <label>ファイル選択</label>
-                  <input type="file" onChange={handleFileChange} required />
-                </div>
-                <div className={styles.upload_form_item}>
-                  <label>代換テキスト</label>
-                  <input type="text" onChange={handleFileNameChange} required />
-                </div>
-                <div className={styles.upload_form_item}>
-                  <button
-                    onClick={handleUpload}
-                    disabled={!file || uploading}
-                    className={styles.upload_form_button_submit}
-                  >
-                    {uploading ? "Uploading..." : "Upload to Blob"}
-                  </button>
-                </div>
+            {" "}
+            <div className={styles.upload_form_code}>
+              <div className={styles.upload_codeCreate_box}>
+                <p>コードを追加したいときはこちらから</p>
+                <form onSubmit={toggleShortCode} method="post">
+                  <div className={styles.upload_codeCreate_wrap}>
+                    <label
+                      htmlFor="codeName"
+                      className={styles.upload_codeCreate_label}
+                    >
+                      code name
+                    </label>
+                    <input
+                      type="text"
+                      name="codeName"
+                      id="codeName"
+                      onChange={(e) => setCodeName(e.target.value)}
+                      className={styles.upload_codeCreate_input}
+                      placeholder="コード名を入力してください。"
+                    />
+                    <label
+                      htmlFor="code"
+                      className={styles.upload_codeCreate_label}
+                    >
+                      code
+                    </label>
+                    <code></code>
+                    <textarea
+                      name="code"
+                      id="code"
+                      rows={5}
+                      onChange={(e) => setCodeText(e.target.value)}
+                      className={styles.upload_codeCreate_textarea}
+                      placeholder="コードを入力してください。"
+                    ></textarea>
+                    <button
+                      type="submit"
+                      className={styles.upload_codeCreate_button}
+                    >
+                      追加
+                    </button>
+                  </div>
+                </form>
               </div>
-            </form>
-            {uploadedUrl && (
-              <div>
-                <p>Uploaded successfully!</p>
-                <Image
-                  src={uploadedUrl}
-                  width={300}
-                  height={300}
-                  alt="Uploaded"
-                  onLoad={handleImageLoad}
-                />
-              </div>
-            )}
+            </div>
+            <div className={styles.upload_form_image}>
+              <form>
+                <div className={styles.upload_form_wrap}>
+                  <div className={styles.upload_form_item}>
+                    <label>ファイル選択</label>
+                    <input type="file" onChange={handleFileChange} required />
+                  </div>
+                  <div className={styles.upload_form_item}>
+                    <label>代換テキスト</label>
+                    <input
+                      type="text"
+                      onChange={handleFileNameChange}
+                      required
+                    />
+                  </div>
+                  <div className={styles.upload_form_item}>
+                    <button
+                      onClick={handleUpload}
+                      disabled={!file || uploading}
+                      className={styles.upload_form_button_submit}
+                    >
+                      {uploading ? "Uploading..." : "Upload to Blob"}
+                    </button>
+                  </div>
+                </div>
+              </form>
+              {uploadedUrl && (
+                <div>
+                  <p>Uploaded successfully!</p>
+                  <Image
+                    src={uploadedUrl}
+                    width={300}
+                    height={300}
+                    alt="Uploaded"
+                    onLoad={handleImageLoad}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </SignedIn>
         <SignedOut>

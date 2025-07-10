@@ -7,6 +7,7 @@ import styles from "@/styles/page.module.css";
 import DOMPurify from "dompurify";
 import { DashboardHeader } from "@/components/Header/DashboardHeader";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const BlogPost = () => {
@@ -20,6 +21,8 @@ const BlogPost = () => {
   const [preview, setPreview] = useState(""); // プレビュー用の state
   const [imageMenu, setImageMenu] = useState(false);
   const [codeMenu, setCodeMenu] = useState(false);
+
+  const [codeList, setCodeList] = useState([]);
   const [copied, setCopied] = useState(false);
   const [draft, setDraft] = useState(false);
   const [switchPreview, setSwitchPreview] = useState(false);
@@ -27,13 +30,22 @@ const BlogPost = () => {
     setSwitchPreview(!switchPreview);
   };
   useEffect(() => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
-    setDate(`${year}/${month}/${day}`);
+    const data = async () => {
+      const response = await fetch("/pages/api/code", { method: "GET" });
+      const data = await response.json();
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, "0");
+      const day = String(today.getDate()).padStart(2, "0");
+      setDate(`${year}/${month}/${day}`);
+      setCodeList(data.value);
+    };
+    data();
     setIsActive(true);
   }, []);
+
+  // console.log(codeData);
+
   const toggleImageMenu = () => {
     setImageMenu(!imageMenu);
     setCodeMenu(false);
@@ -173,10 +185,21 @@ const BlogPost = () => {
       </figure>
     </div>
   ));
-  const codeImg = `<div style="width:100%;height:auto;max-width:300px;margin:5rem auto">
-      <img src="/images/no-image.jpg" alt="no image" />
-    </div>`;
-  const codeHeading2 = `<h2 style="background: var(--accents-color);border-radius: 10px;margin: 1rem"><span style="border-bottom:5px solid var(--sub-color)"> サブタイトル </span></h2>`;
+
+  const htmlCode = codeList.map((item) => (
+    <li className={styles.post_codeGallery_item} key={item._id}>
+      <span>
+        <input type="checkbox" name="checkbox" id="checkbox" />
+      </span>
+      <button
+        type="button"
+        className={styles.post_codeGallery_itemBtn}
+        onClick={() => handleCopy(item.code)}
+      >
+        <span>{item.codeName}</span>
+      </button>
+    </li>
+  ));
 
   const handleChange = (e) => {
     const parsedObject = JSON.parse(e.target.value);
@@ -242,24 +265,8 @@ const BlogPost = () => {
                 <li className={styles.post_Gallery_text}>
                   クリックすると、Codeをコピーできます。
                 </li>
-                <li className={styles.post_codeGallery_item}>
-                  <button
-                    type="button"
-                    className={styles.post_codeGallery_itemBtn}
-                    onClick={() => handleCopy(codeImg)}
-                  >
-                    <span>画像コード</span>
-                  </button>
-                </li>
-                <li className={styles.post_codeGallery_item}>
-                  <button
-                    type="button"
-                    className={styles.post_codeGallery_itemBtn}
-                    onClick={() => handleCopy(codeHeading2)}
-                  >
-                    <span>サブタイトルコード</span>
-                  </button>
-                </li>
+
+                {htmlCode}
               </ul>
             </div>
           )}
