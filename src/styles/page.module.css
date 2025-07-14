@@ -898,6 +898,7 @@ signOut
   height: 100%;
   background: #33333380;
   z-index: var(--z-index-popup);
+  max-height: 100vh;
   overflow: scroll;
   transform: translate(0%, 0%) scale(0.8); /* 初期状態では縮小して中央に配置 */
   transition: transform 1s ease-in-out; /* 変形に0.3秒のイージング効果 */
@@ -908,6 +909,7 @@ signOut
 .post_codeGallery {
   width: 100%;
   height: 100%;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -960,9 +962,7 @@ signOut
   color: var(--base-color);
   text-shadow: 1px 1px 5px var(--white-color);
 }
-li.post_Gallery_text {
-  top: 50px;
-}
+
 p.post_Gallery_text {
   top: -50px;
 }
@@ -981,8 +981,11 @@ p.post_Gallery_text {
   height: auto;
   font-weight: 100;
   color: white;
+  box-shadow: 2px 2px 0px var(--white-color);
 }
-
+.post_imageGallery_item:hover {
+  cursor: pointer;
+}
 .post_imageGallery_btn:active,
 .post_codeGallery_btn:active,
 .post_codeGallery_itemBtn:active {
@@ -990,7 +993,26 @@ p.post_Gallery_text {
   box-shadow: inset 2px 2px 0px var(--black-color);
   background: #ffffffb3;
 }
-
+.post_codeDelete_button {
+  width: 100%;
+  text-align: center;
+  margin: 5rem 0;
+  padding: 2rem;
+}
+.post_codeDelete_button > button {
+  width: fit-content;
+  height: auto;
+  padding: 1rem;
+  background: var(--black-color);
+  color: var(--accents-color);
+  border-radius: 5px;
+  box-shadow: 2px 2px 0px var(--white-color);
+}
+.post_codeDelete_button > button:active {
+  background: var(--sub-color);
+  box-shadow: inset 2px 2px 2px var(--black-color);
+  transform: translate(2px, 2px);
+}
 .post_imageGallery_btn,
 .post_codeGallery_btn {
   width: 28px;
@@ -1000,6 +1022,10 @@ p.post_Gallery_text {
   border-radius: 5px;
   box-shadow: 2px 2px 0px var(--black-color);
   z-index: 100;
+}
+.post_imageGallery_btn:hover,
+.post_codeGallery_btn:hover {
+  cursor: pointer;
 }
 .post_codeGallery_btn {
   position: absolute;
@@ -1015,7 +1041,7 @@ p.post_Gallery_text {
   padding: 1rem;
   background: var(--accents-color);
   border-radius: 5px;
-  box-shadow: 2px 2px 0px var(--black-color);
+  box-shadow: 2px 2px 0px var(--white-color);
   display: flex;
   flex-direction: row;
   justify-content: space-around;

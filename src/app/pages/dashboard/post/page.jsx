@@ -21,7 +21,7 @@ const BlogPost = () => {
   const [preview, setPreview] = useState(""); // プレビュー用の state
   const [imageMenu, setImageMenu] = useState(false);
   const [codeMenu, setCodeMenu] = useState(false);
-
+  const [checkedItems, setCheckedItems] = useState({});
   const [codeList, setCodeList] = useState([]);
   const [copied, setCopied] = useState(false);
   const [draft, setDraft] = useState(false);
@@ -43,8 +43,6 @@ const BlogPost = () => {
     data();
     setIsActive(true);
   }, []);
-
-  // console.log(codeData);
 
   const toggleImageMenu = () => {
     setImageMenu(!imageMenu);
@@ -146,20 +144,7 @@ const BlogPost = () => {
       setError("エラーが発生しました。もう一度お試しください。");
     }
   };
-  const truncateText = (text, maxLength) => {
-    if (typeof text !== "string") {
-      console.error("truncateText received non-string input:", text);
-      return "";
-    }
-    return text.length > maxLength
-      ? text.substring(0, maxLength) + "..."
-      : text;
-  };
 
-  const sanitizeAndTruncateText = (text, maxLength) => {
-    const strippedText = text.replace(/<[^>]*>/g, "");
-    return truncateText(strippedText, maxLength);
-  };
   const { data, error: swrError } = useSWR(`/pages/api/blog/img`, fetcher);
 
   if (swrError) return <div>エラーが発生しました。</div>;
@@ -185,11 +170,57 @@ const BlogPost = () => {
       </figure>
     </div>
   ));
+  const handleCheckboxChange = (id) => {
+    setCheckedItems((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id],
+    }));
+  };
+  const DeleteCheckedItems = async () => {
+    const selectedCodes = await codeList.filter(
+      (item) => checkedItems[item._id]
+    );
+    if (selectedCodes.length === 0) {
+      alert("削除するアイテムを選択してください。");
+      return;
+    }
 
+    try {
+      const response = await fetch("/pages/api/delete", {
+        method: "DELETE",
+        body: JSON.stringify({ ids: selectedCodes.map((item) => item._id) }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete items");
+      }
+      const jsonData = await response.json();
+      console.log(jsonData.success);
+      if (jsonData.success) {
+        setCheckedItems({});
+      } else {
+        setError(jsonData.message || "削除に失敗しました。");
+      }
+      alert("削除に成功しました。");
+      return location.reload();
+    } catch (error) {
+      alert("削除に失敗しました。");
+      return location.reload();
+    }
+  };
   const htmlCode = codeList.map((item) => (
     <li className={styles.post_codeGallery_item} key={item._id}>
       <span>
-        <input type="checkbox" name="checkbox" id="checkbox" />
+        <input
+          type="checkbox"
+          name="checkbox"
+          id={`checkbox-${item._id}`}
+          checked={checkedItems[item._id] || false}
+          onChange={() => handleCheckboxChange(item._id)}
+        />
       </span>
       <button
         type="button"
@@ -261,13 +292,13 @@ const BlogPost = () => {
 
           {codeMenu && (
             <div className={styles.post_codeGallery}>
-              <ul className={styles.post_codeGallery_list}>
-                <li className={styles.post_Gallery_text}>
-                  クリックすると、Codeをコピーできます。
-                </li>
+              <ul className={styles.post_codeGallery_list}>{htmlCode}</ul>
 
-                {htmlCode}
-              </ul>
+              <div className={styles.post_codeDelete_button}>
+                <button onClick={DeleteCheckedItems}>
+                  チェックされたアイテムを削除
+                </button>
+              </div>
             </div>
           )}
           {imageMenu && (
@@ -277,12 +308,7 @@ const BlogPost = () => {
               }`}
             >
               <div className={styles.post_imageGallery_box}>
-                <div className={styles.post_imageGallery}>
-                  <p className={styles.post_Gallery_text}>
-                    クリックすると、URIをコピーできます。
-                  </p>
-                  {Gallery}
-                </div>
+                <div className={styles.post_imageGallery}>{Gallery}</div>
               </div>
             </div>
           )}
