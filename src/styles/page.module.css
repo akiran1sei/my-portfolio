@@ -898,6 +898,7 @@ signOut
   height: 100%;
   background: #33333380;
   z-index: var(--z-index-popup);
+  max-height: 100vh;
   overflow: scroll;
   transform: translate(0%, 0%) scale(0.8); /* 初期状態では縮小して中央に配置 */
   transition: transform 1s ease-in-out; /* 変形に0.3秒のイージング効果 */
@@ -908,28 +909,32 @@ signOut
 .post_codeGallery {
   width: 100%;
   height: 100%;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: flex-start;
   position: absolute;
   top: 50px;
   left: 0;
-  padding-top: 60px;
+  padding-top: 10rem;
   background: #33333380;
   z-index: var(--z-index-popup);
 }
 .post_codeGallery_list {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  position: relative;
-  top: 50px;
 }
 .post_codeGallery_item {
+  margin: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   margin: 1rem;
 }
 
@@ -952,13 +957,15 @@ signOut
 .post_Gallery_text {
   width: 100%;
   position: absolute;
-  top: -50px;
   text-align: center;
   font-size: var(--font-base);
   color: var(--base-color);
   text-shadow: 1px 1px 5px var(--white-color);
 }
 
+p.post_Gallery_text {
+  top: -50px;
+}
 .post_imageGallery_itemBox {
   box-shadow: 2px 2px 2px var(--accents-color);
   background: var(--sub-color-50);
@@ -974,8 +981,11 @@ signOut
   height: auto;
   font-weight: 100;
   color: white;
+  box-shadow: 2px 2px 0px var(--white-color);
 }
-
+.post_imageGallery_item:hover {
+  cursor: pointer;
+}
 .post_imageGallery_btn:active,
 .post_codeGallery_btn:active,
 .post_codeGallery_itemBtn:active {
@@ -983,7 +993,26 @@ signOut
   box-shadow: inset 2px 2px 0px var(--black-color);
   background: #ffffffb3;
 }
-
+.post_codeDelete_button {
+  width: 100%;
+  text-align: center;
+  margin: 5rem 0;
+  padding: 2rem;
+}
+.post_codeDelete_button > button {
+  width: fit-content;
+  height: auto;
+  padding: 1rem;
+  background: var(--black-color);
+  color: var(--accents-color);
+  border-radius: 5px;
+  box-shadow: 2px 2px 0px var(--white-color);
+}
+.post_codeDelete_button > button:active {
+  background: var(--sub-color);
+  box-shadow: inset 2px 2px 2px var(--black-color);
+  transform: translate(2px, 2px);
+}
 .post_imageGallery_btn,
 .post_codeGallery_btn {
   width: 28px;
@@ -993,6 +1022,10 @@ signOut
   border-radius: 5px;
   box-shadow: 2px 2px 0px var(--black-color);
   z-index: 100;
+}
+.post_imageGallery_btn:hover,
+.post_codeGallery_btn:hover {
+  cursor: pointer;
 }
 .post_codeGallery_btn {
   position: absolute;
@@ -1008,7 +1041,11 @@ signOut
   padding: 1rem;
   background: var(--accents-color);
   border-radius: 5px;
-  box-shadow: 2px 2px 0px var(--black-color);
+  box-shadow: 2px 2px 0px var(--white-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 .post_form_preview h3 {
   margin: 1rem auto;
@@ -1068,12 +1105,62 @@ signOut
   height: auto;
   text-align: center;
   margin: 5rem auto;
-  border: 1px solid var(--black-color);
+
   border-radius: 5px;
   padding: 0.5rem 0;
 }
 .upload_section_wrap input[type="file"] {
   margin: 1rem auto;
+}
+.upload_form_image {
+  border: 1px solid var(--black-color);
+}
+.upload_form_code {
+}
+.upload_codeCreate_box {
+  width: 100%;
+  max-width: 500px;
+  background: var(--base-color);
+  border: 5px solid var(--accents-color);
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.upload_codeCreate_wrap {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.upload_codeCreate_label {
+  font-weight: bold;
+  color: var(--white-color);
+  text-shadow: 1px 1px 2px var(--black-color);
+  padding: 1rem 0rem;
+}
+.upload_codeCreate_input {
+  width: 100%;
+  height: 3rem;
+  border-radius: 5px;
+}
+.upload_codeCreate_textarea {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 5px;
+}
+.upload_codeCreate_button {
+  background: var(--white-color);
+  padding: 1rem;
+  margin: 2rem auto;
+  border: 0.5px solid var(--black-color);
+  border-radius: 5px;
+  color: var(--black-color);
+  font-weight: bold;
+  font-size: var(--size-s);
+  text-shadow: 0 0 0 var(--white-color);
 }
 .upload_form_wrap,
 .upload_form_item {

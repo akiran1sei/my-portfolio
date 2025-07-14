@@ -7,6 +7,7 @@ import styles from "@/styles/page.module.css";
 import DOMPurify from "dompurify";
 import { DashboardHeader } from "@/components/Header/DashboardHeader";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const BlogPost = () => {
@@ -20,6 +21,8 @@ const BlogPost = () => {
   const [preview, setPreview] = useState(""); // プレビュー用の state
   const [imageMenu, setImageMenu] = useState(false);
   const [codeMenu, setCodeMenu] = useState(false);
+  const [checkedItems, setCheckedItems] = useState({});
+  const [codeList, setCodeList] = useState([]);
   const [copied, setCopied] = useState(false);
   const [draft, setDraft] = useState(false);
   const [switchPreview, setSwitchPreview] = useState(false);
@@ -27,13 +30,20 @@ const BlogPost = () => {
     setSwitchPreview(!switchPreview);
   };
   useEffect(() => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
-    setDate(`${year}/${month}/${day}`);
+    const data = async () => {
+      const response = await fetch("/pages/api/code", { method: "GET" });
+      const data = await response.json();
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, "0");
+      const day = String(today.getDate()).padStart(2, "0");
+      setDate(`${year}/${month}/${day}`);
+      setCodeList(data.value);
+    };
+    data();
     setIsActive(true);
   }, []);
+
   const toggleImageMenu = () => {
     setImageMenu(!imageMenu);
     setCodeMenu(false);
@@ -134,20 +144,7 @@ const BlogPost = () => {
       setError("エラーが発生しました。もう一度お試しください。");
     }
   };
-  const truncateText = (text, maxLength) => {
-    if (typeof text !== "string") {
-      console.error("truncateText received non-string input:", text);
-      return "";
-    }
-    return text.length > maxLength
-      ? text.substring(0, maxLength) + "..."
-      : text;
-  };
 
-  const sanitizeAndTruncateText = (text, maxLength) => {
-    const strippedText = text.replace(/<[^>]*>/g, "");
-    return truncateText(strippedText, maxLength);
-  };
   const { data, error: swrError } = useSWR(`/pages/api/blog/img`, fetcher);
 
   if (swrError) return <div>エラーが発生しました。</div>;
@@ -173,10 +170,67 @@ const BlogPost = () => {
       </figure>
     </div>
   ));
-  const codeImg = `<div style="width:100%;height:auto;max-width:300px;margin:5rem auto">
-      <img src="/images/no-image.jpg" alt="no image" />
-    </div>`;
-  const codeHeading2 = `<h2 style="background: var(--accents-color);border-radius: 10px;margin: 1rem"><span style="border-bottom:5px solid var(--sub-color)"> サブタイトル </span></h2>`;
+  const handleCheckboxChange = (id) => {
+    setCheckedItems((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id],
+    }));
+  };
+  const DeleteCheckedItems = async () => {
+    const selectedCodes = await codeList.filter(
+      (item) => checkedItems[item._id]
+    );
+    if (selectedCodes.length === 0) {
+      alert("削除するアイテムを選択してください。");
+      return;
+    }
+
+    try {
+      const response = await fetch("/pages/api/delete", {
+        method: "DELETE",
+        body: JSON.stringify({ ids: selectedCodes.map((item) => item._id) }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete items");
+      }
+      const jsonData = await response.json();
+      console.log(jsonData.success);
+      if (jsonData.success) {
+        setCheckedItems({});
+      } else {
+        setError(jsonData.message || "削除に失敗しました。");
+      }
+      alert("削除に成功しました。");
+      return location.reload();
+    } catch (error) {
+      alert("削除に失敗しました。");
+      return location.reload();
+    }
+  };
+  const htmlCode = codeList.map((item) => (
+    <li className={styles.post_codeGallery_item} key={item._id}>
+      <span>
+        <input
+          type="checkbox"
+          name="checkbox"
+          id={`checkbox-${item._id}`}
+          checked={checkedItems[item._id] || false}
+          onChange={() => handleCheckboxChange(item._id)}
+        />
+      </span>
+      <button
+        type="button"
+        className={styles.post_codeGallery_itemBtn}
+        onClick={() => handleCopy(item.code)}
+      >
+        <span>{item.codeName}</span>
+      </button>
+    </li>
+  ));
 
   const handleChange = (e) => {
     const parsedObject = JSON.parse(e.target.value);
@@ -238,29 +292,13 @@ const BlogPost = () => {
 
           {codeMenu && (
             <div className={styles.post_codeGallery}>
-              <ul className={styles.post_codeGallery_list}>
-                <li className={styles.post_Gallery_text}>
-                  クリックすると、Codeをコピーできます。
-                </li>
-                <li className={styles.post_codeGallery_item}>
-                  <button
-                    type="button"
-                    className={styles.post_codeGallery_itemBtn}
-                    onClick={() => handleCopy(codeImg)}
-                  >
-                    <span>画像コード</span>
-                  </button>
-                </li>
-                <li className={styles.post_codeGallery_item}>
-                  <button
-                    type="button"
-                    className={styles.post_codeGallery_itemBtn}
-                    onClick={() => handleCopy(codeHeading2)}
-                  >
-                    <span>サブタイトルコード</span>
-                  </button>
-                </li>
-              </ul>
+              <ul className={styles.post_codeGallery_list}>{htmlCode}</ul>
+
+              <div className={styles.post_codeDelete_button}>
+                <button onClick={DeleteCheckedItems}>
+                  チェックされたアイテムを削除
+                </button>
+              </div>
             </div>
           )}
           {imageMenu && (
@@ -270,12 +308,7 @@ const BlogPost = () => {
               }`}
             >
               <div className={styles.post_imageGallery_box}>
-                <div className={styles.post_imageGallery}>
-                  <p className={styles.post_Gallery_text}>
-                    クリックすると、URIをコピーできます。
-                  </p>
-                  {Gallery}
-                </div>
+                <div className={styles.post_imageGallery}>{Gallery}</div>
               </div>
             </div>
           )}

@@ -27,8 +27,13 @@ const EditPost = ({ params }) => {
   const [copied, setCopied] = useState(false);
   const [draft, setDraft] = useState(true);
   const [switchPreview, setSwitchPreview] = useState(false);
+  const [checkedItems, setCheckedItems] = useState({});
+  const [codeList, setCodeList] = useState([]);
+
   useEffect(() => {
     const ReadCode = async () => {
+      const codeResponse = await fetch("/pages/api/code", { method: "GET" });
+      const data = await codeResponse.json();
       const today = new Date();
       const year = today.getFullYear();
       const month = String(today.getMonth() + 1).padStart(2, "0");
@@ -40,7 +45,7 @@ const EditPost = ({ params }) => {
         cache: "no-cache",
       });
       const jsonData = await response.json();
-
+      setCodeList(data.value);
       setDate(`${year}/${month}/${day}`);
       setSwitchPreview(true);
       setPrevUpdateDate(jsonData.value.postDate);
@@ -196,6 +201,67 @@ const EditPost = ({ params }) => {
       </figure>
     </div>
   ));
+  const handleCheckboxChange = (id) => {
+    setCheckedItems((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id],
+    }));
+  };
+  const DeleteCheckedItems = async () => {
+    const selectedCodes = await codeList.filter(
+      (item) => checkedItems[item._id]
+    );
+    if (selectedCodes.length === 0) {
+      alert("削除するアイテムを選択してください。");
+      return;
+    }
+
+    try {
+      const response = await fetch("/pages/api/delete", {
+        method: "DELETE",
+        body: JSON.stringify({ ids: selectedCodes.map((item) => item._id) }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete items");
+      }
+      const jsonData = await response.json();
+      console.log(jsonData.success);
+      if (jsonData.success) {
+        setCheckedItems({});
+      } else {
+        setError(jsonData.message || "削除に失敗しました。");
+      }
+      alert("削除に成功しました。");
+      return location.reload();
+    } catch (error) {
+      alert("削除に失敗しました。");
+      return location.reload();
+    }
+  };
+  const htmlCode = codeList.map((item) => (
+    <li className={styles.post_codeGallery_item} key={item._id}>
+      <span>
+        <input
+          type="checkbox"
+          name="checkbox"
+          id={`checkbox-${item._id}`}
+          checked={checkedItems[item._id] || false}
+          onChange={() => handleCheckboxChange(item._id)}
+        />
+      </span>
+      <button
+        type="button"
+        className={styles.post_codeGallery_itemBtn}
+        onClick={() => handleCopy(item.code)}
+      >
+        <span>{item.codeName}</span>
+      </button>
+    </li>
+  ));
   const codeImg = `<div style="width:100%;height:auto;max-width:300px;margin:5rem auto">
       <img src="/images/no-image.jpg" alt="no image" />
     </div>`;
@@ -262,29 +328,13 @@ const EditPost = ({ params }) => {
 
           {codeMenu && (
             <div className={styles.post_codeGallery}>
-              <ul className={styles.post_codeGallery_list}>
-                <li className={styles.post_Gallery_text}>
-                  クリックすると、Codeをコピーできます。
-                </li>
-                <li className={styles.post_codeGallery_item}>
-                  <button
-                    type="button"
-                    className={styles.post_codeGallery_itemBtn}
-                    onClick={() => handleCopy(codeImg)}
-                  >
-                    <span>画像コード</span>
-                  </button>
-                </li>
-                <li className={styles.post_codeGallery_item}>
-                  <button
-                    type="button"
-                    className={styles.post_codeGallery_itemBtn}
-                    onClick={() => handleCopy(codeHeading2)}
-                  >
-                    <span>サブタイトルコード</span>
-                  </button>
-                </li>
-              </ul>
+              <ul className={styles.post_codeGallery_list}>{htmlCode}</ul>
+
+              <div className={styles.post_codeDelete_button}>
+                <button onClick={DeleteCheckedItems}>
+                  チェックされたアイテムを削除
+                </button>
+              </div>
             </div>
           )}
           {imageMenu && (
@@ -294,12 +344,7 @@ const EditPost = ({ params }) => {
               }`}
             >
               <div className={styles.post_imageGallery_box}>
-                <div className={styles.post_imageGallery}>
-                  <p className={styles.post_Gallery_text}>
-                    クリックすると、URIをコピーできます。
-                  </p>
-                  {Gallery}
-                </div>
+                <div className={styles.post_imageGallery}>{Gallery}</div>
               </div>
             </div>
           )}

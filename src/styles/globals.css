@@ -93,6 +93,9 @@ button {
   background: transparent;
   border: none;
 }
+button:hover {
+  cursor: pointer;
+}
 body,
 div,
 dl,
