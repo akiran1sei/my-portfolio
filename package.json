@@ -11,7 +11,7 @@
   "dependencies": {
     "@clerk/nextjs": "^6.36.5",
     "@vercel/blob": "^1.1.1",
-    "ace-builds": "^1.36.2",
+    "ace-builds": "^1.43.5",
     "bcryptjs": "^3.0.2",
     "dompurify": "^3.1.6",
     "dotenv": "^16.4.5",
@@ -25,7 +25,7 @@
     "nodemailer": "^7.0.3",
     "normalize.css": "^8.0.1",
     "react": "^19.2.3",
-    "react-ace": "^12.0.0",
+    "react-ace": "^14.0.1",
     "react-dom": "^19.2.3",
     "swr": "^2.3.4"
   },
