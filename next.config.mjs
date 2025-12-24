@@ -15,14 +15,16 @@ const nextConfig = {
   turbo: {
     // 空のオブジェクトでOK
   },
-
   webpack: (config, { isServer, dev }) => {
     config.module = config.module || {};
     config.module.rules = config.module.rules || [];
+
     config.module.rules.push({
       test: /\.js$/,
       enforce: "pre",
       use: ["source-map-loader"],
+      // 👇 ここを追加！ node_modules 内のソースマップ警告を無視します
+      exclude: [/node_modules/],
     });
 
     return config;
