@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.23.3",
+    "@clerk/nextjs": "^6.36.5",
     "@vercel/blob": "^1.1.1",
     "ace-builds": "^1.36.2",
     "bcryptjs": "^3.0.2",
@@ -21,17 +21,17 @@
     "mongodb": "^6.17.0",
     "mongoose": "^8.5.4",
     "multer": "^2.0.1",
-    "next": "^15.3.4",
+    "next": "^16.1.1",
     "nodemailer": "^7.0.3",
     "normalize.css": "^8.0.1",
-    "react": "^18",
+    "react": "^19.2.3",
     "react-ace": "^12.0.0",
-    "react-dom": "^18",
+    "react-dom": "^19.2.3",
     "swr": "^2.3.4"
   },
   "devDependencies": {
     "eslint": "^9.29.0",
-    "eslint-config-next": "^15.3.4",
+    "eslint-config-next": "^16.1.1",
     "source-map-loader": "^5.0.0"
   },
   "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
