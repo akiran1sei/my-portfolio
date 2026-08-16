@@ -2,8 +2,8 @@
 import Link from "next/link";
 import React from "react";
 import styles from "@/styles/page.module.css";
-import { SignedOut, SignOutButton } from "@clerk/nextjs";
-import { SignedIn, SignIn, SignInButton } from "@clerk/clerk-react";
+// 1. clerk-react を削除し、nextjs から Show と各種ボタンをインポート
+import { Show, SignOutButton, SignInButton } from "@clerk/nextjs";
 
 export function DashboardHeader() {
   return (
@@ -38,16 +38,18 @@ export function DashboardHeader() {
               </Link>
             </li>
             <li className={styles.dashboard_header_nav_item}>
-              <SignedIn>
+              {/* 2. SignedIn を Show when="signed-in" に変更 */}
+              <Show when="signed-in">
                 <SignOutButton
                   redirectUrl={`${process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL}`}
                 />
-              </SignedIn>
-              <SignedOut>
+              </Show>
+              {/* 3. SignedOut を Show when="signed-out" に変更 */}
+              <Show when="signed-out">
                 <SignInButton
                   forceRedirectUrl={`${process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL}`}
                 />
-              </SignedOut>
+              </Show>
             </li>
           </ul>
         </nav>
