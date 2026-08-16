@@ -6,7 +6,7 @@ import CodeEditor from "@/components/CodeEditor";
 import styles from "@/styles/page.module.css";
 import DOMPurify from "dompurify";
 import { DashboardHeader } from "@/components/Header/DashboardHeader";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { Show } from "@clerk/nextjs";
 import { UpButton } from "@/components/Buttons/UpButton";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -281,7 +281,7 @@ const EditPost = ({ params }) => {
         className={`${styles.post_section} ${isActive ? styles.active : ""}`}
       >
         <h2 className={styles.page_title}>Edit</h2>
-        <SignedIn>
+        <Show when="signed-in">
           <UpButton />
           <div
             onClick={toggleImageMenu}
@@ -453,10 +453,10 @@ const EditPost = ({ params }) => {
             </form>
           </div>
           {error && <p className={styles.error_message}>{error}</p>}
-        </SignedIn>
-        <SignedOut>
+        </Show>
+        <Show when="signed-out">
           <p className={styles.signOut_text}>サインインしてください。</p>
-        </SignedOut>
+        </Show>
       </section>
     </>
   );
