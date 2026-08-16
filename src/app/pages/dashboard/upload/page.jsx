@@ -5,8 +5,7 @@ import { useRouter } from "next/navigation";
 import dotenv from "dotenv";
 import { DashboardHeader } from "@/components/Header/DashboardHeader";
 import Image from "next/image";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
-
+import { Show } from "@clerk/nextjs";
 export default function ImageUploader() {
   const [file, setFile] = useState(null);
   const [fileName, setNameFile] = useState(null);
@@ -105,7 +104,7 @@ export default function ImageUploader() {
         className={`${styles.upload_section} ${isActive ? "active" : ""}`}
       >
         <h2 className={styles.page_title}>Update</h2>
-        <SignedIn>
+        <Show>
           <div className={styles.upload_section_wrap}>
             {" "}
             <div className={styles.upload_form_code}>
@@ -192,10 +191,10 @@ export default function ImageUploader() {
               )}
             </div>
           </div>
-        </SignedIn>
-        <SignedOut>
+        </Show>
+        <Show when="signed-out">
           <p className={styles.signOut_text}>サインインしてください。</p>
-        </SignedOut>
+        </Show>
       </section>
     </>
   );
