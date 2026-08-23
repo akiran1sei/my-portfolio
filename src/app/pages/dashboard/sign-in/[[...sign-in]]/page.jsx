@@ -1,21 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
 import styles from "@/styles/page.module.css";
-import { useRouter } from "next/navigation";
-
-import { useSignIn, SignIn } from "@clerk/nextjs";
+// ❌ 使っていない useRouter を削除
+// ❌ 使っていない useSignIn を削除
+import { SignIn } from "@clerk/nextjs";
 
 const Sign_In = () => {
-  const { signIn, isLoaded } = useSignIn();
   const [isActive, setIsActive] = useState(false);
 
-  const router = useRouter();
   useEffect(() => {
     setIsActive(true);
   }, []);
-  if (!isLoaded) {
-    return null;
-  }
 
   return (
     <section
@@ -66,4 +61,5 @@ const Sign_In = () => {
     </section>
   );
 };
+
 export default Sign_In;

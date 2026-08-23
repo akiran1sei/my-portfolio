@@ -55,7 +55,7 @@ const EditPost = ({ params }) => {
       setCurrentContent(jsonData.value.postMessage);
       //  setPreview
       setIsActive(true);
-      return;
+      
     };
     ReadCode();
   }, []);
